@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "kansaApp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
