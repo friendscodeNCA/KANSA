@@ -1,0 +1,33 @@
+.logo {
+    height: 40%;
+    text-align: center;
+    img {
+        vertical-align: middle;
+    }
+}
+
+.contenido {
+    height: 45%;
+    width: 100%;
+    padding-top: 20%;
+    ion-button {
+        height: 50px;
+        width: 100%;
+    }
+}
+
+.redes {
+    ion-item-divider {
+        ion-label {
+            margin: 0 auto;
+        }
+    }
+    ion-buttons {
+        margin: 0 auto;
+        padding: 5%;
+        scale: 1.5;
+        ion-button {
+            font-size: 80px !important;
+        } 
+    }
+}

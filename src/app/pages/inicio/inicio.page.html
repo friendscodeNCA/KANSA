@@ -1,0 +1,44 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>inicio</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+
+  <div class="logo">
+    <img src="../../../assets/img/logo kansa.png" alt="">
+  </div>
+
+  <div class="contenido">
+    <ion-button mode="ios" (click)="irHome()" expand="full" shape="round">
+      <ion-label>BRINDAR</ion-label>
+    </ion-button> <br>
+    <ion-button mode="ios" (click)="irHome()" expand="full" shape="round">
+      <ion-label>ADQUIRIR</ion-label>
+    </ion-button>
+  </div>
+
+  <div class="redes">
+    <ion-item-divider>
+      <ion-label>Redes Sociales</ion-label>
+    </ion-item-divider>
+    <ion-item lines="none">
+      <ion-buttons> 
+        <ion-button color="secondary" (click)="onClick()">
+          <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="onClick()">
+          <ion-icon slot="icon-only" name="logo-instagram"></ion-icon>
+        </ion-button>
+        <ion-button color="medium" (click)="onClick()">
+          <ion-icon slot="icon-only" name="logo-tiktok"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="onClick()">
+          <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </div>
+
+</ion-content>
