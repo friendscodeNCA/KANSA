@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="toolbar" color="light">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="4">
+          <img src="../../../assets/img/logo kansa.png" alt="">
+        </ion-col>
+        <ion-col size="8" class="texto">
+          <ion-label>Brinda servicios y deja que le mundo te conozca</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="usuarioForm">
+    <h2>Registro</h2><br>
+    <ion-item lines="none">
+      <ion-label position="floating">Nombres</ion-label>
+      <ion-input formControlName="nombres" type="text" placeholder="Ingrese su nombre"></ion-input>
+    </ion-item> <br>
+    <ion-item lines="none">
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input formControlName="apellidos" type="text" placeholder="Ingrese sus apellidos"></ion-input>
+    </ion-item> <br>
+    <ion-item lines="none">
+      <ion-label position="floating">Direccion</ion-label>
+      <ion-input formControlName="direccion" type="text" placeholder="Ingrese su direccion"></ion-input>
+    </ion-item> <br>
+    <ion-item lines="none">
+      <ion-label position="floating">Fecha de nacimiento</ion-label>
+      <ion-input formControlName="fechaNacimiento" type="date" placeholder="Ingrese su fecha de nacimiento"></ion-input>
+    </ion-item> <br>
+    <ion-item lines="none">
+      <ion-label position="floating">Hablanos de ti</ion-label>
+      <ion-textarea formControlName="descripcion" type="text" placeholder="Cuentanos sobre ti..."></ion-textarea>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button color="primary" (click)="guardarDataUsuario()" expand="block" shape="round">
+      <ion-label>REGISTRARSE</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
