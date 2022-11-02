@@ -1,0 +1,88 @@
+import { Injectable } from '@angular/core';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { getStorage, ref, uploadBytes, getDownloadURL, uploadString } from "firebase/storage";
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GlobalService {
+  public fotos: any[] = [];
+
+  constructor(
+    private toastCtrl: ToastController,
+    private loading: LoadingController,
+  ) { }
+
+  async presentToast(
+    mensaje: string,
+    propiedades: {duracion?: number, position?: 'bottom'| 'top'| 'middle', color?: string, icon?: string} = {}
+  ) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: propiedades.duracion || 2000,
+      position: propiedades.position || 'bottom',
+      color: propiedades.color || 'dark',
+      buttons: [
+        {
+          side: 'start',
+          icon: propiedades.icon || 'notifications-outline',
+        }]
+    });
+    toast.present();
+  }
+
+  async presentLoading(mensaje: string, propiedades: {duracion?: number } = {}) {
+    const loading = await this.loading.create({
+      cssClass: 'my-custom-class',
+      mode: 'ios',
+      message: mensaje,
+      duration: propiedades.duracion || 10000
+    });
+
+    await loading.present();
+    return loading;
+  }
+
+  public async obtenerFotoGaleria() {
+    return await Camera.getPhoto({
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos,
+      quality: 50,
+    });
+  }
+
+  // public async obtenerFotoGaleria() {
+  //   // Take a photo
+  //   return await Camera.pickImages({
+  //     correctOrientation: true,
+  //     presentationStyle: 'fullscreen',
+  //     quality: 100,
+  //     limit: 1,
+  //   });
+  // }
+
+  subirImagen(file: any): Promise<string> {
+    console.log(file);
+    /**
+     * @objetivo : Subir una imagen a Firestore.
+     * @return: (String): Url de la imagen.
+     */
+    return new Promise( resolve => {
+
+      const storage = getStorage();
+      const storageRef = ref(storage, 'categorias/' + 'nuevooooo6');
+
+      console.log(storageRef);
+      uploadString(storageRef, file, 'data_url').then((snapshot) => {
+        console.log('Uploaded a base64url string!', snapshot);
+        getDownloadURL(snapshot.ref).then(url => {
+          resolve(url);
+        });
+      });
+    });
+
+  }
+
+}
