@@ -19,7 +19,7 @@ export class SubcategoriasPage implements OnInit {
   dataCategoria;
   categoriaForm: FormGroup;
   visibilidad = true;
-  listaSubCategorias = [];
+  listaSubCategorias : any = [];
   constructor(
     private route: ActivatedRoute,
     private pasarDatos: PasarDatosService,
@@ -40,24 +40,35 @@ export class SubcategoriasPage implements OnInit {
   }
 
   obtenerSubCategorias() {
-    this.dataApi.obtenerSubCategorias(this.idCategoria)
-    
-    // .forEach(res => {
-    //     console.log(res);
-
-    // })
-    // .subscribe(res => {
-    //   console.log(res);
-    //   this.listaSubCategorias = res;
-    // });
-    .then(res => {
-      res.forEach(data => console.log(data.data()))
-      // this.listaSubCategorias = [];
-      // if (res) {
-      //   this.listaSubCategorias = res;
-      // }
-    });
+    this.dataApi.obtenerSubCategorias(this.idCategoria).subscribe(lista => {
+      console.log(lista);
+      if (lista.length) {
+        this.listaSubCategorias = lista;
+      }
+    })
   }
+
+//   obtenerSubCategorias() {
+//     this.dataApi.obtenerSubCategorias(this.idCategoria)
+    
+//     // .forEach(res => {
+//     //     console.log(res);
+
+//     // })
+//     // .subscribe(res => {
+//     //   console.log(res);
+//     //   this.listaSubCategorias = res;
+//     // });
+//     .then(res => {
+//       res.forEach(data => {
+//       // this.listaSubCategorias = [];
+//       if (data) {
+//         console.log(data.data())
+//         this.listaSubCategorias.push(data.data());
+//       }
+//     });
+//   });
+// }
 
   cerrarModal() {
     this.modal.dismiss();
@@ -84,7 +95,7 @@ export class SubcategoriasPage implements OnInit {
     this.categoriaForm.controls.visible.setValue(this.visibilidad);
   }
 
-  async guardarNuevaCategoria() {
+  async guardarNuevaSubCategoria() {
     console.log(this.categoriaForm.value);
     if (!this.foto) {
       this.servGlobal.presentToast('Por favor, sube una foto para la categoria');

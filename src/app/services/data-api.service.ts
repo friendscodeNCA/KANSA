@@ -20,6 +20,10 @@ import {
 } from '@angular/fire/firestore';
 import { categoriaInterface } from '../models/categoriaInterface';
 import { usuarioInterface } from '../models/usuarioInterface';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
+import { switchMap, map } from 'rxjs/operators'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +31,9 @@ import { usuarioInterface } from '../models/usuarioInterface';
 export class DataApiService {
 
   constructor(
-    private afs: Firestore
+    private afs: Firestore,
+    private afs2: AngularFirestore
+
   ) { }
 
 
@@ -43,6 +49,7 @@ export class DataApiService {
   }
 
   guardarCategoria(newCategoria: categoriaInterface) {
+    newCategoria.fechaRegistro = new Date();
     return addDoc(collection(this.afs, 'categorias'), newCategoria).then(data => {
       if (data.id) {
         return data.id;
@@ -53,7 +60,9 @@ export class DataApiService {
   }
 
   guardarSubCategoria(newSubCategoria: categoriaInterface, id: string) {
-    return addDoc(collection(this.afs, 'categorias/' + id + '/subcategorias'), newSubCategoria).then(data => {
+    newSubCategoria.idCategoria = id;
+    newSubCategoria.fechaRegistro = new Date();
+    return addDoc(collection(this.afs, 'subcategorias'), newSubCategoria).then(data => {
       if (data.id) {
         return data.id;
       } else {
@@ -62,47 +71,37 @@ export class DataApiService {
     })
   }
 
-  async obtenerCategorias() {
-    const userRef = query<categoriaInterface>(collection(this.afs, 'categorias') as CollectionReference<categoriaInterface>);
-    // METODO GET - SI FUNCIONA
-    // return getDocs(userRef).then( (querySnapshot) => { // FUNCIONA COMO GET
-    //   const datos: any[] = [];
-    //   querySnapshot.forEach((doc) => {
-    //     datos.push( {...doc.data(), id: doc.id});
-    //   });
-    //   return datos;
-    // });
+  //obtener categorias
+  obtenerCategorias() {
+    return this.afs2.collection('categorias', ref => ref.orderBy('fechaRegistro', 'desc'))
+    .snapshotChanges().pipe(map(changes => {
+      const datos: categoriaInterface[] = [];
 
-    // NO SE PUDO CON SUBSCRIBE -- YA SE PUDO
-    const datos: any[] = [];
-    await onSnapshot(userRef, (snapshot) => {
-      snapshot.forEach((doc) => {
-        datos.push( {...doc.data(), id: doc.id});
-      })
-    });
-    return datos;
+      changes.map((action: any) => {
+        datos.push({
+          id: action.payload.doc.id,
+          ...action.payload.doc.data()
+        });
+      });
 
-    // VERSION 1
-    // return collectionData<categoriaInterface>(
-    //   query<categoriaInterface>(
-    //     collection(this.afs, 'categorias') as CollectionReference<categoriaInterface>,
-    //     // where('published', '==', true)
-    //   )
-    // );
+      return datos;
+    }));
   }
 
-  async obtenerSubCategorias(id: string) {
-    const userRef = query<categoriaInterface>(collection(this.afs, 'categorias/' + id + '/subcategorias') as CollectionReference<categoriaInterface>);
-    // return getDocs(userRef).then( (querySnapshot) => { // FUNCIONA COMO GET
-    //   const datos: any[] = [];
-    //   querySnapshot.forEach((doc) => {
-    //     datos.push( {...doc.data(), id: doc.id});
-    //   });
-    //   return datos;
-    // });
-    
+  //obtener subcategorias
+  obtenerSubCategorias(idCategoria: string) {
+    return this.afs2.collection('subcategorias', ref => ref.where('idCategoria', '==', idCategoria).orderBy('fechaRegistro', 'desc'))
+    .snapshotChanges().pipe(map(changes => {
+      const datos: categoriaInterface[] = [];
 
-    const querySnapshot = await getDocs(userRef);
-    return querySnapshot;
+      changes.map((action: any) => {
+        datos.push({
+          id: action.payload.doc.id,
+          ...action.payload.doc.data()
+        });
+      });
+
+      return datos;
+    }));
   }
 }

@@ -31,11 +31,12 @@ export class Tab1Page {
   }
 
   obtenerCategorias() {
-    this.dataApi.obtenerCategorias().then(res => {
-      if (res) {
-        this.listaCategorias = res;
+    this.dataApi.obtenerCategorias().subscribe(lista => {
+      console.log(lista);
+      if (lista.length) {
+        this.listaCategorias = lista;
       }
-    });
+    })
   }
   
   cerrarModal() {

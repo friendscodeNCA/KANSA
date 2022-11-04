@@ -5,4 +5,6 @@ export interface categoriaInterface {
     descripcion?: string;
     img?: string;
     orden?: number;
+    idCategoria?: string;
+    fechaRegistro?: Date;
 }
