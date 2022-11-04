@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import{provideAuth,getAuth} from '@angular/fire/auth';
+import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,8 +21,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth())
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },FCM],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
