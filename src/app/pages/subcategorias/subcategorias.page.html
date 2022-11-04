@@ -1,0 +1,71 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <h2 *ngIf="dataCategoria">{{dataCategoria.nombre | titlecase}}</h2>
+
+  <ion-searchbar mode="ios" placeholder="Buscar..." type="text" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let subcategoria of listaSubCategorias">
+        <ion-card mode="ios" (click)="irSubcategoria(categoria)">
+          <ion-card-header>
+            <img [src]="subcategoria.img" alt="">
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label>{{subcategoria.nombre | titlecase}}</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-button shape="round" id="modalSubCategoria">
+      <ion-icon name="add"></ion-icon>
+      <ion-label>Agregar Subcategoria</ion-label>
+    </ion-button>
+  </ion-fab>
+
+  <ion-modal trigger="modalSubCategoria">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-buttons slot="start">
+            <ion-button (click)="cerrarModal()" color="primary">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title color="primary">Agregar Subcategoria</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form class="formCategoria" [formGroup]="categoriaForm">
+          <ion-card mode="ios" (click)="obtenerFotoCategoria()">
+            <ion-img *ngIf="!foto" src="https://freesoft.ru/storage/images/news/1/6/555/555_text.png"></ion-img>
+            <ion-img *ngIf="foto" [src]="foto"></ion-img>
+          </ion-card> <br>
+          <ion-item lines="none">
+            <ion-label color="primary" position="floating">Nombre de subcategoria</ion-label>
+            <ion-input formControlName="nombre" type="text" placeholder="Categoria"></ion-input>
+          </ion-item> <br>
+          <ion-item lines="none">
+            <ion-label color="primary" position="floating">Descripcion de subcategoria</ion-label>
+            <ion-textarea formControlName="descripcion" type="text" placeholder="Descripcion breve de la categoria..."></ion-textarea>
+          </ion-item> <br>
+          <ion-item lines="none">
+            <ion-label color="primary">Visible</ion-label>
+            <ion-checkbox (ionChange)="cambiarVisibilidad($event)" [(ngModel)]="visibilidad" [ngModelOptions]="{standalone: true}" slot="start"></ion-checkbox>
+          </ion-item>
+        </form>
+        
+      </ion-content>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-button (click)="guardarNuevaCategoria()" expand="block" shape="round">
+            Guardar Subcategoria
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>

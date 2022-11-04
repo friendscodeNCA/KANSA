@@ -1,52 +1,67 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
-import { DataApiService } from '../services/data-api.service';
-import { GlobalService } from '../services/global.service';
-import { PasarDatosService } from '../services/pasar-datos.service';
+import { DataApiService } from 'src/app/services/data-api.service';
+import { GlobalService } from 'src/app/services/global.service';
+import { PasarDatosService } from 'src/app/services/pasar-datos.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-subcategorias',
+  templateUrl: './subcategorias.page.html',
+  styleUrls: ['./subcategorias.page.scss'],
 })
-export class Tab1Page {
+export class SubcategoriasPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   foto: any;
+
+  idCategoria;
+  dataCategoria;
   categoriaForm: FormGroup;
   visibilidad = true;
-  listaCategorias = [];  
+  listaSubCategorias = [];
   constructor(
+    private route: ActivatedRoute,
+    private pasarDatos: PasarDatosService,
     private router: Router,
     private servGlobal: GlobalService,
-    private dataApi: DataApiService,
-    private pasarDato: PasarDatosService
+    private dataApi: DataApiService
   ) {
+    this.idCategoria = this.route.snapshot.params.id;
     this.categoriaForm = this.createFormUsuario();
   }
-
+  
   ngOnInit() {
-    this.obtenerCategorias();
+    this.obtenerSubCategorias();
+    this.dataCategoria = this.pasarDatos.getData();
+    if (!this.dataCategoria) {
+      this.router.navigate(['/tabs/tab1']);
+    }
   }
 
-  obtenerCategorias() {
-    this.dataApi.obtenerCategorias().then(res => {
-      if (res) {
-        this.listaCategorias = res;
-      }
+  obtenerSubCategorias() {
+    this.dataApi.obtenerSubCategorias(this.idCategoria)
+    
+    // .forEach(res => {
+    //     console.log(res);
+
+    // })
+    // .subscribe(res => {
+    //   console.log(res);
+    //   this.listaSubCategorias = res;
+    // });
+    .then(res => {
+      res.forEach(data => console.log(data.data()))
+      // this.listaSubCategorias = [];
+      // if (res) {
+      //   this.listaSubCategorias = res;
+      // }
     });
   }
-  
+
   cerrarModal() {
     this.modal.dismiss();
   }
-
-  irPresentacion() {
-    this.router.navigate(['/presentacion']);
-  }
-
-  // CATEGORIAS
 
   createFormUsuario() {
     return new FormGroup({
@@ -69,15 +84,6 @@ export class Tab1Page {
     this.categoriaForm.controls.visible.setValue(this.visibilidad);
   }
 
-  // async subirFoto() {
-  //   const loading = await this.servGlobal.presentLoading('Subiendo imagen...');
-  //   await this.servGlobal.subirImagen(this.foto).then(res => {
-  //     console.log('URL: ', res);
-  //     loading.dismiss();
-  //     return res;
-  //   })
-  // }
-
   async guardarNuevaCategoria() {
     console.log(this.categoriaForm.value);
     if (!this.foto) {
@@ -85,11 +91,11 @@ export class Tab1Page {
       return;
     }
     if (this.categoriaForm.valid) {
-      const loading = await this.servGlobal.presentLoading('Guardando categoria...');
+      const loading = await this.servGlobal.presentLoading('Guardando Subcategoria...');
       await this.servGlobal.subirImagen(this.foto).then(url => {
         this.categoriaForm.controls.img.setValue(url);
         console.log(this.categoriaForm.value);
-        this.dataApi.guardarCategoria(this.categoriaForm.value).then(res => {
+        this.dataApi.guardarSubCategoria(this.categoriaForm.value, this.idCategoria).then(res => {
           if (res && res !== 'fail') {
             this.servGlobal.presentToast('Guardado correctamente.', {color: 'success'});
             this.cerrarModal();
@@ -114,8 +120,4 @@ export class Tab1Page {
     })
   }
 
-  irSubcategoria(categoria) {
-    this.pasarDato.setData(categoria);
-    this.router.navigate(['/subcategorias', categoria.id]);
-  }
 }

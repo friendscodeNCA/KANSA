@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'agregar-editar-categoria',
     loadChildren: () => import('./modals/agregar-editar-categoria/agregar-editar-categoria.module').then( m => m.AgregarEditarCategoriaPageModule)
+  },
+  {
+    path: 'subcategorias/:id',
+    loadChildren: () => import('./pages/subcategorias/subcategorias.module').then( m => m.SubcategoriasPageModule)
   }
 ];
 @NgModule({

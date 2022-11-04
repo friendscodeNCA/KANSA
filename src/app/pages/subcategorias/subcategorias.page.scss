@@ -1,0 +1,27 @@
+h2 {
+    text-align: center;
+}
+ion-card {
+    margin: 3%;
+    ion-card-content {
+        height: 50px;
+        text-align: center;
+        font-size: 1.8vh;
+        font-weight: bold;
+    }
+}
+
+.formCategoria { 
+    ion-card {
+        margin: 0 auto;
+        text-align: center;
+        width: 200px;
+        ion-img {
+            height: 200px;
+        }
+    }
+    ion-item {
+        border: solid 1px var(--ion-color-primary);
+        border-radius: 10px;
+    }
+}
