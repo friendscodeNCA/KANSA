@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./modals/agregar-editar-categoria/agregar-editar-categoria.module').then( m => m.AgregarEditarCategoriaPageModule)
   },
   {
+    path: 'subcategorias/:id',
+    loadChildren: () => import('./pages/subcategorias/subcategorias.module').then( m => m.SubcategoriasPageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }

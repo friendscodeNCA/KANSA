@@ -32,11 +32,57 @@
       <ion-label position="floating">Fecha de nacimiento</ion-label>
       <ion-input formControlName="fechaNacimiento" type="date" placeholder="Ingrese su fecha de nacimiento"></ion-input>
     </ion-item> <br>
+    <ion-item lines="none" id="modalServicios">
+      <ion-label position="floating">Servicios que brinda</ion-label>
+      <ion-textarea readonly formControlName="descripcion" type="text" placeholder="Seleccione los servicios que brinda..."></ion-textarea>
+    </ion-item> <br>
     <ion-item lines="none">
       <ion-label position="floating">Hablanos de ti</ion-label>
       <ion-textarea formControlName="descripcion" type="text" placeholder="Cuentanos sobre ti..."></ion-textarea>
     </ion-item>
   </form>
+
+  <ion-modal trigger="modalServicios">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-buttons slot="start">
+            <ion-button color="primary" (click)="cerrarModal()">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title color="primary">Servicios</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-searchbar mode="ios" placeholder="Buscar servicios" type="text" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
+        <ion-list *ngFor="let item of [1,1,1,1,1,1]">
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="../../../assets/img/logo kansa.png" />
+            </ion-avatar>
+            <ion-label>Categoria 1</ion-label>
+            <ion-button slot="end" color="primary" (click)="onClick()" shape="round">
+              <ion-icon name="add"></ion-icon> Añadir
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+      <div class="listaServicios">
+        <ion-item-divider color="light">
+          <ion-label color="primary">Servicios agregados</ion-label>
+        </ion-item-divider>
+      </div>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-button (click)="onClick()" expand="block" shape="round">
+            <ion-label>Guardar</ion-label>
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
 </ion-content>
 
 <ion-footer class="ion-no-border">

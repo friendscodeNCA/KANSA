@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GlobalService } from 'src/app/services/global.service';
 
@@ -10,11 +11,13 @@ import { GlobalService } from 'src/app/services/global.service';
   styleUrls: ['./registro-datos.page.scss'],
 })
 export class RegistroDatosPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
+
   usuarioForm: FormGroup;
   constructor(
     private router: Router,
     private dataApi: DataApiService,
-    private servGlobal: GlobalService
+    private servGlobal: GlobalService,
   ) {
     this.usuarioForm = this.createFormUsuario();
    }
@@ -63,5 +66,9 @@ export class RegistroDatosPage implements OnInit {
 
   irHome() {
     this.router.navigate(['/tabs/tab1']);
+  }
+
+  cerrarModal() {
+    this.modal.dismiss();
   }
 }

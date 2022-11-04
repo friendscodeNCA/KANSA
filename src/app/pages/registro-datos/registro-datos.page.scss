@@ -28,3 +28,9 @@ form {
         border-radius: 10px;
     }
 }
+
+.listaServicios {
+    background-color: var(--ion-color-light);
+    max-height: 40%;
+    overflow-y: auto;
+}

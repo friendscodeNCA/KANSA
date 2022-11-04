@@ -1,22 +1,4 @@
-<ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar class="toolbar" color="light">
-    <ion-grid>
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="6">
-          <ion-item lines="none" color="light">
-            <ion-avatar>
-              <img src="https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=2000" />
-            </ion-avatar> &nbsp;
-            <ion-label>Gabriel <br> Hola</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="6" class="logo" >
-          <img src="../../assets/img/logo kansa.png" alt="">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content [fullscreen]="true">
   <!-- <div class="header">
@@ -62,7 +44,7 @@
     <ion-grid fixed>
       <ion-row>
         <ion-col size="6" *ngFor="let categoria of listaCategorias">
-          <ion-card mode="ios">
+          <ion-card mode="ios" (click)="irSubcategoria(categoria)">
             <ion-card-header>
               <img [src]="categoria.img" alt="">
             </ion-card-header>
@@ -106,9 +88,6 @@
             <ion-checkbox (ionChange)="cambiarVisibilidad($event)" [(ngModel)]="visibilidad" [ngModelOptions]="{standalone: true}" slot="start"></ion-checkbox>
           </ion-item>
         </form>
-        <ion-button (click)="subirFoto()" expand="block" fill="clear" shape="round">
-          Subir foto
-        </ion-button>
         
       </ion-content>
       <ion-footer class="ion-no-border">
