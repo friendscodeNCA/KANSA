@@ -15,6 +15,9 @@ import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
 import { ComponentModule } from './components/component/component.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 
 @NgModule({
@@ -28,10 +31,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     ComponentModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     provideAuth(() => getAuth()),
     ComponentModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },FCM],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },FCM,NativeStorage],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
