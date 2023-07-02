@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonModal, LoadingController } from '@ionic/angular';
+import { IonModal, IonSearchbar, LoadingController } from '@ionic/angular';
+import { categoriaInterface } from 'src/app/models/categoriaInterface';
+import { BuscadorService } from 'src/app/services/buscador.service';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -13,30 +15,28 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class RegistroDatosPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
-  celular;
-  valorfcm;
-  loading;
+  @ViewChild("mySearchbar", {static: false}) search: IonSearchbar;
+
   usuarioForm: FormGroup;
   listaBusqueda: categoriaInterface[] = [];
   listaAgregados: categoriaInterface[] = [];
 
   cargando =  false;
   sinDatos = false;
+  loading;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dataApi: DataApiService,
     private servGlobal: GlobalService,
-    private loadingController: LoadingController,
+    private buscador: BuscadorService,
     private storage: StorageService,
+    private loadingController: LoadingController
   ) {
     this.usuarioForm = this.createFormUsuario();
    }
 
   ngOnInit() {
-    this.celular = this.route.snapshot.params.celular;
-    this.valorfcm  = this.route.snapshot.params.token;
-    console.log(this.celular, this.valorfcm)
   }
 
   eliminarDataBusqueda(ev) {
@@ -123,10 +123,23 @@ export class RegistroDatosPage implements OnInit {
 
   async guardarDataUsuario() {
     console.log(this.usuarioForm.value);
-    if (this.usuarioForm.valid) {
-      await this.presentLoading('Creando nuevo usuario...');
-      this.guardarDatos(this.usuarioForm.value)
-      
+    if (this.usuarioForm.valid && this.listaAgregados.length) {
+      const lista = [];
+      for (const servicio of this.listaAgregados) {
+        lista.push(servicio.nombre)
+      }
+      this.usuarioForm.controls['listaServicios'].setValue(lista);
+      const loading = await this.servGlobal.presentLoading('Registrando...');
+      this.dataApi.guardarDataUsuario(this.usuarioForm.value).then(res => {
+        if (res !== 'fail' && res !== 'fail') {
+          this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
+          this.router.navigate(['/tabs/tab1']);
+          this.resetForm();
+        } else {
+          this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
+        }
+        loading.dismiss();
+      });
     } else {
       this.servGlobal.presentToast('Complete sus datos correctamente', {color: 'danger'})
     }
@@ -138,8 +151,6 @@ export class RegistroDatosPage implements OnInit {
       direccion: datos.direccion,
       fechaNacimiento: datos.fechaNacimiento,
       descripcion: datos.descripcion,
-      celular: this.celular,
-      token: this.valorfcm,
     };
 
     this.dataApi.guardarUsuario(formatoDatos).then(async res => {
