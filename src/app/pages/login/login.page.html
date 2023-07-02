@@ -1,16 +1,16 @@
-<ion-header class="ion-no-border" style="position: fixed;">
+<!-- <ion-header class="ion-no-border" style="position: fixed;">
   <ion-toolbar color="translucent">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="presentacion"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content color="light">
+<ion-content color="primary">
   <div id='recaptcha-container' style="display: none;"></div>
 
   <div class="logo">
-    <!-- <img src="../../../assets/flujoNegro.png" alt=""> -->
+    <img src="../../../assets/img/logo kansa.png" alt="">
   </div>
   <div class="login">
     <div class="content"  *ngIf="!otpSent">
@@ -18,9 +18,11 @@
       <form [formGroup]="loginForm2" autocomplete="off">
         <div class="titulo">
           <ion-label>
-            Iniciar Sesión
+            REGÍSTRATE
           </ion-label>
+          <br>
         </div>
+        <ion-label> Ingresa tu numero de celular</ion-label><br>
         <ion-item color="light">
           <ion-icon slot="start" color="primary" name="phone-portrait-outline"></ion-icon>
           <ion-input type="number" formControlName="numeroCelular" placeholder="Numero de celular"></ion-input>
@@ -36,7 +38,10 @@
             *El celular debe tener 9 digitos como máximo
           </div>
         </div><br>
-        <ion-button shape="round"  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block">
+        <ion-button  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block" color="success">
+          Términos y condiciones
+        </ion-button>
+        <ion-button  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block" color="warning">
           Iniciar
         </ion-button>
       </form>
@@ -53,12 +58,12 @@
           <ion-icon slot="start" name="key-outline" color="primary"></ion-icon>
           <ion-input type="number" id="otp" placeholder="Ingrese el codigo"></ion-input>
         </ion-item><br>
-        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block">
+        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block" color="success">
           Verificar
         </ion-button>
         <div class="info">
           <ion-label  *ngIf="hiddevalue===false">Reenviar código en {{contador}} seg.</ion-label>
-          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()">
+          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()" color="warning">
             <ion-label>reenviar código</ion-label>
           </ion-button>
         </div>

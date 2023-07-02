@@ -2,6 +2,10 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import {RecaptchaVerifier, ConfirmationResult,Auth, signInWithPhoneNumber } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, Platform, ToastController } from '@ionic/angular';
+import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
+import { Router } from '@angular/router';
+import { DataApiService } from 'src/app/services/data-api.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 @Component({
@@ -27,8 +31,11 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertCtrl: AlertController,
     private zone: NgZone,
-    // private fcm: FCM,
-    private platform: Platform
+    private fcm: FCM,
+    private platform: Platform,
+    private router: Router,
+    private dataApi: DataApiService,
+    private storage: StorageService
     ) {
       this.loginForm2 = this.createFormGroup2();
   }
@@ -208,7 +215,6 @@ export class LoginPage implements OnInit {
     toast.present();
   }
   async verificarOTP() {
-
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     const otp = (<HTMLInputElement> document.getElementById('otp')).value;
     console.log('otp: ', otp);
@@ -216,7 +222,40 @@ export class LoginPage implements OnInit {
       this.presentLoading('Verificando');
       this.confirmationResult.confirm(otp).then( () => {
         this.presentToastCorrecto('Codigo correcto');
+        // console.log(this.NumCel);
         console.log(this.numCel);
+        const userSubcribe = this.dataApi.obtenerUsuarioCelular(this.numCel).subscribe(async res => {
+          userSubcribe.unsubscribe();
+          console.log('res', res);
+          console.log(this.numCel);
+
+
+          if ((res=== null)|| (res === undefined) ){
+            console.log('no hay datos y  deve dejarte ingresar tus datos');
+            this.loading.dismiss();
+            // this.router.navigate(['/registro-datos']);
+              await this.router.navigate(['/registro-datos', this.numCel, this.valorfcm]).then(() => {
+                this.loginForm2.reset();
+                this.otpSent = false;
+            });
+
+          }else {
+            // // alert('datos que se imgresarann' + res )
+            await this.storage.guardarDatosUsuario(res).then( async () => {
+              // actualizar token
+              await this.dataApi.actualizarToken( this.numCel , this.valorfcm);
+              // await this.menuCtrl.enable(true);
+              console.log('actualiza datos por k ya hay en base de datos');
+              await this.router.navigate(['/tabs/tab1']).then(() => {
+                  this.loading.dismiss();
+                  this.loginForm2.reset();
+                  // this.IngresarDatos = false;
+                  this.otpSent = false;
+              });
+            });
+
+          }
+        });
       }).catch(err => {
         this.presentToastError('Codigo incorrecto.');
         this.loading.dismiss();

@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
-    path: 'registro-datos',
+    path: 'registro-datos/:celular/:token',
     loadChildren: () => import('./pages/registro-datos/registro-datos.module').then( m => m.RegistroDatosPageModule)
   },
   {
@@ -37,7 +37,8 @@ const routes: Routes = [
   {
     path: 'perfil-usuario/:id',
     loadChildren: () => import('./pages/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
-  },  {
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   }

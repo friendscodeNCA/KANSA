@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IonModal, IonSearchbar } from '@ionic/angular';
-import { categoriaInterface } from 'src/app/models/categoriaInterface';
-import { BuscadorService } from 'src/app/services/buscador.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IonModal, LoadingController } from '@ionic/angular';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-registro-datos',
@@ -14,8 +13,9 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class RegistroDatosPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
-  @ViewChild("mySearchbar", {static: false}) search: IonSearchbar;
-
+  celular;
+  valorfcm;
+  loading;
   usuarioForm: FormGroup;
   listaBusqueda: categoriaInterface[] = [];
   listaAgregados: categoriaInterface[] = [];
@@ -24,14 +24,19 @@ export class RegistroDatosPage implements OnInit {
   sinDatos = false;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private dataApi: DataApiService,
     private servGlobal: GlobalService,
-    private buscador: BuscadorService
+    private loadingController: LoadingController,
+    private storage: StorageService,
   ) {
     this.usuarioForm = this.createFormUsuario();
    }
 
   ngOnInit() {
+    this.celular = this.route.snapshot.params.celular;
+    this.valorfcm  = this.route.snapshot.params.token;
+    console.log(this.celular, this.valorfcm)
   }
 
   eliminarDataBusqueda(ev) {
@@ -118,26 +123,37 @@ export class RegistroDatosPage implements OnInit {
 
   async guardarDataUsuario() {
     console.log(this.usuarioForm.value);
-    if (this.usuarioForm.valid && this.listaAgregados.length) {
-      const lista = [];
-      for (const servicio of this.listaAgregados) {
-        lista.push(servicio.nombre)
-      }
-      this.usuarioForm.controls['listaServicios'].setValue(lista);
-      const loading = await this.servGlobal.presentLoading('Registrando...');
-      this.dataApi.guardarDataUsuario(this.usuarioForm.value).then(res => {
-        if (res !== 'fail' && res !== 'fail') {
-          this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
-          this.router.navigate(['/tabs/tab1']);
-          this.resetForm();
-        } else {
-          this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
-        }
-        loading.dismiss();
-      });
+    if (this.usuarioForm.valid) {
+      await this.presentLoading('Creando nuevo usuario...');
+      this.guardarDatos(this.usuarioForm.value)
+      
     } else {
       this.servGlobal.presentToast('Complete sus datos correctamente', {color: 'danger'})
     }
+  }
+  async guardarDatos(datos: any){
+    const formatoDatos: any = {
+      nombres: datos.nombres ,
+      apellidos: datos.apellidos,
+      direccion: datos.direccion,
+      fechaNacimiento: datos.fechaNacimiento,
+      descripcion: datos.descripcion,
+      celular: this.celular,
+      token: this.valorfcm,
+    };
+
+    this.dataApi.guardarUsuario(formatoDatos).then(async res => {
+      await this.storage.guardarDatosUsuario(formatoDatos).then(async () => {
+        this.loading.dismiss;
+        this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
+      })
+        await this.router.navigate(['/tabs/tab1']);
+        this.resetForm();
+    }).catch( (err)=> {
+      this.loading.dismiss;
+      this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
+
+    });
   }
 
   irHome() {
@@ -147,5 +163,12 @@ export class RegistroDatosPage implements OnInit {
   cerrarModal() {
     this.modal.dismiss();
     this.listaBusqueda = [];
+  }
+  async presentLoading(mensaje: string) {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: mensaje,
+    });
+    await this.loading.present();
   }
 }
