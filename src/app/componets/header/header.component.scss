@@ -1,10 +1,16 @@
 .toolbar {
     height: 120px;
     border-bottom-right-radius: 20%;
+    border-bottom-left-radius: 20%;
     .logo {
         text-align: center;
         img {
-            height: 120px;
+            height: 70px;
         }
     }
+}
+
+ion-grid {
+    padding-left: 5%;
+    padding-right: 5%;
 }

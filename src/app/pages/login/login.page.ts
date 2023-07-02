@@ -2,7 +2,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import {RecaptchaVerifier, ConfirmationResult,Auth, signInWithPhoneNumber } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, Platform, ToastController } from '@ionic/angular';
-import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
 
 
 @Component({
@@ -28,7 +27,7 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertCtrl: AlertController,
     private zone: NgZone,
-    private fcm: FCM,
+    // private fcm: FCM,
     private platform: Platform
     ) {
       this.loginForm2 = this.createFormGroup2();
@@ -110,7 +109,7 @@ export class LoginPage implements OnInit {
       const celular = '+51' +  this.loginForm2.value.numeroCelular.toString();
       // console.log('numero de celular', Celular);
       console.log('captcha: ' + this.recaptchaVerifer);
-      this.crearFcm();
+      // this.crearFcm();
       signInWithPhoneNumber(this.auth,celular, this.recaptchaVerifer).then((result) => {
           this.otpSent = true;
           this.confirmationResult = result;
@@ -165,13 +164,13 @@ export class LoginPage implements OnInit {
       this.loading.dismiss();
     });
   }
-  crearFcm() {
-    if ( this.platform.is('cordova')) {
-      this.fcm.getToken().then(token => {
-        this.valorfcm = token;
-      }).catch (err => this.presentToastError('Error al obtener token') );
-    } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
-  }
+  // crearFcm() {
+  //   if ( this.platform.is('cordova')) {
+  //     this.fcm.getToken().then(token => {
+  //       this.valorfcm = token;
+  //     }).catch (err => this.presentToastError('Error al obtener token') );
+  //   } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
+  // }
   async presentToastCorrecto(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,

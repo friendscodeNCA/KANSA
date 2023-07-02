@@ -104,4 +104,34 @@ export class DataApiService {
       return datos;
     }));
   }
+
+  // Obtener usuarios que brindan servicio
+
+  busquedaUsuariosServicio(arrayTargets: string[]){
+    return this.afs2.collection('usuarios').ref
+    .where('listaServicios', 'array-contains-any', arrayTargets ).limit(50).get().then((querySnapshot) => {
+      const resultList: any[] = [];
+      querySnapshot.forEach( (doc: any) => {
+        resultList.push({id: doc.id, ...doc.data()});
+      });
+      return resultList;
+    });
+  }
+
+  // Obtener un Usuario
+  obtenerUnUsuario(id: string) {
+    return this.afs2.doc(`usuarios/${id}`)
+    .snapshotChanges().pipe(map(action => {
+      let datos: any = {};
+      if (action.payload.exists === false) {
+        return null;
+      } else {
+        datos = {
+          ...action.payload.data() as usuarioInterface,
+          id: action.payload.id
+        };
+        return datos;
+      }
+    }));
+  }
 }

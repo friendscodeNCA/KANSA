@@ -1,11 +1,9 @@
 export interface usuarioInterface {
     id?: string; // idSerie NO
-    categoria?: string;
-    plantilla?: string;
-    titulo?: string;
+    nombres?: string;
+    apellidos?: string;
+    direccion?: string;
     descripcion?: string;
-    img?: string;
-    precio?: string;
-    numero?: string;
-    color?: string;
+    fechaNacimiento?: string;
+    listaServicios?: string[];
 }

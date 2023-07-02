@@ -24,3 +24,23 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+.botonMediano {
+    width: 80%;
+    height: 40px;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: var(--ion-color-dark);
+    font-family: Gil;
+}
+.boton {
+    width: 80%;
+    height: 60px;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: var(--ion-color-dark);
+    font-family: Gil;
+}
+.botonVerde {
+    --background: rgb(7,255,123);
+    --background: linear-gradient(270deg, rgba(7,255,123,1) 0%, rgba(147,255,198,1) 100%);
+}

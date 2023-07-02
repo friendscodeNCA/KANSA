@@ -72,7 +72,7 @@ export class GlobalService {
     return new Promise( resolve => {
 
       const storage = getStorage();
-      const storageRef = ref(storage, 'categorias/' + 'nuevooooo6');
+      const storageRef = ref(storage, 'categorias/' + new Date());
 
       console.log(storageRef);
       uploadString(storageRef, file, 'data_url').then((snapshot) => {

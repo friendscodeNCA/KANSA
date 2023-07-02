@@ -2,12 +2,17 @@ h2 {
     text-align: center;
 }
 ion-card {
-    margin: 3%;
+    margin: 1%;
+    height: 200px;
+    ion-card-header {
+        height: 70%;
+    }
     ion-card-content {
-        height: 50px;
+        height: 30%;
         text-align: center;
         font-size: 1.8vh;
         font-weight: bold;
+        padding: 0px;
     }
 }
 

@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.paway.qansa;
 
 import com.getcapacitor.BridgeActivity;
 

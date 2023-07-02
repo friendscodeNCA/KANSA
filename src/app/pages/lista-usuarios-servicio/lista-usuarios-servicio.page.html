@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<ion-content>
+
+  <h2 *ngIf="dataSubcategoria">{{dataSubcategoria.nombre | titlecase}}</h2>
+
+  <div class="lista"  *ngFor="let usuario of listaUsuarios">
+    <ion-card mode="ios" (click)="irPerfil(usuario.id)">
+      <ion-item lines="none">
+        <ion-icon slot="start" name="person-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.nombres | titlecase}}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="location-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.direccion | titlecase}}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="grid-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.descripcion | titlecase}}</ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

@@ -32,10 +32,16 @@
       <ion-label position="floating">Fecha de nacimiento</ion-label>
       <ion-input formControlName="fechaNacimiento" type="date" placeholder="Ingrese su fecha de nacimiento"></ion-input>
     </ion-item> <br>
-    <ion-item lines="none" id="modalServicios">
-      <ion-label position="floating">Servicios que brinda</ion-label>
-      <ion-textarea readonly formControlName="descripcion" type="text" placeholder="Seleccione los servicios que brinda..."></ion-textarea>
-    </ion-item> <br>
+    <div class="listaServiciosSeleccionados" id="modalServicios">
+      <ion-label position="floating" color="primary">Servicios que brinda</ion-label>
+      <div class="servicios" *ngIf="listaAgregados.length">
+        <ion-label *ngFor="let item of listaAgregados">
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label>{{item.nombre | titlecase}}</ion-label>
+          </ion-chip>
+        </ion-label>
+      </div>
+    </div> <br>
     <ion-item lines="none">
       <ion-label position="floating">Hablanos de ti</ion-label>
       <ion-textarea formControlName="descripcion" type="text" placeholder="Cuentanos sobre ti..."></ion-textarea>
@@ -56,14 +62,20 @@
       </ion-header>
       <ion-content class="ion-padding">
 
-        <ion-searchbar mode="ios" placeholder="Buscar servicios" type="text" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
-        <ion-list *ngFor="let item of [1,1,1,1,1,1]">
+        <ion-searchbar #mySearchbar mode="ios" placeholder="Buscar servicios" type="text" (ionFocus)="eliminarDataBusqueda($event)" (ionChange)="buscarSubcategoria($event)" [debounce]="250"></ion-searchbar>
+        <div class="cargando" *ngIf="cargando">
+          <ion-spinner color="primary" name="circular"></ion-spinner>
+        </div>
+        <div class="cargando" *ngIf="sinDatos">
+          <ion-label>No se encontraron resultados</ion-label>
+        </div>
+        <ion-list *ngFor="let item of listaBusqueda">
           <ion-item>
             <ion-avatar slot="start">
-              <img src="../../../assets/img/logo kansa.png" />
+              <img [src]="item.img" />
             </ion-avatar>
-            <ion-label>Categoria 1</ion-label>
-            <ion-button slot="end" color="primary" (click)="onClick()" shape="round">
+            <ion-label>{{item.nombre | titlecase}}</ion-label>
+            <ion-button [disabled]="item.agregado" slot="end" color="primary" (click)="addArrayServicios(item)" shape="round">
               <ion-icon name="add"></ion-icon> Añadir
             </ion-button>
           </ion-item>
@@ -73,11 +85,17 @@
         <ion-item-divider color="light">
           <ion-label color="primary">Servicios agregados</ion-label>
         </ion-item-divider>
+        <ion-label *ngFor="let item of listaAgregados">
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label>{{item.nombre | titlecase}}</ion-label>
+            <ion-icon (click)="eliminarDeListaAgregados(item)" name="close"></ion-icon>
+          </ion-chip>
+        </ion-label>
       </div>
       <ion-footer>
         <ion-toolbar>
-          <ion-button (click)="onClick()" expand="block" shape="round">
-            <ion-label>Guardar</ion-label>
+          <ion-button color="success" (click)="cerrarModal()" expand="block" shape="round">
+            <ion-label>Aceptar</ion-label>
           </ion-button>
         </ion-toolbar>
       </ion-footer>

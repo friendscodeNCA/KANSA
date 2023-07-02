@@ -29,7 +29,21 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'lista-usuarios-servicio/:id',
+    loadChildren: () => import('./pages/lista-usuarios-servicio/lista-usuarios-servicio.module').then( m => m.ListaUsuariosServicioPageModule)
+  },
+  {
+    path: 'perfil-usuario/:id',
+    loadChildren: () => import('./pages/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
+  },  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   }
+
+
+
 
 ];
 @NgModule({

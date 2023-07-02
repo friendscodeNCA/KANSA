@@ -16,7 +16,13 @@ export class Tab1Page {
   foto: any;
   categoriaForm: FormGroup;
   visibilidad = true;
-  listaCategorias = [];  
+  listaCategorias = [];
+
+  slideOpciones = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true
+   };
   constructor(
     private router: Router,
     private servGlobal: GlobalService,
@@ -35,6 +41,8 @@ export class Tab1Page {
       console.log(lista);
       if (lista.length) {
         this.listaCategorias = lista;
+      } else {
+        this.listaCategorias = [];
       }
     })
   }
@@ -94,7 +102,8 @@ export class Tab1Page {
           if (res && res !== 'fail') {
             this.servGlobal.presentToast('Guardado correctamente.', {color: 'success'});
             this.cerrarModal();
-            this.categoriaForm.reset();
+            this.categoriaForm.reset({orden: 1});
+            this.foto = '';
             loading.dismiss();
           } else {
             this.servGlobal.presentToast('No se pudo guardar.', {color: 'danger'});
@@ -118,5 +127,9 @@ export class Tab1Page {
   irSubcategoria(categoria) {
     this.pasarDato.setData(categoria);
     this.router.navigate(['/subcategorias', categoria.id]);
+  }
+
+  registro() {
+    this.router.navigate(['/registro-datos']);
   }
 }

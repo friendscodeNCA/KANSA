@@ -110,7 +110,8 @@ export class SubcategoriasPage implements OnInit {
           if (res && res !== 'fail') {
             this.servGlobal.presentToast('Guardado correctamente.', {color: 'success'});
             this.cerrarModal();
-            this.categoriaForm.reset();
+            this.foto = '';
+            this.categoriaForm.reset({orden: 1});
             loading.dismiss();
           } else {
             this.servGlobal.presentToast('No se pudo guardar.', {color: 'danger'});
@@ -129,6 +130,11 @@ export class SubcategoriasPage implements OnInit {
         this.foto =  'data:image/png;base64,' + res.base64String;
       }
     })
+  }
+
+  irListaUsuariosServicio(servicio) {
+    this.pasarDatos.setData(servicio);
+    this.router.navigate(['/lista-usuarios-servicio', servicio.id])
   }
 
 }

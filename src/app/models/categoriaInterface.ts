@@ -5,6 +5,7 @@ export interface categoriaInterface {
     descripcion?: string;
     img?: string;
     orden?: number;
+    agregado?: boolean;
     idCategoria?: string;
     fechaRegistro?: Date;
 }

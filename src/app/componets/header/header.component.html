@@ -2,16 +2,21 @@
   <ion-toolbar class="toolbar" color="light">
     <ion-grid>
       <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="3">
+          <ion-avatar>
+            <img src="../../../assets/img/USUARIO.svg" />
+          </ion-avatar> 
+        </ion-col>
         <ion-col size="6">
           <ion-item lines="none" color="light">
-            <ion-avatar>
-              <img src="https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=2000" />
-            </ion-avatar> &nbsp;
-            <ion-label>Gabriel <br> Hola</ion-label>
+            <ion-label>Usuario invitado</ion-label>
           </ion-item>
+          <ion-button size="small" mode="ios" class="botonVerde" (click)="onClick()" shape="round">
+              <ion-label color="dark">Crear Perfil</ion-label>
+          </ion-button>
         </ion-col>
-        <ion-col size="6" class="logo" >
-          <img src="../../assets/img/logo kansa.png" alt="">
+        <ion-col size="3" class="logo" >
+          <img src="../../../assets/img/Q.svg" alt="">
         </ion-col>
       </ion-row>
     </ion-grid>

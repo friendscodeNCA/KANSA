@@ -12,38 +12,67 @@
   </div> -->
 
   <div class="banner">
-    <ion-slides mode="ios">
+    <ion-slides mode="ios" [options]="slideOpciones">
       <ion-slide>
-        <img src="https://www.grupogrenich.com/wp-content/uploads/2018/03/banner-web-publicidad-textil_BLOG.png" alt="">
+        <img src="../../assets/img/slide1.jfif" alt="">
       </ion-slide>
       <ion-slide>
-        <img src="https://i.ytimg.com/vi/3IYo8vnfsFM/maxresdefault.jpg" alt="">
+        <img src="../../assets/img/slide2.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide3.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide4.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide5.jfif" alt="">
       </ion-slide>
     </ion-slides>
   </div>
 
-  <div class="ubicacion">
-    <ion-item-divider  (click)="irPresentacion()">
-      <ion-label>Busca servicios en</ion-label>
-      <ion-label slot="end" color="primary"><ion-icon slot="end" name="location" color="primary"></ion-icon>Andahuaylas</ion-label>
-    </ion-item-divider>
-  </div>
+  <ion-grid class="buscador">
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar mode="ios" placeholder="¿Qué servicio necesitas?" inputmode="text" type="text" [debounce]="250"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item lines="none" (click)="irPresentacion()">
+          <ion-label color="primary" position="stacked">¿Donde?</ion-label>
+          <ion-input readonly type="text"><ion-icon slot="end" name="location" color="primary"></ion-icon>Andahuaylas</ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button mode="ios" (click)="onClick()" color="warning" expand="block">
+          <ion-icon name="search"></ion-icon> &nbsp;
+          <ion-label>Buscar ahora</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <div class="buscador">
-    <ion-label>¿Que Necesita?</ion-label><br>
-    <ion-searchbar mode="ios" placeholder="Buscar servicio" inputmode="text" type="text" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
   </div>
 
   <div class="categorias">
-    <ion-item-divider>
+    <!-- <ion-item-divider>
       <ion-label>Categorias</ion-label>
       <ion-button mode="ios" size="small" slot="end" id="modalCategoria" shape="clear">
         <ion-icon name="add"></ion-icon>Agregar categoria
       </ion-button>
-    </ion-item-divider>
+      <ion-button mode="ios" size="small" slot="end" (click)="registro()" shape="clear">
+        <ion-icon name="person-outline"></ion-icon>Registrar Usuario
+      </ion-button>
+    </ion-item-divider> -->
+    <div class="tituloGeneral">
+      <ion-label>CATEGORÍAS GENERALES</ion-label>
+      <p>Realiza una busqueda personalizada</p>
+    </div>
     <ion-grid fixed>
       <ion-row>
-        <ion-col size="6" *ngFor="let categoria of listaCategorias">
+        <ion-col size="4" *ngFor="let categoria of listaCategorias">
           <ion-card mode="ios" (click)="irSubcategoria(categoria)">
             <ion-card-header>
               <img [src]="categoria.img" alt="">
