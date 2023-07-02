@@ -55,9 +55,10 @@ export class StorageService {
 
   consultaDatos() {
     this.authService.isAuth().subscribe(user => {
+      console.log('USUARIO DATOS....CELINE:')
       if (user) {
         console.log(user);
-        this.dataApi.obtenerUnAdministrador(user.email).subscribe( data => {
+        this.dataApi.obtenerUsuarioCelular(user.email).subscribe( data => {
           if (data) {
             if (this.platform.is('cordova')) {
               // celular
@@ -88,6 +89,7 @@ export class StorageService {
   }
 
   cargardatosUsuario() {
+    console.log('Cargando datos del usuario')
     const promesa = new Promise( (resolve, reject) => {
       if (this.platform.is('cordova')) {
         // celular
@@ -101,6 +103,8 @@ export class StorageService {
             error => console.error(error),
           );
       } else {
+        console.log('Cargando datos del usuario')
+
         // escritorio
         if (localStorage.getItem('datosUsuario')) {
           this.datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'));

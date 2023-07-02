@@ -58,12 +58,12 @@
           <ion-icon slot="start" name="key-outline" color="primary"></ion-icon>
           <ion-input type="number" id="otp" placeholder="Ingrese el codigo"></ion-input>
         </ion-item><br>
-        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block">
+        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block" color="success">
           Verificar
         </ion-button>
         <div class="info">
           <ion-label  *ngIf="hiddevalue===false">Reenviar código en {{contador}} seg.</ion-label>
-          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()">
+          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()" color="warning">
             <ion-label>reenviar código</ion-label>
           </ion-button>
         </div>

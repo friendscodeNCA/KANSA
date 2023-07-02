@@ -43,15 +43,15 @@ export class DataApiService {
 
 
   
-  guardarDataUsuario(newUsuarios: usuarioInterface) {
-    return addDoc(collection(this.afs, 'usuarios'), newUsuarios).then(data => {
-      if (data.id) {
-        return data.id;
-      } else {
-        return 'fail';
-      }
-    })
-  }
+  // guardarDataUsuario(newUsuarios: usuarioInterface) {
+  //   return addDoc(collection(this.afs, 'usuarios'), newUsuarios).then(data => {
+  //     if (data.id) {
+  //       return data.id;
+  //     } else {
+  //       return 'fail';
+  //     }
+  //   })
+  // }
 
   guardarCategoria(newCategoria: categoriaInterface) {
     newCategoria.fechaRegistro = new Date();
@@ -117,35 +117,7 @@ export class DataApiService {
       throw String('fail');
     });
   }
-  guardarDatosUsuario(user) {
-    console.log(user);
-    const promesa = new Promise<void>( (resolve, reject) => {
-      if (this.platform.is('cordova')) {
-        // dispositivo
-        console.log('guarda:', user);
-        this.nativeStorage.setItem('datosUsuario', user) // { property: 'value', anotherProperty: 'anotherValue' }
-        .then(
-          (data) => {
-            console.log('guardado');
-            // window.alert('Se guardo: ' + data);
-            this.nativeStorage.getItem('datosUsuario')
-            .then(
-              data1 => this.datosUsuario = data1, // console.log(data),
-              error => console.error(error), // window.alert('Error: ' + error)
-            );
-        }, // console.log('Stored first item!', data),
-          error => console.error('Error storing item', error) , //  window.alert('Error: ' + error)
-        );
-      } else {
-        // escritorio
-        localStorage.setItem('datosUsuario', JSON.stringify(user));
-        this.datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'));
-      }
-      resolve();
-    });
-    return promesa;
-  }
-  // obtener usuariocon celular
+   // obtener usuariocon celular
   obtenerUsuarioCelular(celular: string) {
     return this.afs2.doc(`usuarios/${celular}`).snapshotChanges().pipe(map(action => {
       if (action.payload.exists === false) {
@@ -157,17 +129,13 @@ export class DataApiService {
       }
     }));
   }
-  obtenerUnAdministrador(correo: string) {
-    return this.afs2.doc(`usuarios/${correo}`).snapshotChanges().pipe(map(action => {
-      if (action.payload.exists === false) {
-        return null;
-      } else {
-        const data = action.payload.data() as any; //usuarioInterface
-        data.id = action.payload.id;
-        return data;
-      }
-    }));
-  }
+    // guardar usuario
+    guardarUsuario(usuario: any) {
+      usuario.nombres = usuario.nombres.toLocaleLowerCase();
+      usuario.apellidos = usuario.apellidos.toLocaleLowerCase();
+      const cel = usuario.celular;
+      return this.afs2.collection('usuarios').doc(cel).set(usuario).then(() => 'exito').catch(err => err);
+    }
   
 
 }

@@ -233,11 +233,11 @@ export class LoginPage implements OnInit {
           if ((res=== null)|| (res === undefined) ){
             console.log('no hay datos y  deve dejarte ingresar tus datos');
             this.loading.dismiss();
-            this.router.navigate(['/registro-datos']);
-            //   await this.router.navigate(['/registro', this.numCel, this.valorfcm]).then(() => {
-            //     this.loginForm2.reset();
-            //     this.otpSent = false;
-            // });
+            // this.router.navigate(['/registro-datos']);
+              await this.router.navigate(['/registro-datos', this.numCel, this.valorfcm]).then(() => {
+                this.loginForm2.reset();
+                this.otpSent = false;
+            });
 
           }else {
             // // alert('datos que se imgresarann' + res )
@@ -246,7 +246,7 @@ export class LoginPage implements OnInit {
               await this.dataApi.actualizarToken( this.numCel , this.valorfcm);
               // await this.menuCtrl.enable(true);
               console.log('actualiza datos por k ya hay en base de datos');
-              await this.router.navigate(['/home']).then(() => {
+              await this.router.navigate(['/tabs/tab1']).then(() => {
                   this.loading.dismiss();
                   this.loginForm2.reset();
                   // this.IngresarDatos = false;
