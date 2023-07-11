@@ -116,7 +116,7 @@ export class LoginPage implements OnInit {
       const celular = '+51' +  this.loginForm2.value.numeroCelular.toString();
       // console.log('numero de celular', Celular);
       console.log('captcha: ' + this.recaptchaVerifer);
-      // this.crearFcm();
+      this.crearFcm();
       signInWithPhoneNumber(this.auth,celular, this.recaptchaVerifer).then((result) => {
           this.otpSent = true;
           this.confirmationResult = result;
@@ -171,13 +171,13 @@ export class LoginPage implements OnInit {
       this.loading.dismiss();
     });
   }
-  // crearFcm() {
-  //   if ( this.platform.is('cordova')) {
-  //     this.fcm.getToken().then(token => {
-  //       this.valorfcm = token;
-  //     }).catch (err => this.presentToastError('Error al obtener token') );
-  //   } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
-  // }
+  crearFcm() {
+    if ( this.platform.is('cordova')) {
+      this.fcm.getToken().then(token => {
+        this.valorfcm = token;
+      }).catch (err => this.presentToastError('Error al obtener token') );
+    } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
+  }
   async presentToastCorrecto(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,

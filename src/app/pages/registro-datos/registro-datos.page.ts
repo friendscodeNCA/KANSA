@@ -23,6 +23,8 @@ export class RegistroDatosPage implements OnInit {
 
   cargando =  false;
   sinDatos = false;
+  celular;
+  valorfcm;
   loading;
   constructor(
     private router: Router,
@@ -37,6 +39,9 @@ export class RegistroDatosPage implements OnInit {
    }
 
   ngOnInit() {
+    this.celular = this.route.snapshot.params.celular;
+    this.valorfcm  = this.route.snapshot.params.token;
+    console.log(this.celular, this.valorfcm)  
   }
 
   eliminarDataBusqueda(ev) {
@@ -130,20 +135,44 @@ export class RegistroDatosPage implements OnInit {
       }
       this.usuarioForm.controls['listaServicios'].setValue(lista);
       const loading = await this.servGlobal.presentLoading('Registrando...');
-      this.dataApi.guardarDataUsuario(this.usuarioForm.value).then(res => {
-        if (res !== 'fail' && res !== 'fail') {
-          this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
-          this.router.navigate(['/tabs/tab1']);
-          this.resetForm();
-        } else {
-          this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
-        }
-        loading.dismiss();
-      });
+      
+      // this.dataApi.guardarDataUsuario(this.usuarioForm.value).then(res => {
+      //   if (res !== 'fail' && res !== 'fail') {
+      //     this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
+      //     this.router.navigate(['/tabs/tab1']);
+      //     this.resetForm();
+      //   } else {
+      //     this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
+      //   }
+      //   loading.dismiss();
+      // });
+       // this.dataApi.guardarDataUsuario(this.usuarioForm.value).then(res => {
+      //   if (res !== 'fail' && res !== 'fail') {
+      //     this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
+      //     this.router.navigate(['/tabs/tab1']);
+      //     this.resetForm();
+      //   } else {
+      //     this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
+      //   }
+      //   loading.dismiss();
+      // });
+      this.guardarDatos(this.usuarioForm.value);
+      loading.dismiss();
+
     } else {
       this.servGlobal.presentToast('Complete sus datos correctamente', {color: 'danger'})
     }
   }
+  // async guardarDataUsuario() {
+  //   console.log(this.usuarioForm.value);
+  //   if (this.usuarioForm.valid) {
+  //     await this.presentLoading('Creando nuevo usuario...');
+  //     this.guardarDatos(this.usuarioForm.value)
+      
+  //   } else {
+  //     this.servGlobal.presentToast('Complete sus datos correctamente', {color: 'danger'})
+  //   }
+  // }
   async guardarDatos(datos: any){
     const formatoDatos: any = {
       nombres: datos.nombres ,
@@ -151,6 +180,10 @@ export class RegistroDatosPage implements OnInit {
       direccion: datos.direccion,
       fechaNacimiento: datos.fechaNacimiento,
       descripcion: datos.descripcion,
+      celular: this.celular,
+      token: this.valorfcm,
+      listaServicios: datos.listaServicios
+      
     };
 
     this.dataApi.guardarUsuario(formatoDatos).then(async res => {

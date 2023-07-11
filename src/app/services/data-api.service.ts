@@ -43,15 +43,15 @@ export class DataApiService {
 
 
   
-  guardarDataUsuario(newUsuarios: usuarioInterface) {
-    return addDoc(collection(this.afs, 'usuarios'), newUsuarios).then(data => {
-      if (data.id) {
-        return data.id;
-      } else {
-        return 'fail';
-      }
-    })
-  }
+  // guardarDataUsuario(newUsuarios: usuarioInterface) {
+  //   return addDoc(collection(this.afs, 'usuarios'), newUsuarios).then(data => {
+  //     if (data.id) {
+  //       return data.id;
+  //     } else {
+  //       return 'fail';
+  //     }
+  //   })
+  // }
 
   guardarCategoria(newCategoria: categoriaInterface) {
     newCategoria.fechaRegistro = new Date();
