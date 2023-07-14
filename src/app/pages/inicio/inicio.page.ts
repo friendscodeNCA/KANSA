@@ -19,4 +19,8 @@ export class InicioPage implements OnInit {
     this.router.navigate(['/tabs/tab1']);
   }
 
+  irLogin() {
+    this.router.navigate(['/login']);
+  }
+
 }

@@ -34,18 +34,18 @@
   <ion-grid class="buscador">
     <ion-row>
       <ion-col size="12">
-        <ion-searchbar mode="ios" placeholder="¿Qué servicio necesitas?" inputmode="text" type="text" [debounce]="250"></ion-searchbar>
+        <ion-searchbar (ionChange)="textoBuscar($event.target.value)" mode="ios" placeholder="¿Qué servicio necesitas?" inputmode="text" type="text" [debounce]="250"></ion-searchbar>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <ion-item lines="none" (click)="irPresentacion()">
+        <ion-item lines="none">
           <ion-label color="primary" position="stacked">¿Donde?</ion-label>
           <ion-input readonly type="text"><ion-icon slot="end" name="location" color="primary"></ion-icon>Andahuaylas</ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="6">
-        <ion-button mode="ios" (click)="onClick()" color="warning" expand="block">
+        <ion-button mode="ios" (click)="buscarServicioGeneral()" color="warning" expand="block">
           <ion-icon name="search"></ion-icon> &nbsp;
           <ion-label>Buscar ahora</ion-label>
         </ion-button>

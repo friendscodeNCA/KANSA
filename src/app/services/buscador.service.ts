@@ -37,4 +37,16 @@ export class BuscadorService {
       return resultList;
     });
   }
+
+  buscarServicioGeneral(target: string) {
+     // BUSCA POR NOMBRE
+     return this.afs2.collection('usuarios').ref.where('listaServicios', 'array-contains', target)
+     .get().then((querySnapshot) => {
+       const resultList: categoriaInterface[] = [];
+       querySnapshot.forEach( (doc: any) => {
+         resultList.push({id: doc.id, ...doc.data()});
+       });
+       return resultList;
+     });
+  }
 }

@@ -41,7 +41,12 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'resultados-busqueda/:target',
+    loadChildren: () => import('./pages/resultados-busqueda/resultados-busqueda.module').then( m => m.ResultadosBusquedaPageModule)
   }
+
 
 
 

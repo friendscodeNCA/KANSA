@@ -5,6 +5,7 @@ import { IonModal } from '@ionic/angular';
 import { DataApiService } from '../services/data-api.service';
 import { GlobalService } from '../services/global.service';
 import { PasarDatosService } from '../services/pasar-datos.service';
+import { BuscadorService } from '../services/buscador.service';
 
 @Component({
   selector: 'app-tab1',
@@ -17,6 +18,7 @@ export class Tab1Page {
   categoriaForm: FormGroup;
   visibilidad = true;
   listaCategorias = [];
+  textoBuscador: string;
 
   slideOpciones = {
     initialSlide: 0,
@@ -27,7 +29,8 @@ export class Tab1Page {
     private router: Router,
     private servGlobal: GlobalService,
     private dataApi: DataApiService,
-    private pasarDato: PasarDatosService
+    private pasarDato: PasarDatosService,
+    private buscador: BuscadorService
   ) {
     this.categoriaForm = this.createFormUsuario();
   }
@@ -131,5 +134,18 @@ export class Tab1Page {
 
   registro() {
     this.router.navigate(['/registro-datos']);
+  }
+
+  textoBuscar(data: string) {
+    this.textoBuscador = data;
+    console.log(data);
+  }
+
+  buscarServicioGeneral() {
+    if (!this.textoBuscador) {
+      this.servGlobal.presentToast('Ingrese el servicio que desea buscar');
+    } else {
+      this.router.navigate(['/resultados-busqueda', this.textoBuscador]);
+    }
   }
 }
