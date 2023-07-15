@@ -129,12 +129,12 @@ export class RegistroDatosPage implements OnInit {
   async guardarDataUsuario() {
     console.log(this.usuarioForm.value);
     if (this.usuarioForm.valid && this.listaAgregados.length) {
+      this.loading = await this.servGlobal.presentLoading('Registrando...');
       const lista = [];
       for (const servicio of this.listaAgregados) {
         lista.push(servicio.nombre)
       }
       this.usuarioForm.controls['listaServicios'].setValue(lista);
-      const loading = await this.servGlobal.presentLoading('Registrando...');
       
       // this.dataApi.guardarDataUsuario(this.usuarioForm.value).then(res => {
       //   if (res !== 'fail' && res !== 'fail') {
@@ -157,8 +157,6 @@ export class RegistroDatosPage implements OnInit {
       //   loading.dismiss();
       // });
       this.guardarDatos(this.usuarioForm.value);
-      loading.dismiss();
-
     } else {
       this.servGlobal.presentToast('Complete sus datos correctamente', {color: 'danger'})
     }
@@ -186,17 +184,16 @@ export class RegistroDatosPage implements OnInit {
       
     };
 
-    this.dataApi.guardarUsuario(formatoDatos).then(async res => {
-      await this.storage.guardarDatosUsuario(formatoDatos).then(async () => {
-        this.loading.dismiss;
-        this.servGlobal.presentToast('Registrado correctamente', {color: 'success'})
-      })
-        await this.router.navigate(['/tabs/tab1']);
+    this.dataApi.guardarUsuario(formatoDatos).then(res => {
+      this.storage.guardarDatosUsuario(formatoDatos).then(() => {
+        this.servGlobal.presentToast('Registrado correctamente', {color: 'success'});
+        this.loading.dismiss();
+        this.router.navigate(['/tabs/tab1']);
         this.resetForm();
+      })
     }).catch( (err)=> {
-      this.loading.dismiss;
+      this.loading.dismiss();
       this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})
-
     });
   }
 
