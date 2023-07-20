@@ -1,0 +1,31 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>presentacion</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <ion-slides #slider pager="true">
+    <ion-slide>
+      <div class="slide">
+        <img src="https://img.freepik.com/vector-gratis/ilustracion-soporte-al-cliente-plano-organico_23-2148899174.jpg" />
+        <h2>Bienvenido a Qansa</h2>
+        <p>
+          <b>Kansa</b> es una app de servicios, donde puede bridar y contratar servicios de forma facil y segura.
+        </p>
+        <ion-button (click)="siguiente()" fill="clear">Continuar <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <img src="https://img.freepik.com/vector-gratis/ilustracion-soporte-al-cliente-plano-organico_23-2148899174.jpg" />
+        <h2>Que es Qansa?</h2>
+        <p>
+          <b>Kansa</b> Encuentra los servicios que necesites.
+        </p>
+        <ion-button fill="clear" (click)="irInicio()">Iniciar</ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

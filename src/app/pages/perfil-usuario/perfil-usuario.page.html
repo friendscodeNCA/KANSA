@@ -1,0 +1,54 @@
+<ion-content color="light">
+  <div class="portada">
+    <img src="https://i.pinimg.com/736x/85/15/65/8515656df5db03b1e5b606aa965e2811.jpg" alt="">
+  </div>
+  <div class="fotoPerfil">
+    <img src="https://static.vecteezy.com/system/resources/previews/002/275/847/non_2x/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg" alt="">
+  </div>
+
+  <div class="datos">
+    <ion-item lines="none">
+      <ion-skeleton-text *ngIf="!usuario" slot="end" [animated]="true" style="width: 60%; height: 20px;"></ion-skeleton-text>
+      <ion-label *ngIf="usuario" slot="end" class="nombre">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-label>
+      <!-- <ion-button color="warning" slot="end" (click)="onClick()" shape="round">
+        <ion-label color="light">Editar</ion-label>
+      </ion-button> -->
+    </ion-item>
+  </div>
+  <ion-item-divider>
+    <ion-button color="primary" slot="end" (click)="aunNO()" shape="round">
+      <ion-label>Llamar</ion-label>
+    </ion-button>
+    <ion-button slot="end" (click)="aunNO()" shape="round">
+      <ion-label>Enviar Mensaje</ion-label>
+    </ion-button>
+  </ion-item-divider>
+
+  <div class="cargando" *ngIf="!usuario">
+    <ion-spinner color="primary" name="circular"></ion-spinner>
+  </div>
+
+  <ion-card class="cardDatos" mode="ios" *ngIf="usuario">
+    <ion-card-header>
+      <ion-card-title>Informacion personal</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="location-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.direccion}}</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="flash-outline" color="primary"></ion-icon>
+        <ion-label>Disponibilidad: Disponible</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="star-outline" color="primary"></ion-icon>
+        <ion-label>Recomendaciones</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="person-outline" color="primary"></ion-icon>
+        <ion-label>{{usuario.descripcion}}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

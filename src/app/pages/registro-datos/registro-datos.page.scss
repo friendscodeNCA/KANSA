@@ -1,0 +1,48 @@
+.toolbar {
+    height: 120px;
+    border-bottom-right-radius: 10%;
+    img {
+        height: 120px;
+    }
+
+    ion-grid {
+        .texto {
+            text-align: center;
+        }
+    }
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+}
+
+form {
+    ion-item {
+        ion-label {
+            color: var(--ion-color-primary);
+        }
+    }
+    ion-item {
+        border: solid 1px var(--ion-color-primary);
+        border-radius: 10px;
+    }
+}
+
+.listaServiciosSeleccionados {
+    border: solid 1px var(--ion-color-primary);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.listaServicios {
+    max-height: 40%;
+    overflow-y: auto;
+}
+
+.cargando {
+    width: 100%;
+    padding: 5%;
+    text-align: center;
+    color: red;
+}

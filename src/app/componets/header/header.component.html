@@ -1,0 +1,24 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar class="toolbar" color="light">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="3">
+          <ion-avatar>
+            <img src="../../../assets/img/USUARIO.svg" />
+          </ion-avatar> 
+        </ion-col>
+        <ion-col size="6">
+          <ion-item lines="none" color="light">
+            <ion-label>Usuario invitado</ion-label>
+          </ion-item>
+          <ion-button size="small" mode="ios" class="botonVerde" (click)="irLogin()" shape="round">
+              <ion-label color="dark">Iniciar Sesión</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="3" class="logo" >
+          <img src="../../../assets/img/Q.svg" alt="">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>

@@ -1,0 +1,6 @@
+{
+	"appId": "com.paway.qansa",
+	"appName": "kansaApp",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

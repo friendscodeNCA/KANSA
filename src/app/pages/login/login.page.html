@@ -1,0 +1,74 @@
+<!-- <ion-header class="ion-no-border" style="position: fixed;">
+  <ion-toolbar color="translucent">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="presentacion"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content color="primary">
+  <div id='recaptcha-container' style="display: none;"></div>
+
+  <div class="logo">
+    <img src="../../../assets/img/logo kansa.png" alt="">
+  </div>
+  <div class="login">
+    <div class="content"  *ngIf="!otpSent">
+
+      <form [formGroup]="loginForm2" autocomplete="off">
+        <div class="titulo">
+          <ion-label>
+            REGÍSTRATE
+          </ion-label>
+          <br>
+        </div>
+        <ion-label> Ingresa tu numero de celular</ion-label><br>
+        <ion-item color="light">
+          <ion-icon slot="start" color="primary" name="phone-portrait-outline"></ion-icon>
+          <ion-input type="number" formControlName="numeroCelular" placeholder="Numero de celular"></ion-input>
+        </ion-item>
+        <div class="alertDanger" *ngIf="numeroCelular.invalid && (numeroCelular.dirty || numeroCelular.touched)">
+          <div class="mensajeError" *ngIf="!!numeroCelular.errors.required">
+            *Complete el número de celular
+          </div>
+          <div class="mensajeError" *ngIf="!!numeroCelular.errors.min">
+            *Ingrese un celular válido
+          </div>
+          <div class="mensajeError" *ngIf="!!numeroCelular.errors.max">
+            *El celular debe tener 9 digitos como máximo
+          </div>
+        </div><br>
+        <ion-button  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block" color="success">
+          Términos y condiciones
+        </ion-button>
+        <ion-button  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block" color="warning">
+          Iniciar
+        </ion-button>
+      </form>
+    </div>
+    <div class="content" *ngIf="otpSent===true">
+      <!-- <img src="../../../assets/icons svg/mercado.svg" alt=""> -->
+      <form>
+        <div class="titulo">
+          <ion-label>
+            Enviamos  un código al {{numCel}}
+          </ion-label>
+        </div>
+        <ion-item color="light">
+          <ion-icon slot="start" name="key-outline" color="primary"></ion-icon>
+          <ion-input type="number" id="otp" placeholder="Ingrese el codigo"></ion-input>
+        </ion-item><br>
+        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block" color="success">
+          Verificar
+        </ion-button>
+        <div class="info">
+          <ion-label  *ngIf="hiddevalue===false">Reenviar código en {{contador}} seg.</ion-label>
+          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()" color="warning">
+            <ion-label>reenviar código</ion-label>
+          </ion-button>
+        </div>
+      </form>
+    </div>
+    </div>
+ 
+</ion-content>

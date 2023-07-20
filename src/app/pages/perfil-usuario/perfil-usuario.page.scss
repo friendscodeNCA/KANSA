@@ -1,0 +1,55 @@
+.portada {
+    height: 150px;
+    width: 100%;
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        box-shadow: 2px 1px 10px black;
+    }
+}
+
+.fotoPerfil {
+    height: 120px;
+    width: 100%;
+    position: absolute;
+    top: 110px;
+    left: 5%;
+    z-index: 99;
+    img {
+        height: 100%;
+        width: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: solid 5px white;
+    }
+}
+
+.datos {
+    .nombre {
+        font-size: 2.2vh;
+        font-weight: bold;
+    }
+}
+
+ion-item-divider {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    font-size: 18px;
+}
+
+.cardDatos {
+    ion-card-header {
+        text-align: center;
+        ion-card-title {
+        font-weight: bold;
+        }
+    }
+}
+
+.cargando {
+    width: 100%;
+    padding: 5%;
+    text-align: center;
+}

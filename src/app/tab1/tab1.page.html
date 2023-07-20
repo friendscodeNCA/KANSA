@@ -1,0 +1,131 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <div class="header">
+    <ion-item lines="none" color="light">
+      <ion-avatar slot="start">
+        <img src="https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=2000" />
+      </ion-avatar>
+      <ion-label>Gabriel <br> Hola</ion-label>
+      <img class="logo" src="../../assets/img/logo kansa.png" alt="">
+    </ion-item>
+  </div> -->
+
+  <div class="banner">
+    <ion-slides mode="ios" [options]="slideOpciones">
+      <ion-slide>
+        <img src="../../assets/img/slide1.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide2.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide3.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide4.jfif" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/img/slide5.jfif" alt="">
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-grid class="buscador">
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar (ionChange)="textoBuscar($event.target.value)" mode="ios" placeholder="¿Qué servicio necesitas?" inputmode="text" type="text" [debounce]="250"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-item lines="none">
+          <ion-label color="primary" position="stacked">¿Donde?</ion-label>
+          <ion-input readonly type="text"><ion-icon slot="end" name="location" color="primary"></ion-icon>Andahuaylas</ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button mode="ios" (click)="buscarServicioGeneral()" color="warning" expand="block">
+          <ion-icon name="search"></ion-icon> &nbsp;
+          <ion-label>Buscar ahora</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="buscador">
+  </div>
+
+  <div class="categorias">
+    <!-- <ion-item-divider>
+      <ion-label>Categorias</ion-label>
+      <ion-button mode="ios" size="small" slot="end" id="modalCategoria" shape="clear">
+        <ion-icon name="add"></ion-icon>Agregar categoria
+      </ion-button>
+      <ion-button mode="ios" size="small" slot="end" (click)="registro()" shape="clear">
+        <ion-icon name="person-outline"></ion-icon>Registrar Usuario
+      </ion-button>
+    </ion-item-divider> -->
+    <div class="tituloGeneral">
+      <ion-label>CATEGORÍAS GENERALES</ion-label>
+      <p>Realiza una busqueda personalizada</p>
+    </div>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4" *ngFor="let categoria of listaCategorias">
+          <ion-card mode="ios" (click)="irSubcategoria(categoria)">
+            <ion-card-header>
+              <img [src]="categoria.img" alt="">
+            </ion-card-header>
+            <ion-card-content>
+              <ion-label>{{categoria.nombre | titlecase }}</ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-modal trigger="modalCategoria">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-buttons slot="start">
+            <ion-button (click)="cerrarModal()" color="primary">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title color="primary">Agregar categoria</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form class="formCategoria" [formGroup]="categoriaForm">
+          <ion-card mode="ios" (click)="obtenerFotoCategoria()">
+            <ion-img *ngIf="!foto" src="https://freesoft.ru/storage/images/news/1/6/555/555_text.png"></ion-img>
+            <ion-img *ngIf="foto" [src]="foto"></ion-img>
+          </ion-card> <br>
+          <ion-item lines="none">
+            <ion-label color="primary" position="floating">Nombre de categoria</ion-label>
+            <ion-input formControlName="nombre" type="text" placeholder="Categoria"></ion-input>
+          </ion-item> <br>
+          <ion-item lines="none">
+            <ion-label color="primary" position="floating">Descripcion de categoria</ion-label>
+            <ion-textarea formControlName="descripcion" type="text" placeholder="Descripcion breve de la categoria..."></ion-textarea>
+          </ion-item> <br>
+          <ion-item lines="none">
+            <ion-label color="primary">Visible</ion-label>
+            <ion-checkbox (ionChange)="cambiarVisibilidad($event)" [(ngModel)]="visibilidad" [ngModelOptions]="{standalone: true}" slot="start"></ion-checkbox>
+          </ion-item>
+        </form>
+        
+      </ion-content>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-button (click)="guardarNuevaCategoria()" expand="block" shape="round">
+            Guardar categoria
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>
