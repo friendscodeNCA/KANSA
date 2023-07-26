@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuscadorService } from 'src/app/services/buscador.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class ResultadosBusquedaPage implements OnInit {
   constructor(
     private buscador: BuscadorService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -42,5 +43,9 @@ export class ResultadosBusquedaPage implements OnInit {
         this.listaUsuarios = [];
       }
     })
+  }
+
+  irPerfil(id) {
+    this.router.navigate(['/perfil-usuario', id]);
   }
 }

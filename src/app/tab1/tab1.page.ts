@@ -136,8 +136,8 @@ export class Tab1Page {
     this.router.navigate(['/registro-datos']);
   }
 
-  textoBuscar(data: string) {
-    this.textoBuscador = data;
+  textoBuscar(data) {
+    this.textoBuscador = data.target.value;
     console.log(data);
   }
 
