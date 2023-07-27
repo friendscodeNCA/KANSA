@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: 'resultados-busqueda/:target',
     loadChildren: () => import('./pages/resultados-busqueda/resultados-busqueda.module').then( m => m.ResultadosBusquedaPageModule)
+  },
+  {
+    path: 'chats/:id',
+    loadChildren: () => import('./tab3/chat/chat.module').then( m => m.ChatPageModule)
   }
 
 
