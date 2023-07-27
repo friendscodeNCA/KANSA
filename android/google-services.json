@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "496828451584",
+    "project_id": "kansaperu",
+    "storage_bucket": "kansaperu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496828451584:android:6477bf6269dad590f701e5",
+        "android_client_info": {
+          "package_name": "com.paway.qansa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496828451584-djthhosb62vim98ivirj22ijvib8th9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhynvmI5Z1FA_yawg-tUKaRUwvwUj3DbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496828451584-djthhosb62vim98ivirj22ijvib8th9u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

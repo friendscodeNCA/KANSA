@@ -175,7 +175,7 @@ export class LoginPage implements OnInit {
     if ( this.platform.is('cordova')) {
       this.fcm.getToken().then(token => {
         this.valorfcm = token;
-      }).catch (err => this.presentToastError('Error al obtener token') );
+      }).catch (err => this.presentToastError('Error al obtener token' + err) );
     } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
   }
   async presentToastCorrecto(mensaje) {
