@@ -136,9 +136,10 @@ export class Tab1Page {
     this.router.navigate(['/registro-datos']);
   }
 
-  textoBuscar(data: string) {
-    this.textoBuscador = data;
-    console.log(data);
+  textoBuscar(data) {
+    const target = data.detail.value;
+    this.textoBuscador = target;
+    console.log(target);
   }
 
   buscarServicioGeneral() {

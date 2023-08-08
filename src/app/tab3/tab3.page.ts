@@ -95,4 +95,5 @@ export class Tab3Page {
   getUser(user: any) {
     return user;
   }
+  onWillDismiss(event){}
 }

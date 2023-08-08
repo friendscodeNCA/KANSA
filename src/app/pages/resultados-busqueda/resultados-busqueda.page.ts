@@ -85,4 +85,7 @@ export class ResultadosBusquedaPage implements OnInit {
       // this.global.hideLoader();
     }
   }
+  irPerfil(id){
+    console.log(id);
+  }
 }

@@ -25,6 +25,7 @@ export class ChatService {
   getId() {
     this.currentUserId = this.storage.datosUsuario?.id.toString();
     console.log('hola', this.currentUserId);
+    window.alert('celular: '+ this.currentUserId);
     //console.log(this.currentUserId);
     //this.currentUserId = this.auth.getId();
   }
