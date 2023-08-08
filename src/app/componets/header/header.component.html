@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar class="toolbar" color="light">
-    <ion-grid>
+    <ion-grid class="ion-padding">
       <ion-row class="ion-justify-content-center ion-align-items-center">
         <ion-col size="3">
           <ion-avatar>
@@ -8,10 +8,8 @@
           </ion-avatar> 
         </ion-col>
         <ion-col size="6">
-          <ion-item lines="none" color="light">
-            <ion-label>Usuario invitado</ion-label>
-          </ion-item>
-          <ion-button size="small" mode="ios" class="botonVerde" (click)="irLogin()" shape="round">
+          <ion-label>&nbsp; &nbsp;Usuario invitado</ion-label>
+          <ion-button mode="ios" class="botonVerde" (click)="irLogin()" shape="round">
               <ion-label color="dark">Iniciar Sesión</ion-label>
           </ion-button>
         </ion-col>

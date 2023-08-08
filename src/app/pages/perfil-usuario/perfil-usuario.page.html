@@ -1,4 +1,72 @@
-<ion-content color="light">
+<ion-header translucent="true">
+  <ion-toolbar>
+    <!-- <ion-title>Header</ion-title> -->
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="/" icon="arrow-undo" slot="icon-only"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen="true" color="light">
+  <div class="portada">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsyfKMFSGwcKdHQtXzzCcqXs1TvIfEXQwoeWX0EP5XmpicYyCAC4n70uRPKHzR0Kl9FIQ&usqp=CAU" alt="">
+  </div>
+  <div class="perfil">
+    <img src="https://b2472105.smushcdn.com/2472105/wp-content/uploads/2023/01/Perfil-Profesional-_63-819x1024.jpg?lossy=1&strip=1&webp=1" alt="">
+  </div>
+  <div class="dataUsuario">
+    <ion-skeleton-text *ngIf="!usuario" [animated]="true" style="width: 40%; height: 20px; margin: 0 auto;"></ion-skeleton-text>
+    <ion-label *ngIf="usuario">{{usuario.descripcion | uppercase}}</ion-label><br>
+    <ion-skeleton-text *ngIf="!usuario" [animated]="true" style="width: 60%; height: 20px; margin: 0 auto;"></ion-skeleton-text>
+    <ion-label *ngIf="usuario">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-label><br>
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button size="small" class="botonAmarillo" (click)="onClick()" shape="round">
+            <ion-icon color="dark" name="person"></ion-icon> &nbsp;  
+            <ion-label color="dark">Ver Perfil</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button size="small" class="botonVerde" (click)="onClick()" shape="round">
+            <ion-icon color="dark" name="call"></ion-icon> &nbsp;
+            <ion-label color="dark">Llamar</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-label>Mas sobre el perfil</ion-label>
+      <p class="descripcionPerfil">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias eos iusto maiores corrupti doloremque deserunt eaque consequatur maxime impedit suscipit, officiis nulla fugit harum iste quis voluptatem voluptas obcaecati rem!</p>
+      <ion-item color="translucent">
+        <ion-icon name="person"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Edad</ion-label>
+        <ion-label slot="end">35 Anios</ion-label>
+      </ion-item>
+      <ion-item color="translucent">
+        <ion-icon name="person"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Experiencia</ion-label>
+        <ion-label slot="end">5 Anios</ion-label>
+      </ion-item>
+      <ion-item color="translucent" lines="none">
+        <ion-icon name="location"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Direccion</ion-label>
+      </ion-item>
+      <ion-item color="translucent">
+        <ion-label>Av. Andahuaylas nro 358</ion-label>
+      </ion-item>
+      <ion-item color="translucent">
+        <ion-icon name="cube"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Disponibilidad</ion-label>
+        <ion-label slot="end">Inmediata</ion-label>
+      </ion-item>
+    </ion-grid>
+    
+  <div class="comentarios degradadoVerde">
+    <ion-label>Comentarios sobre el perfil</ion-label>
+  </div>
+  </div>
+
+</ion-content>
+<!-- <ion-content color="light" fullscreen="true">
   <div class="portada">
     <img src="https://i.pinimg.com/736x/85/15/65/8515656df5db03b1e5b606aa965e2811.jpg" alt="">
   </div>
@@ -10,9 +78,9 @@
     <ion-item lines="none">
       <ion-skeleton-text *ngIf="!usuario" slot="end" [animated]="true" style="width: 60%; height: 20px;"></ion-skeleton-text>
       <ion-label *ngIf="usuario" slot="end" class="nombre">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-label>
-      <!-- <ion-button color="warning" slot="end" (click)="onClick()" shape="round">
+      <ion-button color="warning" slot="end" (click)="onClick()" shape="round">
         <ion-label color="light">Editar</ion-label>
-      </ion-button> -->
+      </ion-button>
     </ion-item>
   </div>
   <ion-item-divider>
@@ -51,4 +119,4 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-</ion-content>
+</ion-content> -->
