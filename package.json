@@ -1,5 +1,5 @@
 {
-  "name": "kansaApp",
+  "name": "kansaapp",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@awesome-cordova-plugins/core": "^6.1.0",
-    "@awesome-cordova-plugins/fcm": "^6.1.0",
     "@awesome-cordova-plugins/native-storage": "^6.1.0",
     "@capacitor/android": "4.4.0",
     "@capacitor/app": "4.1.0",
@@ -55,6 +54,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "cordova-android-support-gradle-release": "^3.0.1",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -71,5 +71,20 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.7.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-android-support-gradle-release": {}
+    }
+  },
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friendscodeNCA/KANSA.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/friendscodeNCA/KANSA/issues"
+  }
 }

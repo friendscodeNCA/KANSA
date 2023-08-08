@@ -27,7 +27,7 @@ export class StorageService {
   guardarDatosUsuario(user) {
     console.log(user);
     const promesa = new Promise<void>( (resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('android') ) {
         // dispositivo
         console.log('guarda:', user);
         this.nativeStorage.setItem('datosUsuario', user) // { property: 'value', anotherProperty: 'anotherValue' }
@@ -60,7 +60,7 @@ export class StorageService {
         console.log(user);
         this.dataApi.obtenerUsuarioCelular(user.email).subscribe( data => {
           if (data) {
-            if (this.platform.is('cordova')) {
+            if (this.platform.is('android')) {
               // celular
               this.nativeStorage.setItem('datosUsuario', data) // { property: 'value', anotherProperty: 'anotherValue' }
               .then(
@@ -91,7 +91,7 @@ export class StorageService {
   cargardatosUsuario() {
     console.log('Cargando datos del usuario')
     const promesa = new Promise( (resolve, reject) => {
-      if (this.platform.is('cordova')) {
+      if (this.platform.is('android')) {
         // celular
         this.nativeStorage.getItem('datosUsuario')
           .then(
@@ -116,7 +116,7 @@ export class StorageService {
   }
 
   borrarStorage() {
-    if (this.platform.is('cordova')) {
+    if (this.platform.is('android')) {
       // celular
       this.nativeStorage.clear()
       .then(

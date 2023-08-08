@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import {RecaptchaVerifier, ConfirmationResult,Auth, signInWithPhoneNumber } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController, Platform, ToastController } from '@ionic/angular';
-import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
+//import { FCM } from '@awesome-cordova-plugins/fcm/ngx';
 import { Router } from '@angular/router';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   numCel;
   contador;
   hiddevalue = false;
-  valorfcm;
+  valorfcm: string = 'valor inicial de fcm';
 
   // eslint-disable-next-line max-len
   emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private alertCtrl: AlertController,
     private zone: NgZone,
-    private fcm: FCM,
+   // private fcm: FCM,
     private platform: Platform,
     private router: Router,
     private dataApi: DataApiService,
@@ -116,7 +116,7 @@ export class LoginPage implements OnInit {
       const celular = '+51' +  this.loginForm2.value.numeroCelular.toString();
       // console.log('numero de celular', Celular);
       console.log('captcha: ' + this.recaptchaVerifer);
-      this.crearFcm();
+      //this.crearFcm();
       signInWithPhoneNumber(this.auth,celular, this.recaptchaVerifer).then((result) => {
           this.otpSent = true;
           this.confirmationResult = result;
@@ -171,13 +171,13 @@ export class LoginPage implements OnInit {
       this.loading.dismiss();
     });
   }
-  crearFcm() {
-    if ( this.platform.is('cordova')) {
-      this.fcm.getToken().then(token => {
-        this.valorfcm = token;
-      }).catch (err => this.presentToastError('Error al obtener token') );
-    } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
-  }
+  // crearFcm() {
+  //   if ( this.platform.is('cordova')) {
+  //     this.fcm.getToken().then(token => {
+  //       this.valorfcm = token
+  //     }).catch (err => this.presentToastError('Error al obtener token' + err) );
+  //   } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
+  // }
   async presentToastCorrecto(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,
