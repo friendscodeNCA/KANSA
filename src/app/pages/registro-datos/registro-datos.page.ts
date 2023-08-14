@@ -109,6 +109,7 @@ export class RegistroDatosPage implements OnInit {
       apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       direccion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       fechaNacimiento: new FormControl('', [Validators.required]),
+      disponibilidad: new FormControl('', [Validators.required]),
       listaServicios: new FormControl(''),
       descripcion: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(120)]),
     });
@@ -118,6 +119,7 @@ export class RegistroDatosPage implements OnInit {
   get apellidos() { return this.usuarioForm.get('apellidos'); }
   get direccion() { return this.usuarioForm.get('direccion'); }
   get fechaNacimiento() { return this.usuarioForm.get('fechaNacimiento'); }
+  get disponibilidad() { return this.usuarioForm.get('disponibilidad'); }
   get descripcion() { return this.usuarioForm.get('descripcion'); }
 
   resetForm() {
@@ -177,6 +179,7 @@ export class RegistroDatosPage implements OnInit {
       apellidos: datos.apellidos,
       direccion: datos.direccion,
       fechaNacimiento: datos.fechaNacimiento,
+      disponibilidad: datos.disponibilidad,
       descripcion: datos.descripcion,
       celular: this.celular,
       token: this.valorfcm,

@@ -1,4 +1,103 @@
-<ion-header class="ion-no-border">
+<ion-content>
+  <div class="portada">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMcsZz4KYIpdpvmMx5CXNRjFfdCyq0q5lBrUyV0SL57L3vEB7zuNC7mrwFwYNgRnG-Z8&usqp=CAU" alt="">
+  </div>
+  <div class="perfil">
+    <img src="https://us.123rf.com/450wm/alekseyvanin/alekseyvanin1704/alekseyvanin170401391/75474041-agregar-vector-de-icono-de-usuario-ilustraci%C3%B3n-de-logotipo-s%C3%B3lido-pictograma-aislado-en-blanco.jpg?ver=6" alt="">
+  </div>
+  <div class="dataUsuario">
+  <form [formGroup]="usuarioForm">
+    <ion-item>
+      <ion-input formControlName="nombres" type="text" placeholder="Nombres"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="apellidos" type="text" placeholder="Apellidos"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="direccion" type="text" placeholder="Direccion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="fechaNacimiento" type="text" placeholder="Fecha de Nacimiento"></ion-input>
+    </ion-item>
+    <div class="listaServiciosSeleccionados" id="modalServicios">
+      <ion-label position="floating" color="primary">Servicios que brinda</ion-label>
+      <div class="servicios" *ngIf="listaAgregados.length">
+        <ion-label *ngFor="let item of listaAgregados">
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label>{{item.nombre | titlecase}}</ion-label>
+          </ion-chip>
+        </ion-label>
+      </div>
+    </div>
+    <ion-item>
+      <ion-input formControlName="disponibilidad" type="text" placeholder="Disponibilidad"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea formControlName="descripcion" type="text" placeholder="Cuentanos un poco sobre ti"></ion-textarea>
+    </ion-item> <br>
+    <ion-button (click)="guardarDataUsuario()" expand="block" shape="round" class="botonVerde">
+      <ion-icon color="dark" name="save"></ion-icon> &nbsp; &nbsp;  
+      <ion-label color="dark">Guardar datos</ion-label>
+    </ion-button>
+  </form>
+  </div>
+
+  <ion-modal trigger="modalServicios">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="light">
+          <ion-buttons slot="start">
+            <ion-button color="primary" (click)="cerrarModal()">
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title color="primary">Servicios</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-searchbar #mySearchbar mode="ios" placeholder="Buscar servicios" type="text" (ionFocus)="eliminarDataBusqueda($event)" (ionChange)="buscarSubcategoria($event)" [debounce]="250"></ion-searchbar>
+        <div class="cargando" *ngIf="cargando">
+          <ion-spinner color="primary" name="circular"></ion-spinner>
+        </div>
+        <div class="cargando" *ngIf="sinDatos">
+          <ion-label>No se encontraron resultados</ion-label>
+        </div>
+        <ion-list *ngFor="let item of listaBusqueda">
+          <ion-item>
+            <ion-avatar slot="start">
+              <img [src]="item.img" />
+            </ion-avatar>
+            <ion-label>{{item.nombre | titlecase}}</ion-label>
+            <ion-button [disabled]="item.agregado" slot="end" color="primary" (click)="addArrayServicios(item)" shape="round">
+              <ion-icon name="add"></ion-icon> Añadir
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+      <div class="listaServicios">
+        <ion-item-divider color="light">
+          <ion-label color="primary">Servicios agregados</ion-label>
+        </ion-item-divider>
+        <ion-label *ngFor="let item of listaAgregados">
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label>{{item.nombre | titlecase}}</ion-label>
+            <ion-icon (click)="eliminarDeListaAgregados(item)" name="close"></ion-icon>
+          </ion-chip>
+        </ion-label>
+      </div>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-button color="success" (click)="cerrarModal()" expand="block" shape="round">
+            <ion-label>Aceptar</ion-label>
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<!-- <ion-header class="ion-no-border">
   <ion-toolbar class="toolbar" color="light">
     <ion-grid>
       <ion-row class="ion-justify-content-center ion-align-items-center">
@@ -109,4 +208,4 @@
       <ion-label>REGISTRARSE</ion-label>
     </ion-button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

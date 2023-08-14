@@ -6,23 +6,23 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content color="primary">
+<ion-content class="degradadoAzul">
   <div id='recaptcha-container' style="display: none;"></div>
 
   <div class="logo">
-    <img src="../../../assets/img/logo kansa.png" alt="">
+    <img src="../../../assets/img/logo.png" alt="">
   </div>
   <div class="login">
     <div class="content"  *ngIf="!otpSent">
-
       <form [formGroup]="loginForm2" autocomplete="off">
         <div class="titulo">
-          <ion-label>
+          <ion-label color="light">
             REGÍSTRATE
           </ion-label>
-          <br>
         </div>
-        <ion-label> Ingresa tu numero de celular</ion-label><br>
+        <div class="numCelular">
+          <ion-label> Ingresa tu numero de celular</ion-label>
+        </div>
         <ion-item color="light">
           <ion-icon slot="start" color="primary" name="phone-portrait-outline"></ion-icon>
           <ion-input type="number" formControlName="numeroCelular" placeholder="Numero de celular"></ion-input>
@@ -37,13 +37,16 @@
           <div class="mensajeError" *ngIf="!!numeroCelular.errors.max">
             *El celular debe tener 9 digitos como máximo
           </div>
-        </div><br>
-        <ion-button  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block" color="success">
-          Términos y condiciones
+        </div> <br>
+        <p class="terminos">* Al continuar aceptas los terminos y conidiciones de Qansa</p>
+        <ion-button  (click)="confirmarCelular()" mode="ios" class="botonVerde" slot="end" expand="block" shape="round">
+          <ion-label color="dark">Continuar</ion-label>
+          <ion-icon color="dark" name="chevron-forward-outline"></ion-icon>
         </ion-button>
-        <ion-button  (click)="confirmarCelular()" mode="ios" size="lg" slot="end" expand="block" color="warning">
-          Iniciar
-        </ion-button>
+        <ion-button mode="ios" class="botonAmarillo" slot="end" expand="block" shape="round">
+          <ion-icon color="dark" name="chevron-back-outline"></ion-icon>
+          <ion-label color="dark">Volver atras</ion-label>
+        </ion-button> 
       </form>
     </div>
     <div class="content" *ngIf="otpSent===true">
@@ -58,12 +61,12 @@
           <ion-icon slot="start" name="key-outline" color="primary"></ion-icon>
           <ion-input type="number" id="otp" placeholder="Ingrese el codigo"></ion-input>
         </ion-item><br>
-        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block" color="success">
-          Verificar
+        <ion-button shape="round"(click)="verificarOTP()" mode="ios" size="lg" slot="end" expand="block" class="botonVerde">
+          <ion-label color="dark">Verificar</ion-label>
         </ion-button>
         <div class="info">
           <ion-label  *ngIf="hiddevalue===false">Reenviar código en {{contador}} seg.</ion-label>
-          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()" color="warning">
+          <ion-button size="small" fill="clear" color="dark" *ngIf="hiddevalue===true" (click)="reenviar()" color="light">
             <ion-label>reenviar código</ion-label>
           </ion-button>
         </div>

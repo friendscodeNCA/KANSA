@@ -1,35 +1,61 @@
-.toolbar {
-    height: 120px;
-    border-bottom-right-radius: 10%;
+.portada {
+    width: 100%;
+    height: 25%;
     img {
-        height: 120px;
+        height: 100%;
+        width: 100%;
+        display: block;
+        object-fit: cover;
     }
+  }
+  
+  .perfil {
+      text-align: center;
+      position: absolute;
+      top: 12%;
+      height: 120px;
+      width: 100%;
+      z-index: 99;
+      img {
+          height: 100%;
+          width: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: solid 5px var(--ion-color-light);
+      }
+  }
 
-    ion-grid {
-        .texto {
-            text-align: center;
-        }
-    }
-}
-
-h2 {
+  .dataUsuario {
+    padding-top: 70px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    position: absolute;
     text-align: center;
-    font-weight: bold;
-}
-
-form {
-    ion-item {
-        ion-label {
-            color: var(--ion-color-primary);
-        }
+    top: 20%;
+    width: 100%;
+    background-color: var(--ion-color-light);
+    height: auto;
+    border-radius: 40px;
+    .descripcionPerfil {
+        font-size: 14px;
+        text-align: justify;
     }
     ion-item {
-        border: solid 1px var(--ion-color-primary);
-        border-radius: 10px;
+        margin-top: 15px;
+        border-radius: 15px;
+        box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1)!important;
+        // ion-input{
+        //     border-radius: 15px;
+        //     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+        //     --padding-start: 12px;
+        // }
     }
 }
 
 .listaServiciosSeleccionados {
+    margin-top: 15px;
+
     border: solid 1px var(--ion-color-primary);
     border-radius: 10px;
     padding: 15px;

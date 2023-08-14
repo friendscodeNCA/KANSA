@@ -1,8 +1,15 @@
-<app-header></app-header>
-
-<ion-content class="ion-padding">
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-undo"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="tituloPrincipal">
+   <img src="https://www.ucv.edu.pe/wp-content/uploads/2023/06/dia-el-ingeniero-y-arquitecto-peru-750.jpg" alt=""> 
+  </div>
   <h2 *ngIf="dataCategoria">{{dataCategoria.nombre | titlecase}}</h2>
-
   <ion-searchbar mode="ios" placeholder="Buscar..." type="text" [debounce]="250"></ion-searchbar>
 
   <ion-grid fixed>

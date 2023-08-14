@@ -1,9 +1,54 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Ajustes</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content color="medium">
+  <div class="container">
 
-<ion-content>
+    <div class="logo">
+      <img src="../../../assets/img/logo.png" alt="">
+    </div>
+    <div class="content">
+      <div class="titulo">
+        <ion-label color="dark">AJUSTES</ion-label> <br>
+        <ion-label color="dark">GENERALES</ion-label>
+      </div>
+      <hr>
+      <ion-item class="degradadoGris" lines="none">
+        <ion-icon name="person" color="tertiary"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Perfil</ion-label>
+      </ion-item>
+      <ion-item class="degradadoGris" lines="none">
+        <ion-icon name="information-circle" color="success"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Acerca de</ion-label>
+      </ion-item>
+      <ion-item class="degradadoGris" lines="none">
+        <ion-icon name="document-text" color="warning"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Terminos y condiciones</ion-label>
+      </ion-item>
+      <ion-item class="degradadoGris" lines="none">
+        <ion-icon name="document-lock" color="tertiary"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Politica de privacidad</ion-label>
+      </ion-item>
+      <ion-item class="degradadoGris" lines="none">
+        <ion-icon name="arrow-undo" color="danger"></ion-icon> &nbsp; &nbsp;
+        <ion-label>Salir</ion-label>
+      </ion-item>
+      <hr>
+      <div class="redesSociales">
+        <ion-label class="tituloRedes" color="dark">Siguenos en nuestras redes sociales</ion-label>
+        <ion-buttons>
+          <ion-button (click)="onClick()" color="tertiary">
+            <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+          </ion-button>
+          <ion-button (click)="onClick()" color="danger">
+            <ion-icon slot="icon-only" name="logo-instagram"></ion-icon>
+          </ion-button>
+          <ion-button (click)="onClick()" color="dark">
+            <ion-icon slot="icon-only" name="logo-tiktok"></ion-icon>
+          </ion-button>
+          <ion-button (click)="onClick()" color="danger">
+            <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+  </div>
 
 </ion-content>

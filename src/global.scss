@@ -72,6 +72,14 @@
     background: linear-gradient(270deg, rgba(7,255,123,1) 0%, rgba(147,255,198,1) 100%);
 }
 
+.degradadoAzul {
+    --background: linear-gradient(180deg, rgb(7, 94, 255) 30%, rgb(147, 223, 255) 100%);
+}
+
+.degradadoGris {
+    --background: linear-gradient(90deg, rgb(229, 228, 228) 0%, rgb(245, 246, 247) 100%);
+}
+
 .cardUsuarios {
     // background-color: var(--ion-color-light);
     background: linear-gradient(180deg, rgb(255, 255, 255) 50%, rgb(236, 236, 236) 100%);

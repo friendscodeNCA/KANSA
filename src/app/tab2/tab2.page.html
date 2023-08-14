@@ -1,11 +1,64 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>
-      Informacion de la aplicacion
-    </ion-title>
+
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <div class="logo">
+      <img src="../../assets/img/logo.png" alt="">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+          <ion-col size="6">
+            <ion-button mode="ios" class="botonVerde" (click)="onClick()" expand="block" shape="round">
+              <ion-icon color="dark" name="star"></ion-icon> &nbsp; &nbsp;
+              <ion-label color="dark">Favoritos</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button mode="ios" color="light" (click)="onClick()" expand="block" shape="round">
+              <ion-icon name="receipt"></ion-icon> &nbsp; &nbsp;
+              <ion-label>Historial</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-
+<ion-content [fullscreen]="true" color="light">
+<div class="lista"  *ngFor="let usuario of [1,1,1,1,1,1,1,1,1,1]">
+  <ion-card class="cardUsuarios">
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-avatar class="ion-align-items-center">
+            <img alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="7">
+          <ion-row class="ion-no-padding">
+            <ion-col class="ion-no-padding profesion" size="12">INGENIERO DE SISTEMAS</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-no-padding" size="12">Nerio Canari Huarcaya</ion-col>
+          </ion-row>
+          <ion-row class="ion-no-padding">
+            <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>Jr. Tupac Amaru s/n</ion-col>
+          </ion-row>
+          <ion-row class="ion-no-padding">
+            <ion-col class="ion-no-padding" size="12">
+              <ion-button (click)="irPerfil(usuario.id)" size="small" expand="block" shape="round" color="warning" mode="ios">
+                <ion-icon name="eye"></ion-icon> &nbsp; Ver Perfil
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="2">
+          <ion-buttons>
+            <ion-button (click)="onClick()" color="danger">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</div>
 </ion-content>
