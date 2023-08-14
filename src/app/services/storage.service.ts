@@ -3,6 +3,7 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { Platform } from '@ionic/angular';
 import { AuthService } from './auth.service';
 import { DataApiService } from './data-api.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class StorageService {
     private authService: AuthService,
     private dataApi: DataApiService,
     private platform: Platform,
-    private nativeStorage: NativeStorage
+  // private nativeStorage: NativeStorage,
   ) { }
 
   cargarDatosLogin() {
@@ -24,22 +25,19 @@ export class StorageService {
     });
     return promesa;
   }
-  guardarDatosUsuario(user) {
+  async guardarDatosUsuario(user) {
     console.log(user);
-    const promesa = new Promise<void>( (resolve, reject) => {
-      if (this.platform.is('android') ) {
+    const promesa = new Promise<void>( async (resolve, reject) => {
+      if (this.platform.is('capacitor') ) {
         // dispositivo
         console.log('guarda:', user);
-        this.nativeStorage.setItem('datosUsuario', user) // { property: 'value', anotherProperty: 'anotherValue' }
+        await Preferences.set({key: 'datosUsuario', value: JSON.stringify(user)}) // { property: 'value', anotherProperty: 'anotherValue' }
         .then(
-          (data) => {
+          async (data) => {
             console.log('guardado');
             // window.alert('Se guardo: ' + data);
-            this.nativeStorage.getItem('datosUsuario')
-            .then(
-              data1 => this.datosUsuario = data1, // console.log(data),
-              error => console.error(error), // window.alert('Error: ' + error)
-            );
+            this.datosUsuario =JSON.parse( (await Preferences.get({ key: 'datosUsuario' })).value)
+            
         }, // console.log('Stored first item!', data),
           error => console.error('Error storing item', error) , //  window.alert('Error: ' + error)
         );
@@ -53,27 +51,20 @@ export class StorageService {
     return promesa;
   }
 
-  consultaDatos() {
+  async consultaDatos() {
     this.authService.isAuth().subscribe(user => {
       console.log('USUARIO DATOS....CELINE:')
       if (user) {
         console.log(user);
-        this.dataApi.obtenerUsuarioCelular(user.email).subscribe( data => {
+        this.dataApi.obtenerUsuarioCelular(user.email).subscribe( async data => {
           if (data) {
-            if (this.platform.is('android')) {
+            if (this.platform.is('capacitor')) {
               // celular
-              this.nativeStorage.setItem('datosUsuario', data) // { property: 'value', anotherProperty: 'anotherValue' }
+              await Preferences.set({key: 'datosUsuario', value: JSON.stringify(user)}) // { property: 'value', anotherProperty: 'anotherValue' }
               .then(
-                (data1) => {
+                async (data1) => {
                   // window.alert('Se Obtuvo: ' + data1),
-                  this.nativeStorage.getItem('datosUsuario')
-                  .then(
-                    data2 => {
-                      // window.alert('cargado: ' + data1),
-                      this.datosUsuario = data2;
-                    }, // console.log(data),
-                    error => console.error(error)  // window.alert('Error: ' + error),
-                  );
+                  this.datosUsuario =JSON.parse( (await Preferences.get({ key: 'datosUsuario' })).value);
                 }, // console.log('Stored first item!', data),
                 error => alert('error' + JSON.stringify(error)) //  window.alert('Error: ' + error),
               );
@@ -88,20 +79,12 @@ export class StorageService {
     });
   }
 
-  cargardatosUsuario() {
+  async cargardatosUsuario() {
     console.log('Cargando datos del usuario')
-    const promesa = new Promise( (resolve, reject) => {
-      if (this.platform.is('android')) {
+    const promesa = new Promise(async  (resolve, reject) => {
+      if (this.platform.is('capacitor')) {
         // celular
-        this.nativeStorage.getItem('datosUsuario')
-          .then(
-            data => {
-              if (data) {
-                this.datosUsuario = data;
-              }
-            }, // console.log(data),
-            error => console.error(error),
-          );
+        this.datosUsuario =JSON.parse( (await Preferences.get({ key: 'datosUsuario' })).value)
       } else {
         console.log('Cargando datos del usuario')
 
@@ -115,10 +98,10 @@ export class StorageService {
     return promesa;
   }
 
-  borrarStorage() {
-    if (this.platform.is('android')) {
+  async borrarStorage() {
+    if (this.platform.is('capacitor')) {
       // celular
-      this.nativeStorage.clear()
+     await Preferences.clear()
       .then(
         data => {
           // console.log(data);
