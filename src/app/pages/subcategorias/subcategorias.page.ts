@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
+import { BuscadorService } from 'src/app/services/buscador.service';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { PasarDatosService } from 'src/app/services/pasar-datos.service';
@@ -20,12 +21,17 @@ export class SubcategoriasPage implements OnInit {
   categoriaForm: FormGroup;
   visibilidad = true;
   listaSubCategorias : any = [];
+
+  target: string;
+  listaUsuarios = [];
+  sinDatos = false;
   constructor(
     private route: ActivatedRoute,
     private pasarDatos: PasarDatosService,
     private router: Router,
     private servGlobal: GlobalService,
-    private dataApi: DataApiService
+    private dataApi: DataApiService,
+    private buscador: BuscadorService,
   ) {
     this.idCategoria = this.route.snapshot.params.id;
     this.categoriaForm = this.createFormUsuario();
@@ -44,6 +50,26 @@ export class SubcategoriasPage implements OnInit {
       console.log(lista);
       if (lista.length) {
         this.listaSubCategorias = lista;
+      }
+    })
+  }
+
+  irPerfil(id){
+    console.log(id);
+    this.router.navigate(['/perfil-usuario', id]);
+  }
+
+  buscarGeneral(event) {
+    this.sinDatos = false;
+    this.target = event.target.value;
+    this.buscador.buscarServicioGeneral(this.target).then(res => {
+      console.log('BUSCADOR DENTRO: ', res);
+      if (res.length) {
+        this.listaUsuarios = res;
+        this.sinDatos = false;
+      } else {
+        this.listaUsuarios = [];
+        this.sinDatos = true;
       }
     })
   }

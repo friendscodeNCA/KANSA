@@ -1,0 +1,47 @@
+<ion-header class="ion-no-border" translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" color="light" icon="arrow-undo"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="container">
+    <div class="logo">
+      <img src="../../../assets/img/logo.png" alt="">
+    </div>
+    <div class="contenido">
+      <ion-label class="titulo">Qansa APP</ion-label> <br>
+      <ion-label class="subtitulo">Acerca de la empresa</ion-label>
+      <p class="descripcion">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam, temporibus quod maxime inventore provident, quidem illum tempora laborum voluptatibus error iure fugiat consequatur autem, quaerat distinctio omnis minus odio expedita!</p>
+      <hr>
+      <ion-item lines="none">
+        <ion-avatar>
+          <img src="https://i.pinimg.com/originals/89/1a/49/891a49a94c0bf95852ee75fda1a46ccb.png" />
+        </ion-avatar>
+        <ion-avatar>
+          <img src="https://img.freepik.com/foto-gratis/hombre-guapo-elegante-tomando-selfie-redes-sociales-smartphone_176420-19613.jpg?w=360" />
+        </ion-avatar>
+        <ion-avatar>
+          <img src="https://i.pinimg.com/564x/85/dd/df/85dddfae9009fa04bffcc2ac222678c3.jpg" />
+        </ion-avatar> &nbsp; &nbsp;  &nbsp; &nbsp;
+        <ion-label class="ion-text-wrap">+10 586 Usuarios registrados</ion-label>
+      </ion-item>
+      <hr>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="flag"></ion-icon>
+        <ion-label slot="end" class="ion-text-wrap">+254 personas que usan nuestra app a diario</ion-label>
+      </ion-item>
+      <hr>
+      <img src="../../../assets/img/statusApp.jpg" alt="">
+      <hr>
+      <ion-label class="subtitulo">Llega a más personas</ion-label>
+      <p>Comunicate con nuestros asesores y llega de forma mas rapida a tus clientes con nuestros planes de publicidad</p>
+      <ion-button mode="ios" class="botonVerde" (click)="onClick()" expand="block" shape="round">
+        <ion-icon color="dark" name="call"></ion-icon> &nbsp;&nbsp;
+        <ion-label color="dark">Contactarme con un asesor</ion-label>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

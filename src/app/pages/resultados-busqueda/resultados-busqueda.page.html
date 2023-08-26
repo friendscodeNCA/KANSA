@@ -13,6 +13,13 @@
   <ion-item class="degradadoVerde" color="translucent" lines="none">
     <ion-label>RECOMENDADOS</ion-label>
   </ion-item>
+  <div class="skeleton" *ngIf="!listaUsuarios.length && !sinDatos">
+    <ion-skeleton-text *ngFor="let item of [1,1,1,1,1,1]" animated style="width: 94%; height: 90px; margin: 3%; border-radius: 20px;"></ion-skeleton-text>
+  </div>
+  <div class="sinDatos" *ngIf="sinDatos">
+    <ion-icon name="cloud-offline-outline"></ion-icon><br>
+    <ion-label>No se encontraron resultados</ion-label>
+  </div>
   <div class="lista"  *ngFor="let usuario of listaUsuarios">
     <ion-card class="cardUsuarios">
       <ion-grid fixed>
@@ -49,18 +56,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <!-- <ion-item color="translucent" lines="none">
-        <ion-icon slot="start" name="person-outline" color="primary"></ion-icon>
-        <ion-label>{{usuario.nombres | titlecase}}</ion-label>
-      </ion-item>
-      <ion-item color="translucent" lines="none">
-        <ion-icon slot="start" name="location-outline" color="primary"></ion-icon>
-        <ion-label>{{usuario.direccion | titlecase}}</ion-label>
-      </ion-item>
-      <ion-item color="translucent" lines="none">
-        <ion-icon slot="start" name="grid-outline" color="primary"></ion-icon>
-        <ion-label>{{usuario.descripcion | titlecase}}</ion-label>
-      </ion-item> -->
     </ion-card>
   </div>
 

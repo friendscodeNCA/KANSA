@@ -83,6 +83,21 @@
           </ion-card>
         </ion-col>
       </ion-row>
+      <div class="skeleton" *ngIf="!listaCategorias.length">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+          <ion-col size="4" *ngFor="let categoria of [1,1,1,1,1]">
+            <ion-card color="light" mode="ios">
+              <ion-card-header>
+                <ion-skeleton-text animated style="width: 50%; height: 70%; margin: 0 auto;"></ion-skeleton-text>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-skeleton-text animated style="width: 100%; height: 30%; margin: 0 auto;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 50%; height: 30%; margin: 0 auto; margin-top: 5px;"></ion-skeleton-text>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
     </ion-grid>
   </div>
 

@@ -1,4 +1,46 @@
 
+ion-header {
+    ion-toolbar {
+        border-radius: 0 0 50px 50px;
+		overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.logo {
+    height: 30%;
+    background: linear-gradient(360deg, rgb(57, 125, 253) 30%, rgb(147, 223, 255) 100%);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    text-align: center;
+    img {
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-top: 15%;
+        padding-bottom: 2%;
+    }
+    ion-grid {
+        padding-left: 10%;
+        padding-right: 10%;
+        font-size: 22px;
+        .texto{
+            text-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+        }
+        .icono{
+            text-align: end;
+        }
+    }
+}
+
+.cardUser {
+    border-radius: 20px;
+    background-color:#e6e6e6;
+    margin-left: 5%;
+    margin-right: 5%;
+}
 
 ion-content {
     ion-list {

@@ -29,4 +29,10 @@ export class AuthService {
     console.log(this.currentUser);
     return this.currentUser?.uid;
   }
+
+  logOut() {
+    this.auth.signOut().then(res => {
+      console.log('sesion cerrada');
+    });
+  }
 }

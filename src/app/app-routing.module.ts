@@ -49,7 +49,11 @@ const routes: Routes = [
   {
     path: 'chats/:id',
     loadChildren: () => import('./tab3/chat/chat.module').then( m => m.ChatPageModule)
+  },  {
+    path: 'info-app',
+    loadChildren: () => import('./pages/info-app/info-app.module').then( m => m.InfoAppPageModule)
   }
+
 
 
 
