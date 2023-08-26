@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -6,10 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-
-  constructor() { }
+  id = this.storage.datosUsuario.id;
+  constructor(
+    private router: Router,
+    private storage: StorageService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+  }
+
+  irPerfil(id){
+    console.log(id);
+    this.router.navigate(['/perfil-usuario', id]);
+  }
+
+  acercaDe() {
+    this.router.navigate(['/info-app']);
+  }
+
+  cerrarSesion() {
+    this.authService.logOut();
+    this.storage.borrarStorage();
+    this.router.navigate(['/inicio']);
   }
 
 }

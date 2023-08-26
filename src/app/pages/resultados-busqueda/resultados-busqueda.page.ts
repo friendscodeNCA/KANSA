@@ -18,7 +18,8 @@ export class ResultadosBusquedaPage implements OnInit {
   open_new_chat = false;
 
   target: string;
-  listaUsuarios;
+  listaUsuarios = [];
+  sinDatos = false;
   constructor(
     private buscador: BuscadorService,
     private route: ActivatedRoute,
@@ -38,8 +39,10 @@ export class ResultadosBusquedaPage implements OnInit {
       console.log('BUSCADOR: ', res);
       if (res.length) {
         this.listaUsuarios = res;
+        this.sinDatos= false;
       } else {
         this.listaUsuarios = [];
+        this.sinDatos= true;
       }
     })
   }
@@ -49,8 +52,10 @@ export class ResultadosBusquedaPage implements OnInit {
       console.log('BUSCADOR DENTRO: ', res);
       if (res.length) {
         this.listaUsuarios = res;
+        this.sinDatos = false;
       } else {
         this.listaUsuarios = [];
+        this.sinDatos = true;
       }
     })
   }

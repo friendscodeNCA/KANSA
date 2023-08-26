@@ -14,6 +14,7 @@ export class ListaUsuariosServicioPage implements OnInit {
   dataSubcategoria;
 
   listaUsuarios: usuarioInterface[] = [];
+  sinDatos = false;
   constructor(
     private pasarDatos: PasarDatosService,
     private route: ActivatedRoute,
@@ -42,8 +43,10 @@ export class ListaUsuariosServicioPage implements OnInit {
       console.log('TENEMOS: ', lista);
       if (lista.length) {
         this.listaUsuarios = lista;
+        this.sinDatos = false;
       } else {
         this.listaUsuarios = [];
+        this.sinDatos = true;
       }
     });
   }

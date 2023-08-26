@@ -1,30 +1,89 @@
+ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
+
+.container {
+    height: 100%;
+        display: flex;
+        flex-direction: column;
+}
 
 .tituloPrincipal {
-    height: 20%;
+    height: 40%;
+    width: 100%;
     position: absolute;
-    top: -70px;
-    img {
-        object-fit: cover;
+    z-index: -9;
+    top: -50px;
+    background-image: linear-gradient(
+        rgba(7, 11, 206, 0.7),
+        rgba(12, 29, 140, 0.7)
+      ), url('https://www.ucv.edu.pe/wp-content/uploads/2023/06/dia-el-ingeniero-y-arquitecto-peru-750.jpg');
+    background-size: cover;
+    // img {
+    //     object-fit: cover;
+    //     // background-color: rgb(26, 42, 223);
+    //     filter: brightness(0.4);
+    // }
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .letrasTitulo {
+        position: relative;
+        z-index: 1;
+        color: white;
+        font-size: 28px;
+        padding: 5%;
+    }
+    // ion-label {
+    //     padding: 10%;
+    //     font-size: 30px;
+    //     filter: brightness(1);
+    // }
+}
+
+.contenido {
+    margin-top: 35%;
+    flex: 1;
+    background-color: var(--ion-color-light);
+    height: auto;
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
+    padding: 10%;
+    .cardInicio {
+        margin: 1%;
+        height: 150px;
+        ion-card-header {
+            height: 70%;
+        }
+        ion-card-content {
+            height: 30%;
+            text-align: center;
+            font-size: 1.8vh;
+            font-weight: bold;
+            padding: 0px;
+        }
     }
 }
 
-h2 {
-    text-align: center;
-}
-ion-card {
-    margin: 1%;
-    height: 200px;
-    ion-card-header {
-        height: 70%;
-    }
-    ion-card-content {
-        height: 30%;
-        text-align: center;
-        font-size: 1.8vh;
-        font-weight: bold;
-        padding: 0px;
-    }
-}
+// h2 {
+//     text-align: center;
+// }
+// ion-card {
+//     margin: 1%;
+//     height: 200px;
+//     ion-card-header {
+//         height: 70%;
+//     }
+//     ion-card-content {
+//         height: 30%;
+//         text-align: center;
+//         font-size: 1.8vh;
+//         font-weight: bold;
+//         padding: 0px;
+//     }
+// }
 
 .formCategoria { 
     ion-card {

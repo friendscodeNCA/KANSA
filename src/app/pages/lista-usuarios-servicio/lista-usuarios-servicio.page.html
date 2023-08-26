@@ -1,4 +1,4 @@
-<app-header></app-header>
+<!-- <app-header></app-header>
 
 <ion-content>
 
@@ -20,4 +20,68 @@
       </ion-item>
     </ion-card>
   </div>
+</ion-content> -->
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{dataSubcategoria.nombre | titlecase}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin">
+  <!-- <ion-searchbar class="buscadorStyle" [value]="target" placeholder="Buscar" inputmode="text" type="text" (ionChange)="buscarGeneral($event)" [debounce]="250"></ion-searchbar> -->
+
+  <ion-item class="degradadoVerde" color="translucent" lines="none">
+    <ion-label>RECOMENDADOS</ion-label>
+  </ion-item>
+  <div class="skeleton" *ngIf="!listaUsuarios.length && !sinDatos">
+    <ion-skeleton-text *ngFor="let item of [1,1,1,1,1,1]" animated style="width: 94%; height: 90px; margin: 3%; border-radius: 20px;"></ion-skeleton-text>
+  </div>
+  <div class="sinDatos" *ngIf="sinDatos">
+    <ion-icon name="cloud-offline-outline"></ion-icon><br>
+    <ion-label>No se encontraron resultados</ion-label>
+  </div>
+  <div class="lista"  *ngFor="let usuario of listaUsuarios">
+    <ion-card class="cardUsuarios">
+      <ion-grid fixed>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">
+            <ion-avatar class="ion-align-items-center">
+              <img alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="7">
+            <ion-row class="ion-no-padding">
+              <ion-col class="ion-no-padding profesion" size="12">{{usuario.descripcion | uppercase}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-no-padding" size="12">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-col>
+            </ion-row>
+            <ion-row class="ion-no-padding">
+              <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion | titlecase}}</ion-col>
+            </ion-row>
+            <ion-row class="ion-no-padding">
+              <ion-col class="ion-no-padding" size="12">
+                <ion-button (click)="irPerfil(usuario.id)" size="small" expand="block" shape="round" color="warning" mode="ios">
+                  <ion-icon name="eye"></ion-icon> &nbsp; Ver Perfil
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="2">
+            <ion-buttons>
+              <ion-button  color="success">
+                <ion-icon slot="icon-only" name="call"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div>
+
 </ion-content>
+

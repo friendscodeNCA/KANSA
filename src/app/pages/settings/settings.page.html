@@ -10,23 +10,23 @@
         <ion-label color="dark">GENERALES</ion-label>
       </div>
       <hr>
-      <ion-item class="degradadoGris" lines="none">
+      <ion-item class="degradadoGris" lines="none" (click)="irPerfil(id)">
         <ion-icon name="person" color="tertiary"></ion-icon> &nbsp; &nbsp;
         <ion-label>Perfil</ion-label>
       </ion-item>
-      <ion-item class="degradadoGris" lines="none">
+      <ion-item class="degradadoGris" lines="none" (click)="acercaDe()">
         <ion-icon name="information-circle" color="success"></ion-icon> &nbsp; &nbsp;
         <ion-label>Acerca de</ion-label>
       </ion-item>
-      <ion-item class="degradadoGris" lines="none">
+      <ion-item class="degradadoGris" lines="none" id="open-modal1">
         <ion-icon name="document-text" color="warning"></ion-icon> &nbsp; &nbsp;
         <ion-label>Terminos y condiciones</ion-label>
       </ion-item>
-      <ion-item class="degradadoGris" lines="none">
+      <ion-item class="degradadoGris" lines="none" id="open-modal2">
         <ion-icon name="document-lock" color="tertiary"></ion-icon> &nbsp; &nbsp;
         <ion-label>Politica de privacidad</ion-label>
       </ion-item>
-      <ion-item class="degradadoGris" lines="none">
+      <ion-item class="degradadoGris" lines="none" (click)="cerrarSesion()">
         <ion-icon name="arrow-undo" color="danger"></ion-icon> &nbsp; &nbsp;
         <ion-label>Salir</ion-label>
       </ion-item>
@@ -52,3 +52,54 @@
   </div>
 
 </ion-content>
+<ion-modal #modal1 trigger="open-modal1">
+  <ng-template>
+    <ion-content>
+      <div class="contenedorModal">
+        <div class="logoModal">
+          <img src="../../../assets/img/logoAzul.png" alt="">
+        </div>
+        <h2>Terminos y condiciones</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestias sit accusantium! Laboriosam in at iure voluptas. Quisquam cupiditate soluta dolor dolore! Saepe quisquam aperiam voluptates laboriosam alias nihil commodi?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus et, eveniet dolor nulla voluptatem tempora adipisci inventore quibusdam non at, atque numquam modi sequi ratione officiis dolorem nam cupiditate quia!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, ad accusantium et laborum possimus magni expedita, molestias doloribus vero earum saepe itaque illum consequuntur autem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, 
+        </p>
+        <ion-button class="botonMediano botonVerde" shape="round">
+          <ion-label>Aceptar</ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button> <br>
+        <ion-button class="botonMediano" (click)="modal1.dismiss()" color="warning" shape="round">
+          <ion-icon name="close-circle"></ion-icon> &nbsp;
+          <ion-label>Cerrar</ion-label>
+        </ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #modal2 trigger="open-modal2">
+  <ng-template>
+    <ion-content>
+      <div class="contenedorModal">
+        <div class="logoModal">
+          <img src="../../../assets/img/logoAzul.png" alt="">
+        </div>
+        <h2>Politica de privacidad</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum molestias sit accusantium! Laboriosam in at iure voluptas. Quisquam cupiditate soluta dolor dolore! Saepe quisquam aperiam voluptates laboriosam alias nihil commodi?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus et, eveniet dolor nulla voluptatem tempora adipisci inventore quibusdam non at, atque numquam modi sequi ratione officiis dolorem nam cupiditate quia!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, ad accusantium et laborum possimus magni expedita, molestias doloribus vero earum saepe itaque illum consequuntur autem.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, 
+        </p>
+        <ion-button class="botonMediano botonVerde" shape="round">
+          <ion-label>Aceptar</ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button> <br>
+        <ion-button class="botonMediano" (click)="modal2.dismiss()" color="warning" shape="round">
+          <ion-icon name="close-circle"></ion-icon> &nbsp;
+          <ion-label>Cerrar</ion-label>
+        </ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -53,8 +53,11 @@ const routes: Routes = [
   {
     path: 'modal-obtener-ubicacion',
     loadChildren: () => import('./modals/modal-obtener-ubicacion/modal-obtener-ubicacion.module').then( m => m.ModalObtenerUbicacionPageModule)
+  },
+  {
+    path: 'info-app',
+    loadChildren: () => import('./pages/info-app/info-app.module').then( m => m.InfoAppPageModule)
   }
-
 
 
 

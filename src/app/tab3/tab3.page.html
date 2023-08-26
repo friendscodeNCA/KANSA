@@ -1,39 +1,58 @@
-<ion-header class="title-header">
-  <ion-toolbar color="primary">
-    <ion-title>CHAT</ion-title>
-    
+<!-- <ion-header class="title-header"> -->
+<ion-header class="ion-no-border" color="light">
+  <ion-toolbar color="light">
+    <div class="logo">
+      <img src="../../assets/img/logo.png" alt="">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="texto" size="10">
+            <ion-label color="light">Chats recientes</ion-label>
+          </ion-col>
+          <ion-col class="icono" size="2">
+            <ion-buttons>
+              <ion-button (click)="onClick()">
+                <ion-icon color="light" slot="icon-only" name="menu"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-toolbar>
-  <ion-segment [value]="segment" mode="md" (ionChange)="onSegmentChanged($event)">
+  <!-- <ion-segment [value]="segment" mode="md" (ionChange)="onSegmentChanged($event)">
     
     <ion-segment-button value="chats">
       <ion-label>CHAT</ion-label>
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> -->
 </ion-header>
 
-<ion-content color="light">
+<ion-content>
   
   <app-empty-screen 
     *ngIf="(chatRooms | async)?.length == 0" 
     [model]="model">
   </app-empty-screen>
 
-  <ng-container *ngIf="segment == 'chats' && (chatRooms | async) as rooms">
+  <ng-container *ngIf="segment == 'chats' && (chatRooms | async) as rooms" color="translucent">
 
-    <ion-list *ngIf="rooms?.length > 0">
+    <ion-list *ngIf="rooms?.length > 0" color="translucent">
   
       
   
-      <ion-item
+      <ion-item lines="none" color="translucent" class="cardUser"
         *ngFor="let item of rooms" 
         (click)="getChat(item)"
         [detail]="true">
+        <ion-avatar>
+          <img src="https://pm1.aminoapps.com/7508/5cef9735fab6796649b5a48fabb03c49cf7ac668r1-720-922v2_hq.jpg" />
+        </ion-avatar> &nbsp; &nbsp;
         <ng-container *ngIf="(item?.user | async) as user">
           <!--<ion-avatar slot="start">
             <img [src]="getUser(user)?.photo" />
           </ion-avatar>-->
           <ion-label>
-            {{getUser(user)?.nombres}}
+            {{getUser(user)?.nombres}} {{getUser(user)?.apellidos}}
             <!-- <p>
               <ion-text>
                 message
@@ -49,11 +68,11 @@
   </ng-container>
 
 
-  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+  <!--<ion-fab slot="fixed" horizontal="end" vertical="bottom">
     <ion-fab-button (click)="newChat()">
       <ion-icon name="car"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>-->
 
   <ion-modal #new_chat [isOpen]="open_new_chat" (willDismiss)="onWillDismiss($event)">
     <ng-template>
