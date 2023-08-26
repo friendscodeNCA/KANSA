@@ -1,9 +1,11 @@
 <ion-content>
-  <div class="portada">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMcsZz4KYIpdpvmMx5CXNRjFfdCyq0q5lBrUyV0SL57L3vEB7zuNC7mrwFwYNgRnG-Z8&usqp=CAU" alt="">
+  <div class="portada" (click)="SubirFotoPortada()">
+    <img id="fotoPortada" *ngIf="!imagePortada"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMcsZz4KYIpdpvmMx5CXNRjFfdCyq0q5lBrUyV0SL57L3vEB7zuNC7mrwFwYNgRnG-Z8&usqp=CAU" alt="">
+    <img id="fotoPortada"  *ngIf="imagePortada" [src]='imagePortada' alt="">
   </div>
-  <div class="perfil">
-    <img src="https://us.123rf.com/450wm/alekseyvanin/alekseyvanin1704/alekseyvanin170401391/75474041-agregar-vector-de-icono-de-usuario-ilustraci%C3%B3n-de-logotipo-s%C3%B3lido-pictograma-aislado-en-blanco.jpg?ver=6" alt="">
+  <div class="perfil" (click)="SubirFotoPerfil()">
+    <img id="fotoPerfil" *ngIf="!image"  src="https://us.123rf.com/450wm/alekseyvanin/alekseyvanin1704/alekseyvanin170401391/75474041-agregar-vector-de-icono-de-usuario-ilustraci%C3%B3n-de-logotipo-s%C3%B3lido-pictograma-aislado-en-blanco.jpg?ver=6" alt="">
+    <img  id="fotoPerfil" *ngIf="image"  [src]="image" alt="">
   </div>
   <div class="dataUsuario">
   <form [formGroup]="usuarioForm">
@@ -14,10 +16,21 @@
       <ion-input formControlName="apellidos" type="text" placeholder="Apellidos"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input formControlName="direccion" type="text" placeholder="Direccion"></ion-input>
+      <ion-input *ngIf="userUbicacion && userUbicacion.direccion" readonly>{{userUbicacion.direccion.split(',', 1)}}</ion-input>
+      <ion-buttons slot="end">
+        <ion-button (click)="modalUbicacion()">
+          <ion-icon slot="icon-only" name="create-outline" color="primary"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
     <ion-item>
-      <ion-input formControlName="fechaNacimiento" type="text" placeholder="Fecha de Nacimiento"></ion-input>
+      Fecha Nacimiento
+      <ion-datetime-button datetime="datetime"  ></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" locale="es-ES" [showDefaultButtons]="true" cancelText="Cancelar" doneText="Aceptar" splayFormat="DD MMM YYYY"></ion-datetime>
+        </ng-template>
+      </ion-modal>
     </ion-item>
     <div class="listaServiciosSeleccionados" id="modalServicios">
       <ion-label position="floating" color="primary">Servicios que brinda</ion-label>
@@ -39,6 +52,9 @@
       <ion-icon color="dark" name="save"></ion-icon> &nbsp; &nbsp;  
       <ion-label color="dark">Guardar datos</ion-label>
     </ion-button>
+    <ion-button color="danger" (click)="subirFotoStorage('perfil')" expand="block" shape="round">
+            <ion-label>Subir Foto</ion-label>
+          </ion-button>
   </form>
   </div>
 

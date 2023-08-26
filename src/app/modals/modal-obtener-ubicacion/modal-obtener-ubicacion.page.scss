@@ -1,0 +1,38 @@
+#map1{
+    height: 100% !important;
+    margin: 0;
+    position: relative;
+  }
+  #map1:after {
+    width: 40px;
+    height: 40px;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 50%; left: 50%;
+    margin: -40px 0 0 -15px;
+    background: url('../../../assets/icon/ico_estoy_aqui.png');
+    background-size: 40px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
+    pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
+}
+#floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  z-index: 5;
+  background-color: #fff;
+  border: 1px solid #999;
+  line-height: 30px;
+  padding-left: 10px;
+  width: 80%;
+  border-radius: 10px;
+  ion-item {
+    border-radius: 10px;
+  }
+}
+.mensajeError {
+  color: #201e1e;
+  font-size: 13px;
+  font-weight: bold;
+  margin-left: 15px;
+}

@@ -17,5 +17,8 @@ export class HeaderComponent implements OnInit {
   irLogin() {
     this.router.navigate(['/login']);
   }
+  async irRegistro(){
+    await this.router.navigate(['/registro-datos', '999999999', ' ']);
+  }
 
 }

@@ -16,14 +16,23 @@ import { ComponentModule } from './components/component/component.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { ModalObtenerUbicacionPage } from './modals/modal-obtener-ubicacion/modal-obtener-ubicacion.page';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ModalObtenerUbicacionPage],
+  entryComponents: [ModalObtenerUbicacionPage],
   imports: [
     BrowserModule,
+    CommonModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
@@ -35,7 +44,13 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
     provideAuth(() => getAuth()),
     ComponentModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NativeStorage], // FCM
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    NativeStorage,
+    AndroidPermissions,
+    LocationAccuracy
+
+  ], // FCM
   bootstrap: [AppComponent],
 })
 export class AppModule {}

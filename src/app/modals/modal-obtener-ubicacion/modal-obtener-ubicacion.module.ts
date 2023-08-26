@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegistroDatosPageRoutingModule } from './registro-datos-routing.module';
+import { ModalObtenerUbicacionPageRoutingModule } from './modal-obtener-ubicacion-routing.module';
 
-import { RegistroDatosPage } from './registro-datos.page';
+import { ModalObtenerUbicacionPage } from './modal-obtener-ubicacion.page';
 
 @NgModule({
   imports: [
@@ -14,9 +14,8 @@ import { RegistroDatosPage } from './registro-datos.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RegistroDatosPageRoutingModule
+    ModalObtenerUbicacionPageRoutingModule
   ],
-  declarations: [RegistroDatosPage],
- 
+  declarations: [],
 })
-export class RegistroDatosPageModule {}
+export class ModalObtenerUbicacionPageModule {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
+ id = this.storage.datosUsuario?.id.toString();
   constructor(
-    private router: Router
+    private router: Router, private storage: StorageService
   ) {}
   
   irPerfil(id){
