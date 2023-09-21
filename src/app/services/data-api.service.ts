@@ -16,7 +16,8 @@ import {
   collectionChanges,
   docSnapshots,
   addDoc,
-  getDocs
+  getDocs,
+  setDoc
 } from '@angular/fire/firestore';
 import { categoriaInterface } from '../models/categoriaInterface';
 import { usuarioInterface } from '../models/usuarioInterface';
@@ -64,6 +65,48 @@ export class DataApiService {
     })
   }
 
+  agregarHistorial(idUser: string, usuario) {
+    return setDoc(doc(this.afs, 'usuarios', idUser, 'historial', usuario.id),
+    {id: usuario.id,
+     fecha: new Date(),
+     nombres: usuario.nombres,
+     apellidos: usuario.apellidos,
+     descripcion: usuario.descripcion,
+     direccion: usuario.direccion
+     }).then(() => {
+      console.log('Agregar correctamente');
+    });
+  }
+
+  agregarFavoritos(idUser: string, usuario) {
+    return setDoc(doc(this.afs, 'usuarios', idUser, 'favoritos', usuario.id), 
+    {id: usuario.id,
+     fecha: new Date(),
+     nombres: usuario.nombres,
+     apellidos: usuario.apellidos,
+     descripcion: usuario.descripcion,
+     direccion: usuario.direccion
+    }).then(() => {
+      console.log('Agregado a favoritos correctamente');
+    });
+  }
+
+  obtenerFavorito(idUser: string, id: string) {
+    return this.afs2.doc(`usuarios/${idUser}/favoritos/${id}`)
+    .snapshotChanges().pipe(map(action => {
+      let datos: any = {};
+      if (action.payload.exists === false) {
+        return null;
+      } else {
+        datos = {
+          ...action.payload.data() as usuarioInterface,
+          id: action.payload.id
+        };
+        return datos;
+      }
+    }));
+  }
+
   guardarSubCategoria(newSubCategoria: categoriaInterface, id: string) {
     newSubCategoria.idCategoria = id;
     newSubCategoria.fechaRegistro = new Date();
@@ -74,6 +117,40 @@ export class DataApiService {
         return 'fail';
       }
     })
+  }
+
+  //obtener HISTORIAL
+  obtenerListaHistorial(id) {
+    return this.afs2.collection(`usuarios/${id}/historial`, ref => ref.orderBy('fecha', 'desc'))
+    .snapshotChanges().pipe(map(changes => {
+      const datos: categoriaInterface[] = [];
+
+      changes.map((action: any) => {
+        datos.push({
+          id: action.payload.doc.id,
+          ...action.payload.doc.data()
+        });
+      });
+
+      return datos;
+    }));
+  }
+
+  //obtener FAVORITOS
+  obtenerListaFavoritos(id) {
+    return this.afs2.collection(`usuarios/${id}/favoritos`, ref => ref.orderBy('fecha', 'desc'))
+    .snapshotChanges().pipe(map(changes => {
+      const datos: categoriaInterface[] = [];
+
+      changes.map((action: any) => {
+        datos.push({
+          id: action.payload.doc.id,
+          ...action.payload.doc.data()
+        });
+      });
+
+      return datos;
+    }));
   }
 
   //obtener categorias

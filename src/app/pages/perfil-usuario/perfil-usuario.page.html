@@ -4,6 +4,12 @@
     <ion-buttons slot="start">
       <ion-back-button color="light" defaultHref="/" icon="arrow-undo" slot="icon-only"></ion-back-button>
     </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [color]="favorito?'danger':'light'" (click)="addFavoritos()">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen="true" color="light">

@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { getStorage, ref, uploadBytes, getDownloadURL, uploadString } from "firebase/storage";
+import { Router } from '@angular/router';
+import { DataApiService } from './data-api.service';
+import { StorageService } from './storage.service';
+import { usuarioInterface } from '../models/usuarioInterface';
 
 
 @Injectable({
@@ -13,6 +17,9 @@ export class GlobalService {
   constructor(
     private toastCtrl: ToastController,
     private loading: LoadingController,
+    private router: Router,
+    private dataApi: DataApiService,
+    private storage: StorageService
   ) { }
 
   async presentToast(
@@ -85,4 +92,11 @@ export class GlobalService {
 
   }
 
+
+  goPerfil(usuario: usuarioInterface) {
+    this.router.navigate(['/perfil-usuario', usuario.id]);
+    if (this.storage.datosUsuario) {
+      this.dataApi.agregarHistorial(this.storage.datosUsuario.id, usuario);
+    }
+  }
 }

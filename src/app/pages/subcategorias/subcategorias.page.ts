@@ -32,6 +32,7 @@ export class SubcategoriasPage implements OnInit {
     private servGlobal: GlobalService,
     private dataApi: DataApiService,
     private buscador: BuscadorService,
+    private globalService: GlobalService
   ) {
     this.idCategoria = this.route.snapshot.params.id;
     this.categoriaForm = this.createFormUsuario();
@@ -54,9 +55,8 @@ export class SubcategoriasPage implements OnInit {
     })
   }
 
-  irPerfil(id){
-    console.log(id);
-    this.router.navigate(['/perfil-usuario', id]);
+  irPerfil(usuario){
+    this.globalService.goPerfil(usuario);
   }
 
   buscarGeneral(event) {
