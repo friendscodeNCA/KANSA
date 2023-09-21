@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { usuarioInterface } from 'src/app/models/usuarioInterface';
 import { DataApiService } from 'src/app/services/data-api.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { PasarDatosService } from 'src/app/services/pasar-datos.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class ListaUsuariosServicioPage implements OnInit {
     private pasarDatos: PasarDatosService,
     private route: ActivatedRoute,
     private router: Router,
-    private dataApi: DataApiService
+    private dataApi: DataApiService,
+    private globalService: GlobalService
   ) {
     this.idSubcategoria = this.route.snapshot.params.id;
     console.log('id: ', this.idSubcategoria);
@@ -51,8 +53,8 @@ export class ListaUsuariosServicioPage implements OnInit {
     });
   }
 
-  irPerfil(id) {
-    this.router.navigate(['/perfil-usuario', id]);
+  irPerfil(usuario){
+    this.globalService.goPerfil(usuario);
   }
 
 }

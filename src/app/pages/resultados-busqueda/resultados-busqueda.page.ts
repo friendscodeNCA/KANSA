@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { createConnection } from 'net';
 import { BuscadorService } from 'src/app/services/buscador.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-resultados-busqueda',
@@ -24,7 +25,8 @@ export class ResultadosBusquedaPage implements OnInit {
     private buscador: BuscadorService,
     private route: ActivatedRoute,
     private router: Router,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private globalService: GlobalService
   
   ) { }
 
@@ -90,8 +92,7 @@ export class ResultadosBusquedaPage implements OnInit {
   //     // this.global.hideLoader();
   //   }
   // }
-  irPerfil(id){
-    console.log(id);
-    this.router.navigate(['/perfil-usuario', id]);
+  irPerfil(usuario){
+    this.globalService.goPerfil(usuario);
   }
 }

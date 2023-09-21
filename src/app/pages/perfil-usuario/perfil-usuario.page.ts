@@ -4,6 +4,7 @@ import { usuarioInterface } from 'src/app/models/usuarioInterface';
 import { ChatService } from 'src/app/services/chat.service';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GlobalService } from 'src/app/services/global.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -14,16 +15,19 @@ export class PerfilUsuarioPage implements OnInit {
 
   usuario: usuarioInterface;
   idUsuario: string;
+  favorito = false;
   constructor(
     private router: Router,
     private chatService: ChatService,
     private dataApi: DataApiService,
     private route: ActivatedRoute,
-    private servGlobal: GlobalService
+    private servGlobal: GlobalService,
+    private storage: StorageService
   ) { }
 
   ngOnInit() {
     this.idUsuario = this.route.snapshot.params.id;
+    this.consultaFavoritos();
     this.obtenerUsuario();
   }
 
@@ -58,6 +62,22 @@ export class PerfilUsuarioPage implements OnInit {
       console.log(e);
       // this.global.hideLoader();
     }
+  }
+
+  addFavoritos() {
+    if (this.storage.datosUsuario && this.usuario) {
+      this.dataApi.agregarFavoritos(this.storage.datosUsuario.id, this.usuario);
+    }
+  }
+
+  consultaFavoritos() {
+    this.favorito = false;
+    this.dataApi.obtenerFavorito(this.storage.datosUsuario.id, this.idUsuario).subscribe(data => {
+      console.log(data);
+      if (data) {
+        this.favorito = true;
+      }
+    })
   }
 
 }
