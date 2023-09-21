@@ -103,9 +103,10 @@ export class ChatService {
     .pipe(map((arr: any) => arr.reverse()));
   }
 
-  async sendMessage(chatId, msg) {
+  async sendMessage(chatId, msg, url) {
     try {
       const new_message = {
+        foto: url,
         message: msg,
         sender: this.currentUserId,
         createdAt: new Date()

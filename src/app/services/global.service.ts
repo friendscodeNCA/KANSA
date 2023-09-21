@@ -85,4 +85,24 @@ export class GlobalService {
 
   }
 
+  subirImagenChat(file: any): Promise<string> {
+    console.log(file);
+    /**
+     * @objetivo : Subir una imagen a Firestore. 
+     * @return: (String): Url de la imagen.
+     */
+    return new Promise( resolve => {
+
+      const storage = getStorage();
+      const storageRef = ref(storage, 'chat/' + new Date());
+
+      console.log(storageRef);
+      uploadString(storageRef, file, 'data_url').then((snapshot) => {
+        console.log('Uploaded a base64url string!', snapshot);
+        getDownloadURL(snapshot.ref).then(url => {
+          resolve(url);
+        });
+      });
+    });
+  }
 }
