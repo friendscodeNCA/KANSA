@@ -10,6 +10,7 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  id = this.storage.datosUsuario?.id.toString();
   listaUsuarios = [];
   seleccionado = 'favoritos';
   constructor(

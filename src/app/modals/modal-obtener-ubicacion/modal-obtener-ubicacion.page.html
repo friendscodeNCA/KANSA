@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title>Obtener Ubicación</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon color="primary" slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="obtenerCoords()">
+        <ion-icon color="primary" slot="icon-only" name="navigate-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div id="floating-panel">
+    <ion-item lines="none">
+      <ion-icon slot="start" name="search" color="primary"></ion-icon>
+      <ion-label style="font-family: Sniglet;"> {{address}}</ion-label>
+    </ion-item>
+  </div>
+
+  <div id="map1" #map></div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <form [formGroup] = "MapaForm">
+      <ion-item no-lines>
+        <ion-icon slot="start" name="home"></ion-icon>
+        <ion-input style="font-family: Sniglet;" type="text" placeholder="Referencia" formControlName="referencia"></ion-input>
+      </ion-item>
+      <div  class="mensajeError" *ngIf="referencia.invalid && (referencia.dirty || referencia.touched)">
+        <div *ngIf="!!referencia.errors.required">
+          <span> *Referencia es requerido</span>
+        </div>
+        <div *ngIf="!!referencia.errors.minlength">
+          <span>*Referencia debe tener al menos 8 caracteres</span>
+        </div>
+      </div>
+      <div  class="mensajeError" *ngIf="completar">
+          <span> *Complete referencia</span>
+      </div>
+      <ion-button (click)="GuardarUbicacion()" expand="block"color="primary">
+        <ion-label color="light">Seleccionar</ion-label>
+      </ion-button>
+  </form>
+    
+  </ion-toolbar>
+</ion-footer>
+ 
