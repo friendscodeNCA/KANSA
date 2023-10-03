@@ -7,6 +7,7 @@
         font-family: Gil;
     }
 }
+
 #recaptcha-container{
     display: none;
  }
@@ -14,9 +15,9 @@
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
     text-align: center;
     color: var(--ion-color-light);
     padding-left: 10%;
@@ -37,9 +38,14 @@
     }
 }
 .logo {
+    height: 35%;
     padding-top: 20%;
     padding-left: 10%;
     padding-right: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
 }
 .terminos {
     font-size: 12px;
@@ -52,7 +58,7 @@ ion-toolbar {
   }
 .login {
     padding: 20px;
-    // height: 50%;
+    height: 65%;
     // width: 100%;
     display: flex;
     justify-content: center;
