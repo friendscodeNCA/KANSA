@@ -116,6 +116,6 @@ export class GlobalService {
     this.router.navigate(['/perfil-usuario', usuario.id]);
     if (this.storage.datosUsuario) {
       this.dataApi.agregarHistorial(this.storage.datosUsuario.id, usuario);
-    }git
+    }
   }
 }
