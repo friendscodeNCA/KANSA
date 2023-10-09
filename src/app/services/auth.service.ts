@@ -32,7 +32,7 @@ export class AuthService {
 
   logOut() {
     this.auth.signOut().then(res => {
-      console.log('sesion cerrada');
-    });
+      console.log('sesion cerrada', res);
+    }).catch(err=>{console.log("error al cerrar sesion", err)});
   }
 }

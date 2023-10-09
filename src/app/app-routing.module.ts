@@ -6,7 +6,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'presentacion',
@@ -47,7 +46,8 @@ const routes: Routes = [
   },
   {
     path: 'resultados-busqueda/:target',
-    loadChildren: () => import('./pages/resultados-busqueda/resultados-busqueda.module').then( m => m.ResultadosBusquedaPageModule)
+    loadChildren: () => import('./pages/resultados-busqueda/resultados-busqueda.module').then( m => m.ResultadosBusquedaPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'chats/:id',
