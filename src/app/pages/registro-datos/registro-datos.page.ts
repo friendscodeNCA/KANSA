@@ -33,6 +33,8 @@ export class RegistroDatosPage implements OnInit {
   loading;
   image: any;
   imagePortada: any;
+  urlPortada: any;
+  urlPerfil: any;
   progress;
 
 
@@ -156,6 +158,18 @@ export class RegistroDatosPage implements OnInit {
     console.log(this.usuarioForm.value);
     if (this.usuarioForm.valid && this.listaAgregados.length) {
       this.loading = await this.servGlobal.presentLoading('Registrando...');
+      if(this.image){
+        await this.uploadImagePerfil(this.image).then(url => {
+          this.urlPerfil = url;
+        })
+      }
+      if(this.imagePortada){
+        await this.uploadImagePortada(this.imagePortada).then(urlPort => {
+          this.urlPortada = urlPort;
+
+        })
+      }
+
       const lista = [];
       for (const servicio of this.listaAgregados) {
         lista.push(servicio.nombre)
@@ -207,7 +221,9 @@ export class RegistroDatosPage implements OnInit {
       descripcion: datos.descripcion,
       celular: this.celular,
       token: this.valorfcm,
-      listaServicios: datos.listaServicios
+      listaServicios: datos.listaServicios,
+      urlPortada: this.urlPortada ?this.urlPortada: null,
+      urlPerfil: this.urlPerfil ?this.urlPerfil: null
       
     };
 
@@ -283,18 +299,18 @@ export class RegistroDatosPage implements OnInit {
     }
     
   }
-  subirFotoStorage(tipo: string){
-    if(tipo=== 'perfil'){
-      this.uploadImagePerfil(this.image).then(res=> {
-        console.log('se pudo subir foto PERFIL');
-      })
+  // subirFotoStorage(tipo: string){
+  //   if(tipo=== 'perfil'){
+  //     this.uploadImagePerfil(this.image).then(res=> {
+  //       console.log('se pudo subir foto PERFIL');
+  //     })
 
-    }else if(tipo === 'portada')
-    this.uploadImagePortada(this.image).then(res=> {
-      console.log('se pudo subir foto PORTADA');
-    })
+  //   }else if(tipo === 'portada')
+  //   this.uploadImagePortada(this.imagePortada).then(res=> {
+  //     console.log('se pudo subir foto PORTADA');
+  //   })
   
-  }
+  // }
 
 
   uploadImagePerfil(image) {
