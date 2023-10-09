@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-inicio',
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
 
   constructor(
     private router: Router,
@@ -16,6 +18,7 @@ export class InicioPage implements OnInit {
   }
 
   irHome() {
+    this.modal.dismiss(null, 'cancel');
     this.router.navigate(['/tabs/tab1']);
   }
 

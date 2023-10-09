@@ -19,7 +19,7 @@ import { ModalObtenerUbicacionPage } from 'src/app/modals/modal-obtener-ubicacio
   providers: [DatePipe]
 })
 export class RegistroDatosPage implements OnInit {
-  @ViewChild(IonModal) modal: IonModal;
+  @ViewChild("modalServicios") modal: IonModal;
   @ViewChild("mySearchbar", {static: false}) search: IonSearchbar;
 
   usuarioForm: FormGroup;

@@ -6,6 +6,7 @@ import { AlertController, LoadingController, Platform, ToastController } from '@
 import { Router } from '@angular/router';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private router: Router,
     private dataApi: DataApiService,
-    private storage: StorageService
+    private storage: StorageService,
+    private location: Location
     ) {
       this.loginForm2 = this.createFormGroup2();
   }
@@ -263,6 +265,10 @@ export class LoginPage implements OnInit {
     } else {
       this.presentToastError('Complete el codigo');
     }
+  }
+
+  volver() {
+    this.location.back();
   }
 
 }
