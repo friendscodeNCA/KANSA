@@ -13,5 +13,10 @@
       "SplashScreen": "screen",
       "SplashScreenDelay": "3000"
     }
+  },
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
   }
 }

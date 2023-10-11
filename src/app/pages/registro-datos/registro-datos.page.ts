@@ -143,7 +143,7 @@ export class RegistroDatosPage implements OnInit {
 
   get nombres() { return this.usuarioForm.get('nombres'); }
   get apellidos() { return this.usuarioForm.get('apellidos'); }
-  get direccion() { return this.usuarioForm.get('direccion'); }
+  //get direccion() { return this.usuarioForm.get('direccion'); }
   get fechaNacimiento() { return this.usuarioForm.get('fechaNacimiento'); }
   get disponibilidad() { return this.usuarioForm.get('disponibilidad'); }
   get descripcion() { return this.usuarioForm.get('descripcion'); }
@@ -156,6 +156,9 @@ export class RegistroDatosPage implements OnInit {
 
   async guardarDataUsuario() {
     console.log(this.usuarioForm.value);
+    this.usuarioForm.controls['direccion'].setValue(this.userUbicacion);
+    this.usuarioForm.controls['fechaNacimiento'].setValue(new Date());
+    
     if (this.usuarioForm.valid && this.listaAgregados.length) {
       this.loading = await this.servGlobal.presentLoading('Registrando...');
       if(this.image){
@@ -314,7 +317,7 @@ export class RegistroDatosPage implements OnInit {
 
 
   uploadImagePerfil(image) {
-    window.alert(image);
+    // window.alert(image);
     return new Promise<any>((resolve, reject) => {
       // tslint:disable-next-line:prefer-const
       let storageRef = this.firebaseStorage.storage.ref();
@@ -338,7 +341,7 @@ export class RegistroDatosPage implements OnInit {
     });
   }
   uploadImagePortada(image) {
-    window.alert(image);
+    // window.alert(image);
     return new Promise<any>((resolve, reject) => {
       // tslint:disable-next-line:prefer-const
       let storageRef = this.firebaseStorage.storage.ref();

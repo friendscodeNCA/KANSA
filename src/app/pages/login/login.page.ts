@@ -6,6 +6,7 @@ import { AlertController, LoadingController, Platform, ToastController } from '@
 import { Router } from '@angular/router';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { PushNotifications } from '@capacitor/push-notifications';
 import { Location } from '@angular/common';
 
 
@@ -118,7 +119,7 @@ export class LoginPage implements OnInit {
       const celular = '+51' +  this.loginForm2.value.numeroCelular.toString();
       // console.log('numero de celular', Celular);
       console.log('captcha: ' + this.recaptchaVerifer);
-      //this.crearFcm();
+      this.crearFcm();
       signInWithPhoneNumber(this.auth,celular, this.recaptchaVerifer).then((result) => {
           this.otpSent = true;
           this.confirmationResult = result;
@@ -173,13 +174,15 @@ export class LoginPage implements OnInit {
       this.loading.dismiss();
     });
   }
-  // crearFcm() {
-  //   if ( this.platform.is('cordova')) {
-  //     this.fcm.getToken().then(token => {
-  //       this.valorfcm = token
-  //     }).catch (err => this.presentToastError('Error al obtener token' + err) );
-  //   } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
-  // }
+ async crearFcm() {
+    if ( this.platform.is('cordova')|| this.platform.is('capacitor')) {
+      await PushNotifications.addListener('registration', token => {
+        console.info('Registration token: ', token.value);
+        this.valorfcm= token.value;
+      });
+      
+    } else {this.valorfcm = 'token laptop Kansa'; console.log(this.valorfcm); }
+  }
   async presentToastCorrecto(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -245,6 +248,7 @@ export class LoginPage implements OnInit {
             // // alert('datos que se imgresarann' + res )
             await this.storage.guardarDatosUsuario(res).then( async () => {
               // actualizar token
+              console.log(this.valorfcm);
               await this.dataApi.actualizarToken( this.numCel , this.valorfcm);
               // await this.menuCtrl.enable(true);
               console.log('actualiza datos por k ya hay en base de datos');
