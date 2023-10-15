@@ -39,6 +39,9 @@ export class ListaUsuariosServicioPage implements OnInit {
       }
     }, 1000);
   }
+  llamar(celular){
+    this.globalService.llamarNumero(celular);
+  }
 
   obtenerUsuariosServicio() {
     this.dataApi.busquedaUsuariosServicio([this.dataSubcategoria.nombre]).then(lista => {

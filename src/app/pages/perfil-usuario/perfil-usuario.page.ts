@@ -24,7 +24,7 @@ export class PerfilUsuarioPage implements OnInit {
     private dataApi: DataApiService,
     private route: ActivatedRoute,
     private servGlobal: GlobalService,
-    private storage: StorageService
+    public storage: StorageService,
   ) { }
 
   ngOnInit() {
@@ -35,6 +35,9 @@ export class PerfilUsuarioPage implements OnInit {
     this.obtenerUsuario();
     this.ComsultaComentarios();
   }
+  llamar(celular){
+    this.servGlobal.llamarNumero(celular);
+  }  
 
   ComsultaComentarios() {
     this.dataApi.obtenerComentarios(this.idUsuario).subscribe(data => {

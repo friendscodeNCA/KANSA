@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { DataApiService } from './data-api.service';
 import { StorageService } from './storage.service';
 import { usuarioInterface } from '../models/usuarioInterface';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Platform } from '@ionic/angular';
 
 
 @Injectable({
@@ -19,7 +21,9 @@ export class GlobalService {
     private loading: LoadingController,
     private router: Router,
     private dataApi: DataApiService,
-    private storage: StorageService
+    private storage: StorageService,    
+    private callNumber: CallNumber,
+    private platform: Platform
   ) { }
 
   async presentToast(
@@ -117,5 +121,16 @@ export class GlobalService {
     if (this.storage.datosUsuario) {
       this.dataApi.agregarHistorial(this.storage.datosUsuario.id, usuario);
     }
+  }
+
+  llamarNumero(numero: string) {
+    console.log(numero)
+    if(this.platform.is('cordova')|| this.platform.is('capacitor')){      
+      this.callNumber.callNumber(numero, true)
+      .then(res => console.log('La llamada se inició con éxito', res))
+      .catch(err => console.error('Error al iniciar la llamada', err));
+    } else {
+      console.log('solo llama en aplicacion');
+    }    
   }
 }

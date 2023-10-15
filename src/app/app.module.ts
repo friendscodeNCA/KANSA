@@ -24,6 +24,7 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { ModalObtenerUbicacionPage } from './modals/modal-obtener-ubicacion/modal-obtener-ubicacion.page';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeStorage,
     AndroidPermissions,
-    LocationAccuracy
+    LocationAccuracy,
+    CallNumber
 
   ], // FCM
   bootstrap: [AppComponent],
