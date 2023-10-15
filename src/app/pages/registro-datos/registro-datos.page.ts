@@ -134,7 +134,9 @@ export class RegistroDatosPage implements OnInit {
       nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       direccion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
+      profesion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       fechaNacimiento: new FormControl('', [Validators.required]),
+      experiencia: new FormControl('', [Validators.required]),
       disponibilidad: new FormControl('', [Validators.required]),
       listaServicios: new FormControl(''),
       descripcion: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(120)]),
@@ -143,8 +145,10 @@ export class RegistroDatosPage implements OnInit {
 
   get nombres() { return this.usuarioForm.get('nombres'); }
   get apellidos() { return this.usuarioForm.get('apellidos'); }
+  get profesion() { return this.usuarioForm.get('profesion'); }
   //get direccion() { return this.usuarioForm.get('direccion'); }
   get fechaNacimiento() { return this.usuarioForm.get('fechaNacimiento'); }
+  get experiencia() { return this.usuarioForm.get('experiencia'); }
   get disponibilidad() { return this.usuarioForm.get('disponibilidad'); }
   get descripcion() { return this.usuarioForm.get('descripcion'); }
 
@@ -220,6 +224,8 @@ export class RegistroDatosPage implements OnInit {
       apellidos: datos.apellidos,
       direccion: datos.direccion,
       fechaNacimiento: datos.fechaNacimiento,
+      profesion: datos.profesion,
+      experiencia: datos.experiencia,
       disponibilidad: datos.disponibilidad,
       descripcion: datos.descripcion,
       celular: this.celular,
@@ -236,7 +242,8 @@ export class RegistroDatosPage implements OnInit {
         this.loading.dismiss();
         this.router.navigate(['/tabs/tab1']);
         this.resetForm();
-      })
+      });
+      this.storage.guardarInicio(true).then(() => console.log('Guardado la visita inicio'));
     }).catch( (err)=> {
       this.loading.dismiss();
       this.servGlobal.presentToast('No se pudo completar el registro', {color: 'danger'})

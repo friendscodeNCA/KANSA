@@ -53,9 +53,10 @@ ion-toolbar {
     padding: 10%;
     .cardInicio {
         margin: 1%;
-        height: 150px;
+        height: 130px;
         ion-card-header {
             height: 70%;
+            padding: 0px;
         }
         ion-card-content {
             height: 30%;

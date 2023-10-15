@@ -18,6 +18,7 @@ export class Tab1Page {
   categoriaForm: FormGroup;
   visibilidad = true;
   listaCategorias = [];
+  listaSlides = [];
   textoBuscador: string;
 
   slideOpciones = {
@@ -37,6 +38,18 @@ export class Tab1Page {
 
   ngOnInit() {
     this.obtenerCategorias();
+    this.obtenerSlides();
+  }
+
+  obtenerSlides() {
+    this.dataApi.obtenerSlidesPrincipal().subscribe(listaSlides => {
+      console.log(listaSlides);
+      if (listaSlides.length) {
+        this.listaSlides = listaSlides;
+      } else {
+        this.listaSlides = [];
+      }
+    })
   }
 
   obtenerCategorias() {

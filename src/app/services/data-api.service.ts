@@ -27,6 +27,7 @@ import { switchMap, map } from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { deleteDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,20 @@ export class DataApiService {
   //   })
   // }
 
+
+  // LIMITA A UN SOLO COMENTARIO POR PERFIL
+  guardarComentarioPerfil(idUser: string, usuario, comentario) {
+    return setDoc(doc(this.afs, 'usuarios', idUser, 'comentarios', usuario.id), 
+    {id: usuario.id,
+     fecha: new Date(),
+     nombres: usuario.nombres,
+     apellidos: usuario.apellidos,
+     comentario: comentario
+    }).then(() => {
+      console.log('Comentario guardado correctamente');
+    });
+  }
+
   guardarCategoria(newCategoria: categoriaInterface) {
     newCategoria.fechaRegistro = new Date();
     return addDoc(collection(this.afs, 'categorias'), newCategoria).then(data => {
@@ -66,15 +81,16 @@ export class DataApiService {
   }
 
   agregarHistorial(idUser: string, usuario) {
+    console.log('usuario: ', usuario);
     return setDoc(doc(this.afs, 'usuarios', idUser, 'historial', usuario.id),
     {id: usuario.id,
      fecha: new Date(),
      nombres: usuario.nombres,
      apellidos: usuario.apellidos,
-     descripcion: usuario.descripcion,
+     profesion: usuario.profesion || 'No definido',
      direccion: usuario.direccion
      }).then(() => {
-      console.log('Agregar correctamente');
+      console.log('Agregado a historial correctamente');
     });
   }
 
@@ -84,7 +100,7 @@ export class DataApiService {
      fecha: new Date(),
      nombres: usuario.nombres,
      apellidos: usuario.apellidos,
-     descripcion: usuario.descripcion,
+     profesion: usuario.profesion,
      direccion: usuario.direccion
     }).then(() => {
       console.log('Agregado a favoritos correctamente');
@@ -119,6 +135,23 @@ export class DataApiService {
     })
   }
 
+  //obtener COMENTARIOS
+  obtenerComentarios(id) {
+    return this.afs2.collection(`usuarios/${id}/comentarios`, ref => ref.orderBy('fecha', 'desc'))
+    .snapshotChanges().pipe(map(changes => {
+      const datos: categoriaInterface[] = [];
+
+      changes.map((action: any) => {
+        datos.push({
+          id: action.payload.doc.id,
+          ...action.payload.doc.data()
+        });
+      });
+
+      return datos;
+    }));
+  }
+
   //obtener HISTORIAL
   obtenerListaHistorial(id) {
     return this.afs2.collection(`usuarios/${id}/historial`, ref => ref.orderBy('fecha', 'desc'))
@@ -139,6 +172,23 @@ export class DataApiService {
   //obtener FAVORITOS
   obtenerListaFavoritos(id) {
     return this.afs2.collection(`usuarios/${id}/favoritos`, ref => ref.orderBy('fecha', 'desc'))
+    .snapshotChanges().pipe(map(changes => {
+      const datos: categoriaInterface[] = [];
+
+      changes.map((action: any) => {
+        datos.push({
+          id: action.payload.doc.id,
+          ...action.payload.doc.data()
+        });
+      });
+
+      return datos;
+    }));
+  }
+
+  //obtener slides Principal
+  obtenerSlidesPrincipal() {
+    return this.afs2.collection('slidesPrincipal', ref => ref.where('mostrar', '==' , true).orderBy('prioridad', 'desc'))
     .snapshotChanges().pipe(map(changes => {
       const datos: categoriaInterface[] = [];
 
@@ -242,6 +292,14 @@ export class DataApiService {
       usuario.apellidos = usuario.apellidos.toLocaleLowerCase();
       const cel = usuario.celular;
       return this.afs2.collection('usuarios').doc(cel).set(usuario).then(() => 'exito').catch(err => err);
+    }
+
+    eliminarFavoritosHistorial(tipo: string, id: string, idEliminar: String) {
+      return this.afs2.doc<any>(`usuarios/${id}/${tipo}/${idEliminar}`).ref.delete()
+      .then(() => 'exito').catch(err => {
+        console.log('error', err);
+        throw String('fail');
+      });
     }
   
 

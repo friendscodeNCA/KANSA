@@ -29,18 +29,19 @@
             <ion-row class="ion-align-items-center">
               <ion-col size="3">
                 <ion-avatar class="ion-align-items-center">
-                  <img alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
+                  <img *ngIf="usuario && !usuario.urlPerfil" alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
+                  <img *ngIf="usuario && usuario.urlPerfil" alt="foto de perfil" [src]="usuario.urlPerfil" />
                 </ion-avatar>
               </ion-col>
               <ion-col size="7">
                 <ion-row class="ion-no-padding">
-                  <ion-col class="ion-no-padding profesion" size="12">{{usuario.descripcion | uppercase}}</ion-col>
+                  <ion-col class="ion-no-padding profesion" size="12">{{usuario.profesion | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col class="ion-no-padding" size="12">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-col>
                 </ion-row>
                 <ion-row class="ion-no-padding">
-                  <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion | titlecase}}</ion-col>
+                  <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion.direccion | titlecase}}</ion-col>
                 </ion-row>
                 <ion-row class="ion-no-padding">
                   <ion-col class="ion-no-padding" size="12">
@@ -63,7 +64,7 @@
       </div>
       <ion-grid *ngIf="!target">
         <ion-row>
-          <ion-col size="6" *ngFor="let subcategoria of listaSubCategorias">
+          <ion-col size="4" *ngFor="let subcategoria of listaSubCategorias">
             <ion-card class="cardInicio" mode="ios" (click)="irListaUsuariosServicio(subcategoria)">
               <ion-card-header>
                 <img [src]="subcategoria.img" alt="">
@@ -76,8 +77,8 @@
         </ion-row>
         <div class="skeleton" *ngIf="!listaSubCategorias.length">
           <ion-row>
-            <ion-col size="6" *ngFor="let subcategoria of [1,1,1,1,1]">
-              <ion-card mode="ios">
+            <ion-col size="4" *ngFor="let subcategoria of [1,1,1,1,1,1]">
+              <ion-card mode="ios" class="cardInicio">
                 <ion-card-header>
                 <ion-skeleton-text animated style="width: 50%; height: 70%; margin: 0 auto;"></ion-skeleton-text>
                 </ion-card-header>

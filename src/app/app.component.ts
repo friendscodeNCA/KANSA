@@ -17,7 +17,7 @@ export class AppComponent {
   }
   initializeApp() {
     this.storage.cargardatosUsuario();
-
+    this.storage.cargardataInicio();
   }
 
 }

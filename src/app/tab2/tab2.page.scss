@@ -22,3 +22,14 @@ ion-header {
         padding-right: 5%;
     }
 }
+
+.sinData {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    ion-icon {
+        font-size: 30px;
+    }
+}

@@ -24,8 +24,8 @@ export class ChatPage implements OnInit {
   isLoading: boolean;
   model = {
     icon: 'chatbubbles-outline',
-    title: 'No Conversation',
-    color: 'danger'
+    title: 'Chat vacío',
+    color: 'primary'
   };
 
   constructor(

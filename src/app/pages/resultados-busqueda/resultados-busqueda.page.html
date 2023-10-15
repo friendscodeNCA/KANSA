@@ -31,13 +31,13 @@
           </ion-col>
           <ion-col size="7">
             <ion-row class="ion-no-padding">
-              <ion-col class="ion-no-padding profesion" size="12">{{usuario.descripcion | uppercase}}</ion-col>
+              <ion-col class="ion-no-padding profesion" size="12">{{usuario.profesion | uppercase}}</ion-col>
             </ion-row>
             <ion-row>
               <ion-col class="ion-no-padding" size="12">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-col>
             </ion-row>
             <ion-row class="ion-no-padding">
-              <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion | titlecase}}</ion-col>
+              <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion.direccion | titlecase}}</ion-col>
             </ion-row>
             <ion-row class="ion-no-padding">
               <ion-col class="ion-no-padding" size="12">

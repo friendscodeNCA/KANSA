@@ -66,4 +66,13 @@ export class Tab2Page {
   irPerfil(usuario){
     this.globalService.goPerfil(usuario);
   }
+
+  eliminarFavHistorial(id) {
+    this.dataApi.eliminarFavoritosHistorial(this.seleccionado, this.storage.datosUsuario.id, id).then(res => {
+      console.log('Eliminado', res);
+      if (res == 'exito') {
+        this.globalService.presentToast('Eliminado correctamente');
+      }
+    })
+  }
 }

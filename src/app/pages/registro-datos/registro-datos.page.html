@@ -16,7 +16,16 @@
       <ion-input formControlName="apellidos" type="text" placeholder="Apellidos"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input *ngIf="userUbicacion && userUbicacion.direccion" readonly>{{userUbicacion.direccion.split(',', 1)}}</ion-input>
+      Fecha Nacimiento
+      <ion-datetime-button mode="ios" datetime="datetime"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true" mode="ios">
+        <ng-template mode="ios">
+          <ion-datetime mode="ios" id="datetime" locale="es-PE" [firstDayOfWeek]="1" [showDefaultButtons]="true" cancelText="Cancelar" doneText="Aceptar" splayFormat="DD MMM YYYY"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+    <ion-item>
+      <ion-input *ngIf="userUbicacion && userUbicacion.direccion" placeholder="Ubicacion" readonly>{{userUbicacion.direccion.split(',', 1)}}</ion-input>
       <ion-buttons slot="end">
         <ion-button (click)="modalUbicacion()">
           <ion-icon slot="icon-only" name="create-outline" color="primary"></ion-icon>
@@ -24,13 +33,7 @@
       </ion-buttons>
     </ion-item>
     <ion-item>
-      Fecha Nacimiento
-      <ion-datetime-button datetime="datetime"  ></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
-        <ng-template>
-          <ion-datetime id="datetime" locale="es-ES" [showDefaultButtons]="true" cancelText="Cancelar" doneText="Aceptar" splayFormat="DD MMM YYYY"></ion-datetime>
-        </ng-template>
-      </ion-modal>
+      <ion-input formControlName="profesion" type="text" placeholder="Profesion / Ocupación"></ion-input>
     </ion-item>
     <div class="listaServiciosSeleccionados" id="modalServicios">
       <ion-label position="floating" color="primary">Servicios que brinda</ion-label>
@@ -42,8 +45,28 @@
         </ion-label>
       </div>
     </div>
+    <div class="custom-label">
+      <ion-label>Experiencia</ion-label>
+    </div>
     <ion-item>
-      <ion-input formControlName="disponibilidad" type="text" placeholder="Disponibilidad"></ion-input>
+      <ion-select slot="end" formControlName="experiencia" mode="ios" interface="popover" placeholder="Seleccionar Experiencia">
+        <ion-select-option value="NINGUNA">NINGUNA</ion-select-option>
+        <ion-select-option value="MENOR A 1 AÑO">MENOR A 1 AÑO</ion-select-option>
+        <ion-select-option value="ENTRE 1 Y 3 AÑOS">ENTRE 1 Y 3 AÑOS</ion-select-option>
+        <ion-select-option value="MAYOR A 3 AÑOS">MAYOR A 3 AÑOS</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="custom-label">
+      <ion-label>Disponibilidad</ion-label>
+    </div>
+    <ion-item>
+      <ion-select slot="end" formControlName="disponibilidad" mode="ios" interface="popover" placeholder="Seleccionar Disponibilidad">
+        <ion-select-option value="INMEDIATA">INMEDIATA</ion-select-option>
+        <ion-select-option value="MEDIO TIEMPO">MEDIO TIEMPO</ion-select-option>
+        <ion-select-option value="TIEMPO COMPLETO">TIEMPO COMPLETO</ion-select-option>
+        <ion-select-option value="A COORDINAR">A COORDINAR</ion-select-option>
+        <ion-select-option value="FINES DE SEMANA">FINES DE SEMANA</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-textarea formControlName="descripcion" type="text" placeholder="Cuentanos un poco sobre ti"></ion-textarea>

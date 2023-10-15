@@ -19,6 +19,10 @@ export class HeaderComponent implements OnInit {
     this.usuario = this.storage.datosUsuario;
   }
 
+  ionViewDidEnter() {
+    this.usuario = this.storage.datosUsuario;
+  }
+
   irPerfil(id){
     console.log(id);
     this.router.navigate(['/perfil-usuario', id]);

@@ -10,6 +10,7 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class StorageService {
   datosUsuario: any;//usuarioService
+  homeActivado: any;//usuarioService
 
   constructor(
     private authService: AuthService,
@@ -25,8 +26,36 @@ export class StorageService {
     });
     return promesa;
   }
+
+  // ACTIVA EL HOME
+  async guardarInicio(data) {
+    const promesa = new Promise<void>( async (resolve, reject) => {
+      if (this.platform.is('capacitor') ) {
+        // dispositivo
+        console.log('guarda:', data);
+        await Preferences.set({key: 'homeActivado', value: JSON.stringify(data)}) // { property: 'value', anotherProperty: 'anotherValue' }
+        .then(
+          async (data) => {
+            console.log('guardado');
+            // window.alert('Se guardo: ' + data);
+            this.homeActivado =JSON.parse( (await Preferences.get({ key: 'homeActivado' })).value)
+            
+        }, // console.log('Stored first item!', data),
+          error => console.error('Error storing item', error) , //  window.alert('Error: ' + error)
+        );
+      } else {
+        // escritorio
+        localStorage.setItem('homeActivado', JSON.stringify(data));
+        this.homeActivado = JSON.parse(localStorage.getItem('homeActivado'));
+      }
+      resolve();
+    });
+    return promesa;
+  }
+
   async guardarDatosUsuario(user) {
     console.log(user);
+    user.id = user.celular;
     const promesa = new Promise<void>( async (resolve, reject) => {
       if (this.platform.is('capacitor') ) {
         // dispositivo
@@ -94,6 +123,25 @@ export class StorageService {
         }
       }
       resolve(this.datosUsuario);
+    });
+    return promesa;
+  }
+
+  async cargardataInicio() {
+    console.log('Cargando datos del inicio')
+    const promesa = new Promise(async  (resolve, reject) => {
+      if (this.platform.is('capacitor')) {
+        // celular
+        this.homeActivado =JSON.parse( (await Preferences.get({ key: 'homeActivado' })).value)
+      } else {
+        console.log('Cargando datos del inicio')
+
+        // escritorio
+        if (localStorage.getItem('homeActivado')) {
+          this.homeActivado = JSON.parse(localStorage.getItem('homeActivado'));
+        }
+      }
+      resolve(this.homeActivado);
     });
     return promesa;
   }

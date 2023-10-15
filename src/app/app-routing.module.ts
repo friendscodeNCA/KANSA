@@ -47,7 +47,6 @@ const routes: Routes = [
   {
     path: 'resultados-busqueda/:target',
     loadChildren: () => import('./pages/resultados-busqueda/resultados-busqueda.module').then( m => m.ResultadosBusquedaPageModule),
-    canActivate: [AuthGuard],
   },
   {
     path: 'chats/:id',

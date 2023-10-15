@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.storage.datosUsuario) {
-        console.log('No hay datos de usuario');
+        console.log('Hay datos de usuario');
         return true;
       } else {
         return this.afAuth.authState.pipe(map( auth => {

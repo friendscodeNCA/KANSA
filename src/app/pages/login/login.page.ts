@@ -246,6 +246,7 @@ export class LoginPage implements OnInit {
 
           }else {
             // // alert('datos que se imgresarann' + res )
+            await this.storage.guardarInicio(true).then(() => console.log('Guardado la visita inicio'));
             await this.storage.guardarDatosUsuario(res).then( async () => {
               // actualizar token
               console.log(this.valorfcm);
@@ -259,7 +260,6 @@ export class LoginPage implements OnInit {
                   this.otpSent = false;
               });
             });
-
           }
         });
       }).catch(err => {
@@ -273,6 +273,10 @@ export class LoginPage implements OnInit {
 
   volver() {
     this.location.back();
+  }
+
+  irInicio() {
+    this.router.navigate(['/inicio']);
   }
 
 }

@@ -14,19 +14,10 @@
   <div class="banner">
     <ion-slides mode="ios" [options]="slideOpciones">
       <ion-slide>
-        <img src="../../assets/img/slide1.jfif" alt="">
+        <img src="../../assets/img/benvenida.png" alt="">
       </ion-slide>
-      <ion-slide>
-        <img src="../../assets/img/slide2.jfif" alt="">
-      </ion-slide>
-      <ion-slide>
-        <img src="../../assets/img/slide3.jfif" alt="">
-      </ion-slide>
-      <ion-slide>
-        <img src="../../assets/img/slide4.jfif" alt="">
-      </ion-slide>
-      <ion-slide>
-        <img src="../../assets/img/slide5.jfif" alt="">
+      <ion-slide *ngFor="let item of listaSlides">
+        <img [src]="item.url" alt="">
       </ion-slide>
     </ion-slides>
   </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-inicio',
@@ -12,6 +13,7 @@ export class InicioPage implements OnInit {
 
   constructor(
     private router: Router,
+    private storage: StorageService
   ) { }
 
   ngOnInit() {
@@ -20,6 +22,7 @@ export class InicioPage implements OnInit {
   irHome() {
     this.modal.dismiss(null, 'cancel');
     this.router.navigate(['/tabs/tab1']);
+    this.storage.guardarInicio(true).then(() => console.log('Guardado la visita inicio'));
   }
 
   irLogin() {

@@ -50,18 +50,19 @@
         <ion-row class="ion-align-items-center">
           <ion-col size="3">
             <ion-avatar class="ion-align-items-center">
-              <img alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
+              <img *ngIf="usuario && !usuario.urlPerfil" alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
+              <img *ngIf="usuario && usuario.urlPerfil" alt="foto de perfil" [src]="usuario.urlPerfil" />
             </ion-avatar>
           </ion-col>
           <ion-col size="7">
             <ion-row class="ion-no-padding">
-              <ion-col class="ion-no-padding profesion" size="12">{{usuario.descripcion | uppercase}}</ion-col>
+              <ion-col class="ion-no-padding profesion" size="12">{{usuario.profesion | uppercase}}</ion-col>
             </ion-row>
             <ion-row>
               <ion-col class="ion-no-padding" size="12">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-col>
             </ion-row>
             <ion-row class="ion-no-padding">
-              <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion | titlecase}}</ion-col>
+              <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion.direccion | titlecase}}</ion-col>
             </ion-row>
             <ion-row class="ion-no-padding">
               <ion-col class="ion-no-padding" size="12">

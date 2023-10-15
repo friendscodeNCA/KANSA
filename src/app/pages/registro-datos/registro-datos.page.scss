@@ -72,3 +72,19 @@
     text-align: center;
     color: red;
 }
+
+.custom-label {
+  display: flex;
+  align-items: center;
+  padding-top: 8px; /* Ajusta el espaciado según tus preferencias */
+}
+
+.custom-label ion-label {
+  margin: 0; /* Elimina el margen del ion-label */
+  font-weight: bold; /* Aplica negrita u otros estilos de texto si es necesario */
+}
+
+ion-item {
+  margin: 0; /* Elimina el margen del ion-item */
+  padding: 0; /* Elimina el espaciado dentro del ion-item */
+}

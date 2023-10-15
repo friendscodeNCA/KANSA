@@ -23,6 +23,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" color="light">
+  <div class="sinData" *ngIf="!listaUsuarios.length">
+    <ion-icon color="danger" name="cloud-offline-outline"></ion-icon> &nbsp; &nbsp;
+    <ion-label color="danger">No hay datos</ion-label>
+  </div>
 <div class="lista"  *ngFor="let usuario of listaUsuarios">
   <ion-card class="cardUsuarios">
     <ion-grid fixed>
@@ -34,13 +38,13 @@
         </ion-col>
         <ion-col size="7">
           <ion-row class="ion-no-padding">
-            <ion-col class="ion-no-padding profesion" size="12">{{usuario.descripcion | titlecase}}</ion-col>
+            <ion-col class="ion-no-padding profesion" size="12">{{usuario.profesion | uppercase}}</ion-col>
           </ion-row>
           <ion-row>
             <ion-col class="ion-no-padding" size="12">{{usuario.nombres | titlecase}} {{usuario.apellidos | titlecase}}</ion-col>
           </ion-row>
           <ion-row class="ion-no-padding">
-            <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion | titlecase}}</ion-col>
+            <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion.direccion | titlecase}}</ion-col>
           </ion-row>
           <ion-row class="ion-no-padding">
             <ion-col class="ion-no-padding" size="12">
@@ -52,7 +56,7 @@
         </ion-col>
         <ion-col size="2">
           <ion-buttons>
-            <ion-button  color="danger">
+            <ion-button  color="danger" (click)="eliminarFavHistorial(usuario.id)">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-button>
           </ion-buttons>
