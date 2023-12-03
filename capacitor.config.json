@@ -1,6 +1,6 @@
 {
   "appId": "com.paway.qansa",
-  "appName": "kansaApp",
+  "appName": "Qansa",
   "webDir": "www",
   "bundledWebRuntime": false,
   "cordova": {

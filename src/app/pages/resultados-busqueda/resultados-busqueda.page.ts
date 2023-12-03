@@ -35,6 +35,9 @@ export class ResultadosBusquedaPage implements OnInit {
     console.log(this.target);
     this.buscar();
   }
+  llamar(celular){
+    this.globalService.llamarNumero(celular);
+  }
 
   buscar() {
     this.buscador.buscarServicioGeneral(this.target).then(res => {

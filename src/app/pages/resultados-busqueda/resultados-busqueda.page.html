@@ -51,9 +51,11 @@
             </ion-row>
           </ion-col>
           <ion-col size="2">
-            <ion-button class="botonLlamar"  color="success">
-              <ion-icon slot="icon-only" name="call"></ion-icon>
-            </ion-button>
+            <ion-buttons>
+              <ion-button  color="success" (click)="llamar(usuario.celular)">
+                <ion-icon slot="icon-only" name="call"></ion-icon>
+              </ion-button>
+            </ion-buttons>
           </ion-col>
         </ion-row>
       </ion-grid>
