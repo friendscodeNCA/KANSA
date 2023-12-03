@@ -27,13 +27,13 @@
         <ion-card class="cardUsuarios">
           <ion-grid fixed>
             <ion-row class="ion-align-items-center">
-              <ion-col size="3">
+              <ion-col size="3" (click)="irPerfil(usuario)">
                 <ion-avatar class="ion-align-items-center">
                   <img *ngIf="usuario && !usuario.urlPerfil" alt="foto de perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOfiQ5jt6UNVmHw7YJy7F6I25FV6LgBX9RS6w3wF7PUhORio-woVIGPyIZUcbNWENrBjI&usqp=CAU" />
                   <img *ngIf="usuario && usuario.urlPerfil" alt="foto de perfil" [src]="usuario.urlPerfil" />
                 </ion-avatar>
               </ion-col>
-              <ion-col size="7">
+              <ion-col size="7" (click)="irPerfil(usuario)">
                 <ion-row class="ion-no-padding">
                   <ion-col class="ion-no-padding profesion" size="12">{{usuario.profesion | uppercase}}</ion-col>
                 </ion-row>
@@ -44,23 +44,34 @@
                   <ion-col class="ion-no-padding" size="12"><ion-icon name="location" color="primary"></ion-icon>{{usuario.direccion.direccion | titlecase}}</ion-col>
                 </ion-row>
                 <ion-row class="ion-no-padding">
-                  <ion-col class="ion-no-padding" size="12">
-                    <ion-button (click)="irPerfil(usuario)" size="small" expand="block" shape="round" color="warning" mode="ios">
+                  <ion-col size="6" class="ion-align-items-center">
+                    <ion-icon class="estrellas" *ngFor="let item of [1,1,1,1,1]" name="star" color="warning"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding" size="6">
+                    <ion-button size="small" expand="block" shape="round" color="warning" mode="ios">
                       <ion-icon name="eye"></ion-icon> &nbsp; Ver Perfil
                     </ion-button>
                   </ion-col>
                 </ion-row>
               </ion-col>
               <ion-col size="2">
-                <ion-buttons>
-                  <ion-button  color="success">
-                    <ion-icon slot="icon-only" name="call"></ion-icon>
-                  </ion-button>
-                </ion-buttons>
+                <ion-button class="botonLlamar" color="success">
+                  <ion-icon slot="icon-only" name="call"></ion-icon>
+                </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-card>
+      </div>
+      <div class="banner" *ngIf="!target">
+        <ion-slides mode="ios" [options]="slideOpciones">
+          <ion-slide>
+            <img src="../../assets/img/benvenida.png" alt="">
+          </ion-slide>
+          <ion-slide *ngFor="let item of listaSlides">
+            <img [src]="item.url" alt="">
+          </ion-slide>
+        </ion-slides>
       </div>
       <ion-grid *ngIf="!target">
         <ion-row>

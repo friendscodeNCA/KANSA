@@ -28,6 +28,9 @@ ion-toolbar {
         padding: 15%;
     }
 }
+p {
+    font-size: 13px;
+}
 
 .contenido {
     flex: 1;
@@ -48,4 +51,8 @@ ion-toolbar {
         height: 2px;
         background-color: rgba(128, 128, 128, 0.725);
     }
+}
+
+.donacion {
+    text-align: center;
 }

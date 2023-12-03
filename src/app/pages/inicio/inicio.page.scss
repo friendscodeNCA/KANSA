@@ -10,7 +10,10 @@
         padding: 5%;
     }
 }
-
+hr {
+    height: 2px;
+    background-color: var(--ion-color-medium);
+}
 .contenido {
     height: 55%;
     width: 100%;

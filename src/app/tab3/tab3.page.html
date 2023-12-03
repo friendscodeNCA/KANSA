@@ -45,7 +45,7 @@
         (click)="getChat(item)"
         [detail]="true">
         <ion-avatar *ngIf="(item?.user | async) as user">
-          <img *ngIf="getUser(user) && !getUser(user)?.urlPerfil" src="https://pm1.aminoapps.com/7508/5cef9735fab6796649b5a48fabb03c49cf7ac668r1-720-922v2_hq.jpg" />
+          <img *ngIf="getUser(user) && !getUser(user)?.urlPerfil" src="../../assets/img/USUARIO.svg" />
           <img *ngIf="getUser(user) && getUser(user)?.urlPerfil" alt="foto de perfil" [src]="getUser(user)?.urlPerfil" />
         </ion-avatar> &nbsp; &nbsp;
         <ng-container *ngIf="(item?.user | async) as user">

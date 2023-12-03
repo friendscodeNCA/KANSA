@@ -3,7 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/tab3"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{nombres | titlecase}}</ion-title>
+    <ion-avatar (click)="irPerfil(dataUsuario)" *ngIf="dataUsuario && dataUsuario.urlPerfil" slot="start">
+      <img src="{{dataUsuario.urlPerfil}}" />
+    </ion-avatar>
+    <ion-avatar (click)="irPerfil(dataUsuario)" *ngIf="!dataUsuario || !dataUsuario.urlPerfil" slot="start">
+      <img src="../../../assets/img/USUARIO.svg" />
+    </ion-avatar>
+    <ion-title (click)="irPerfil(dataUsuario)" *ngIf="dataUsuario">
+      {{dataUsuario.nombres | titlecase}} {{dataUsuario.apellidos | titlecase}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 

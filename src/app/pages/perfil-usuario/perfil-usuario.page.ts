@@ -128,4 +128,8 @@ export class PerfilUsuarioPage implements OnInit {
     });
   }
 
+  irPerfil(usuario){
+    this.servGlobal.goPerfil(usuario);
+  }
+
 }

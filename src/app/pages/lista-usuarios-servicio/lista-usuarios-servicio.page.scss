@@ -6,3 +6,21 @@ h2 {
         font-family: Gil;
     }
 }
+
+ion-grid{
+    height: 100%;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.estrellas {
+    font-size: 16px;
+}
+
+.botonLlamar {
+    --border-radius: 50%;
+}

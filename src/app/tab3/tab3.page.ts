@@ -4,6 +4,7 @@ import { ChatService } from '../services/chat.service';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { PasarDatosService } from '../services/pasar-datos.service';
 
 @Component({
   selector: 'app-tab3',
@@ -24,7 +25,8 @@ export class Tab3Page {
   };
   constructor(
     private router: Router,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private pasaDatos:PasarDatosService
   ) {}
 
   ngOnInit() {
@@ -83,6 +85,7 @@ export class Tab3Page {
       take(1)
     ).subscribe(user_data => {
       console.log('data: ', user_data);
+      this.pasaDatos.setData(user_data);
       const navData: NavigationExtras = {
         queryParams: {
           name: user_data?.nombres

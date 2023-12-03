@@ -5,6 +5,7 @@ import { IonContent, NavController, Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { GlobalService } from 'src/app/services/global.service';
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { PasarDatosService } from 'src/app/services/pasar-datos.service';
 
 @Component({
   selector: 'app-chat',
@@ -28,15 +29,21 @@ export class ChatPage implements OnInit {
     color: 'primary'
   };
 
+  dataUsuario;
+
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
     public chatService: ChatService,
     private servGlobal: GlobalService,
     private platform: Platform,
+    private pasaDatos: PasarDatosService,
+    private globalService: GlobalService
   ) { }
 
   ngOnInit() {
+    this.dataUsuario = this.pasaDatos.getData();
+    console.log(this.dataUsuario);
     const data: any = this.route.snapshot.queryParams;
     console.log('data: ', data);
     if(data?.name) {
@@ -150,6 +157,10 @@ export class ChatPage implements OnInit {
       console.log('solo se abre en android');
     }
     
+  }
+
+  irPerfil(usuario){
+    this.globalService.goPerfil(usuario);
   }
 
 }

@@ -34,8 +34,8 @@ ion-toolbar {
 
 .dataUsuario {
     padding-top: 70px;
-    padding-left: 10%;
-    padding-right: 10%;
+    // padding-left: 10%;
+    // padding-right: 10%;
     position: absolute;
     text-align: center;
     top: 20%;
@@ -47,12 +47,18 @@ ion-toolbar {
         font-size: 14px;
         text-align: justify;
     }
+    .datosPersonales {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
 }
 
 .comentarios {
     width: 100%;
     height: auto;
-    border-radius: 30px;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
     padding: 20px;
 }
 
