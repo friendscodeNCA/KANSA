@@ -21,10 +21,17 @@ export class SubcategoriasPage implements OnInit {
   categoriaForm: FormGroup;
   visibilidad = true;
   listaSubCategorias : any = [];
+  listaSlides = [];
+  
 
   target: string;
   listaUsuarios = [];
   sinDatos = false;
+  slideOpciones = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true
+   };
   constructor(
     private route: ActivatedRoute,
     private pasarDatos: PasarDatosService,
