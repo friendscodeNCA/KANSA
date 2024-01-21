@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { GlobalService } from 'src/app/services/global.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class SettingsPage implements OnInit {
   constructor(
     private router: Router,
     private storage: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private servGlobal: GlobalService
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,9 @@ export class SettingsPage implements OnInit {
     this.authService.logOut();
     this.storage.borrarStorage();
     this.router.navigate(['/inicio']);
+  }
+  redesSociales(redSocial: string){
+    this.servGlobal.presentToast('Pronto estará disponible en: '+ redSocial, {position: 'top'});
   }
 
 }

@@ -99,4 +99,8 @@ export class Tab3Page {
     return user;
   }
   onWillDismiss(event){}
+  
+  irTab1(){
+    this.router.navigate(['/tabs/tab1']).then(()=> console.log('arreglo de botones'))
+  }
 }

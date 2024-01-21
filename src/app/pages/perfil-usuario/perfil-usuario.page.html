@@ -72,7 +72,7 @@
     
   <div class="comentarios degradadoVerde">
     <ion-label>Comentarios sobre el perfil</ion-label>
-    <div class="espaciComentar" *ngIf="storage.datosUsuario">
+    <div class="espaciComentar" *ngIf="datosStorage">
       <ion-textarea [(ngModel)]="comentario" autoGrow="true" aria-placeholder="Deja un comentario sobre este perfil"></ion-textarea> <br>
       <ion-button (click)="guardarComentario()" expand="block"shape="round">
         <ion-label>Enviar comentario</ion-label> &nbsp;
@@ -89,8 +89,8 @@
           <ion-col size="12"><ion-label class="nombre">{{item.nombres | titlecase}} {{item.apellidos | titlecase}}</ion-label></ion-col>
           <ion-col size="12"><ion-label class="ion-text-wrap texto">{{item.comentario}}</ion-label></ion-col>
         </ion-row>
-        <ion-buttons slot="end">
-          <ion-button color="medium">
+        <ion-buttons slot="end"  *ngIf="datosStorage && (this.storage.datosUsuario.id == item.id)">
+          <ion-button color="medium" (click)="AccionComentario($event,item)">
             <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
           </ion-button>
         </ion-buttons>

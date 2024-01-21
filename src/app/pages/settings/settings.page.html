@@ -34,16 +34,16 @@
       <div class="redesSociales">
         <ion-label class="tituloRedes" color="dark">Siguenos en nuestras redes sociales</ion-label>
         <ion-buttons>
-          <ion-button  color="tertiary">
+          <ion-button  color="tertiary" (click)="redesSociales('facebook')">
             <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
           </ion-button>
-          <ion-button  color="danger">
+          <ion-button  color="danger" (click)="redesSociales('instagram')">
             <ion-icon slot="icon-only" name="logo-instagram"></ion-icon>
           </ion-button>
-          <ion-button  color="dark">
+          <ion-button  color="dark" (click)="redesSociales('tiktok')">
             <ion-icon slot="icon-only" name="logo-tiktok"></ion-icon>
           </ion-button>
-          <ion-button  color="danger">
+          <ion-button  color="danger" (click)="redesSociales('youtube')">
             <ion-icon slot="icon-only" name="logo-youtube"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -65,7 +65,7 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, ad accusantium et laborum possimus magni expedita, molestias doloribus vero earum saepe itaque illum consequuntur autem.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, 
         </p>
-        <ion-button class="botonMediano botonVerde" shape="round">
+        <ion-button class="botonMediano botonVerde" shape="round" (click)="modal1.dismiss()">
           <ion-label>Aceptar</ion-label>
           <ion-icon name="chevron-forward-outline"></ion-icon>
         </ion-button> <br>
@@ -91,7 +91,7 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, ad accusantium et laborum possimus magni expedita, molestias doloribus vero earum saepe itaque illum consequuntur autem.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste laudantium tempora eius ipsa id, 
         </p>
-        <ion-button class="botonMediano botonVerde" shape="round">
+        <ion-button class="botonMediano botonVerde" shape="round" (click)="modal2.dismiss()" >
           <ion-label>Aceptar</ion-label>
           <ion-icon name="chevron-forward-outline"></ion-icon>
         </ion-button> <br>

@@ -301,6 +301,22 @@ export class DataApiService {
         throw String('fail');
       });
     }
+    eliminarComentario(idPerfil: string, idUsuarioComentario) {
+      
+      return this.afs2.doc(`usuarios/${idPerfil}/comentarios/${idUsuarioComentario}`).ref.delete()
+      .then(() => 'exito').catch(err => {
+        console.log('error', err);
+        throw String('fail');
+      });
+    }
+    EditarComentario(idPerfil: string, idUsuarioComentario, comentarioActual){
+      return this.afs2.collection('usuarios').doc(idPerfil).collection('comentarios')
+    .doc(idUsuarioComentario).ref.update({comentario: comentarioActual})
+    .then(() => 'exito').catch(err => {
+      console.log('error', err);
+      throw String('fail');
+    });
+    }
   
 
 }

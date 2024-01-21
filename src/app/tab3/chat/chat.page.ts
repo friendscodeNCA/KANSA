@@ -16,7 +16,7 @@ export class ChatPage implements OnInit {
 
   public ocultar1: boolean = false;
   foto: any;
-  image: any;
+  //image: any;
   @ViewChild(IonContent, { static: false }) content: IonContent;
   id: string;
   nombres: string;
@@ -42,8 +42,9 @@ export class ChatPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    Camera.requestPermissions();
     this.dataUsuario = this.pasaDatos.getData();
-    console.log(this.dataUsuario);
+    console.log('datos pasados', this.dataUsuario);
     const data: any = this.route.snapshot.queryParams;
     console.log('data: ', data);
     if(data?.name) {
@@ -122,6 +123,7 @@ export class ChatPage implements OnInit {
   }
 
   obtenerFotoChat() {
+    console.log('desde laptop mas')
     this.servGlobal.obtenerFotoGaleria().then(res => {
       if (res) {
         this.foto =  'data:image/png;base64,' + res.base64String;
@@ -150,9 +152,9 @@ export class ChatPage implements OnInit {
         promptLabelPicture: 'Camara',
   
       });
-      var myImg = document.getElementById('fotoPerfil') as HTMLImageElement;
-      myImg.src = dataImage.webPath;
-      this.image = 'data:image/jpeg;base64,'+  dataImage.base64String;
+  
+      this.foto = 'data:image/png;base64,'+  dataImage.base64String;
+      this.ocultar1 = !this.ocultar1;
     }else {
       console.log('solo se abre en android');
     }
@@ -162,5 +164,5 @@ export class ChatPage implements OnInit {
   irPerfil(usuario){
     this.globalService.goPerfil(usuario);
   }
-
+ 
 }

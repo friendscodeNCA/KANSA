@@ -25,11 +25,12 @@ import { ModalObtenerUbicacionPage } from './modals/modal-obtener-ubicacion/moda
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { PopoverEditarComponent } from './components/popover-editar/popover-editar.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ModalObtenerUbicacionPage],
-  entryComponents: [ModalObtenerUbicacionPage],
+  declarations: [AppComponent, ModalObtenerUbicacionPage, PopoverEditarComponent],
+  entryComponents: [ModalObtenerUbicacionPage, PopoverEditarComponent],
   imports: [
     BrowserModule,
     CommonModule,

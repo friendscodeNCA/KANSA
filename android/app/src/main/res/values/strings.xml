@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">kansaApp</string>
-    <string name="title_activity_main">kansaApp</string>
+    <string name="app_name">Qansa</string>
+    <string name="title_activity_main">Qansa</string>
     <string name="package_name">com.paway.qansa</string>
     <string name="custom_url_scheme">com.paway.qansa</string>
 </resources>
