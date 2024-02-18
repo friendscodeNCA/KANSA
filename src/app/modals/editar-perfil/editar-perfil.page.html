@@ -1,10 +1,12 @@
 <ion-content>
   <div class="portada" (click)="SubirFotoPortada()">
-    <img id="fotoPortada" *ngIf="!imagePortada"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMcsZz4KYIpdpvmMx5CXNRjFfdCyq0q5lBrUyV0SL57L3vEB7zuNC7mrwFwYNgRnG-Z8&usqp=CAU" alt="">
+    <img id="fotoPortada" *ngIf="!datosPerfil && !datosPerfil.urlPortada"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfMcsZz4KYIpdpvmMx5CXNRjFfdCyq0q5lBrUyV0SL57L3vEB7zuNC7mrwFwYNgRnG-Z8&usqp=CAU" alt="">
+    <img id="fotoPortada"  *ngIf="datosPerfil && datosPerfil.urlPortada" [src]='datosPerfil.urlPortada' alt="">
     <img id="fotoPortada"  *ngIf="imagePortada" [src]='imagePortada' alt="">
   </div>
   <div class="perfil" (click)="SubirFotoPerfil()">
-    <img id="fotoPerfil" *ngIf="!image"  src="https://us.123rf.com/450wm/alekseyvanin/alekseyvanin1704/alekseyvanin170401391/75474041-agregar-vector-de-icono-de-usuario-ilustraci%C3%B3n-de-logotipo-s%C3%B3lido-pictograma-aislado-en-blanco.jpg?ver=6" alt="">
+    <img id="fotoPerfil" *ngIf="datosPerfil && !datosPerfil.urlPerfil"  src="https://us.123rf.com/450wm/alekseyvanin/alekseyvanin1704/alekseyvanin170401391/75474041-agregar-vector-de-icono-de-usuario-ilustraci%C3%B3n-de-logotipo-s%C3%B3lido-pictograma-aislado-en-blanco.jpg?ver=6" alt="">
+    <img  id="fotoPerfil" *ngIf="datosPerfil && datosPerfil.urlPerfil"  [src]="datosPerfil.urlPerfil" alt="">
     <img  id="fotoPerfil" *ngIf="image"  [src]="image" alt="">
   </div>
   <div class="dataUsuario">

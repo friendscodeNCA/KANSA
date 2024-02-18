@@ -1,41 +1,42 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Camera, CameraResultType } from '@capacitor/camera';
 import { IonModal, IonSearchbar, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { categoriaInterface } from 'src/app/models/categoriaInterface';
 import { BuscadorService } from 'src/app/services/buscador.service';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { Camera, CameraResultType } from '@capacitor/camera';
-import { DatePipe } from '@angular/common';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { ModalObtenerUbicacionPage } from 'src/app/modals/modal-obtener-ubicacion/modal-obtener-ubicacion.page';
+import { ModalObtenerUbicacionPage } from '../modal-obtener-ubicacion/modal-obtener-ubicacion.page';
 
 @Component({
-  selector: 'app-registro-datos',
-  templateUrl: './registro-datos.page.html',
-  styleUrls: ['./registro-datos.page.scss'],
+  selector: 'app-editar-perfil',
+  templateUrl: './editar-perfil.page.html',
+  styleUrls: ['./editar-perfil.page.scss'],
   providers: [DatePipe]
 })
-export class RegistroDatosPage implements OnInit {
+export class EditarPerfilPage implements OnInit {
+
   @ViewChild("modalServicios") modal: IonModal;
   @ViewChild("mySearchbar", {static: false}) search: IonSearchbar;
 
   usuarioForm: FormGroup;
   listaBusqueda: categoriaInterface[] = [];
-  listaAgregados: categoriaInterface[] = [];
+  listaAgregados: categoriaInterface[] = this.storage.datosUsuario.listaServicios|| [];
 
   cargando =  false;
   sinDatos = false;
   celular;
-  valorfcm;
   loading;
   image: any;
   imagePortada: any;
   urlPortada: any;
   urlPerfil: any;
   progress;
+  datosPerfil = this.storage.datosUsuario ;
 
 
   userUbicacion: {
@@ -44,7 +45,7 @@ export class RegistroDatosPage implements OnInit {
     long: any,
     referencia: string,
     provincia: string
-  };
+  } = this.storage.datosUsuario.direccion;
   fechaHoy = new Date();
   constructor(
     private router: Router,
@@ -62,13 +63,13 @@ export class RegistroDatosPage implements OnInit {
     
   ) {
     this.usuarioForm = this.createFormUsuario();
+    console.log(this.datosPerfil);
    }
 
   ngOnInit() {
     this.celular = this.route.snapshot.params.celular;
-    this.valorfcm  = this.route.snapshot.params.token;
 
-    console.log(this.celular, this.valorfcm)  
+    console.log(this.celular, )  
   }
 
   eliminarDataBusqueda(ev) {
@@ -132,15 +133,15 @@ export class RegistroDatosPage implements OnInit {
 
   createFormUsuario() {
     return new FormGroup({
-      nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
-      apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
+      nombres: new FormControl(this.datosPerfil.nombres, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
+      apellidos: new FormControl(this.datosPerfil.apellidos, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       direccion: new FormControl('Andahuaylas', [Validators.required]),
-      profesion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
+      profesion: new FormControl(this.datosPerfil.profesion, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
       fechaNacimiento: new FormControl(this.fechaHoy, [Validators.required]),
-      experiencia: new FormControl('', [Validators.required]),
-      disponibilidad: new FormControl('', [Validators.required]),
+      experiencia: new FormControl(this.datosPerfil.experiencia, [Validators.required]),
+      disponibilidad: new FormControl(this.datosPerfil.disponibilidad, [Validators.required]),
       listaServicios: new FormControl(''),
-      descripcion: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(120)]),
+      descripcion: new FormControl(this.datosPerfil.descripcion, [Validators.required,Validators.minLength(3), Validators.maxLength(120)]),
     });
   }
 
@@ -233,7 +234,6 @@ export class RegistroDatosPage implements OnInit {
       disponibilidad: datos.disponibilidad,
       descripcion: datos.descripcion,
       celular: this.celular,
-      token: this.valorfcm,
       listaServicios: datos.listaServicios,
       urlPortada: this.urlPortada ?this.urlPortada: null,
       urlPerfil: this.urlPerfil ?this.urlPerfil: null

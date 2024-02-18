@@ -61,7 +61,12 @@ const routes: Routes = [
   {
     path: 'info-app',
     loadChildren: () => import('./pages/info-app/info-app.module').then( m => m.InfoAppPageModule)
+  },
+  {
+    path: 'editar-perfil/:celular',
+    loadChildren: () => import('./modals/editar-perfil/editar-perfil.module').then( m => m.EditarPerfilPageModule)
   }
+
 
 
 

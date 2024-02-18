@@ -36,7 +36,16 @@ export class SettingsPage implements OnInit {
     this.router.navigate(['/inicio']);
   }
   redesSociales(redSocial: string){
-    this.servGlobal.presentToast('Pronto estará disponible en: '+ redSocial, {position: 'top'});
+    console.log(redSocial);
+    if(redSocial == 'facebook'){
+      window.open('https://www.facebook.com/profile.php?id=100095630438201 ', '_blank');
+      
+    }else if(redSocial == 'tiktok'){
+      window.open('https://www.tiktok.com/@qansa.app?_t=8jUwLsm762f&_r=1', '_blank');
+
+    }else {
+      this.servGlobal.presentToast('Pronto estará disponible en: '+ redSocial, {position: 'top'});
+    }
   }
 
 }

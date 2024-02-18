@@ -19,16 +19,22 @@ export class NoLoginGuard implements CanActivate {
         this.router.navigate(['']);
         return false;
       } else {
-        return this.afAuth.authState.pipe(map( auth => {
-          if (auth == null || auth == undefined) {
-            console.log('No Esta logeado');
-            return true;
-          } else if (auth) {
-            console.log('Si Esta logeado');
-            this.router.navigate(['']);
-            return false;
-          }
-        }));
+        if(this.storage.datosUsuario == null || this.storage.datosUsuario == undefined  ){
+          console.log('datos de storage son nulos o indefinidos')
+          return true;
+        }else {
+          return this.afAuth.authState.pipe(map( auth => {
+            if (auth == null || auth == undefined) {
+              console.log('No Esta logeado');
+              return true;
+            } else if (auth) {
+              console.log('Si Esta logeado');
+              this.router.navigate(['']);
+              return false;
+            }
+          }));
+        }
+       
       }
   }
   

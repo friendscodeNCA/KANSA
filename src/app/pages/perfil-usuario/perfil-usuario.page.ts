@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { PopoverEditarComponent } from 'src/app/components/popover-editar/popover-editar.component';
+import { EditarPerfilPage } from 'src/app/modals/editar-perfil/editar-perfil.page';
 import { usuarioInterface } from 'src/app/models/usuarioInterface';
 import { ChatService } from 'src/app/services/chat.service';
 import { DataApiService } from 'src/app/services/data-api.service';
@@ -29,7 +30,8 @@ export class PerfilUsuarioPage implements OnInit {
     private servGlobal: GlobalService,
     public storage: StorageService,
     public popoverCtrl: PopoverController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -67,7 +69,9 @@ export class PerfilUsuarioPage implements OnInit {
   }
 
   calcularEdad(fecha) {
-    const fechaNacimiento = new Date(fecha.seconds * 1000 + fecha.nanoseconds / 1000000);
+    
+    //const fechaNacimiento = new Date(fecha.seconds * 1000 + fecha.nanoseconds / 1000000);
+    const fechaNacimiento: Date = new Date(fecha)
     console.log('nacimiento: ',fechaNacimiento.getFullYear());
     // Obtener la fecha actual
     const fechaActual = new Date();
@@ -263,5 +267,9 @@ export class PerfilUsuarioPage implements OnInit {
     });
 
   }
+
+ async  abrirModalEditarPerfil(){
+  await this.router.navigate(['/editar-perfil', '9999999999']).then(() => {});
+}
 
 }

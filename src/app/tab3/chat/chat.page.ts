@@ -42,7 +42,6 @@ export class ChatPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    Camera.requestPermissions();
     this.dataUsuario = this.pasaDatos.getData();
     console.log('datos pasados', this.dataUsuario);
     const data: any = this.route.snapshot.queryParams;

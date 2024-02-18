@@ -2,12 +2,15 @@
   <ion-toolbar>
     <!-- <ion-title>Header</ion-title> -->
     <ion-buttons slot="start">
-      <ion-back-button color="light" defaultHref="/" icon="arrow-undo" slot="icon-only"></ion-back-button>
+      <ion-back-button color="light" defaultHref="/"  slot="icon-only"></ion-back-button>
     </ion-buttons>
 
     <ion-buttons slot="end">
       <ion-button [color]="favorito?'danger':'light'" (click)="addFavoritos()">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+      <ion-button color="light" (click)="abrirModalEditarPerfil()">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
